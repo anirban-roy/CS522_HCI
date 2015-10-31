@@ -1,0 +1,5 @@
+Draft of the Mosaic Plot with the agreed categorical Data displayed in the plot - 4th November, Midnight (estimated 6 hrs)
+	- Prepare and convert data for the visualization rendering
+	- Create the Mosaic Plot which can be displayed on a modern web browser: overallpattern.html
+
+Integrate the overallpattern.html with the home.html home page. - 5th November (estimated 2hrs)

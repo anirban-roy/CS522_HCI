@@ -1,0 +1,8 @@
+Draft of user interface (homepage.html)- 1st November, midnight (estimated 5 hours)
+     - Home page - home.html
+     - upload image - dicom.html
+     - lymphatic system - part of dicom.html or lymph.html
+
+Integration of DICOM viewer with interface - 3 November midnight  (estimated 4 hours)
+Draft of probabillity curve - 4th november midnight (estimated 4 hours).
+Updates to viz - 7th November midnight
