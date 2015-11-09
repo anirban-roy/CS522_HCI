@@ -1,0 +1,81 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="http://cameronspear.com/downloads/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/treemap.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script>
+$(document).ready(function(){
+
+	//$("#chartId").load("basicViz.html");
+	//$("#mosaicplot").load("overallpattern.html");
+	$("#parallelChart").load("parallelCoord.html");
+			  $(".nav li").on("click", function() {
+				$(".navbar li").removeClass("active");
+				$(".links").hide();
+				$(this).addClass("active");
+				
+				$($(this).children('a').attr('href')).show();
+	});
+});
+</script>
+		<style>
+		.jumbotron {
+                padding: 0.5em 0.6em;
+                h1 {
+                    font-size: 2em;
+                }
+                p {
+                    font-size: 1.2em;
+                    .btn {
+                        padding: 0.5em;
+                    }
+                }
+            }
+
+		</style>
+</head>
+<body>
+<div class="container">
+            <div class="jumbotron">
+                <h2 style="text-align:center;">Head And Neck Therapy </h2>
+            </div>
+	<nav role="navigation" class="navbar navbar-default">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collection of nav links and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li	class="active"><a href="#chartId" class="anchors">Data OverView</a></li>
+                <li><a href="#parallelChart" class="anchors">Overall Data Representation</a></li>
+                <li><a href="#mosaicplot" class="anchors">Detailed Representation</a></li>
+            </ul>
+        </div>
+    </nav>
+<div id="chart1">
+<div id="chartId" style="margin-top:20px; margin-left:50px;height:475px; width:1100px;" class="links"></div>
+</div>
+<div id="chart3" style="">
+<div id="mosaicplot" style="margin-top:20px; margin-left:50px;width:1140px; display:none;" class="links" ></div>
+</div>
+<div id="chart2" style="">
+<div id="parallelChart" style="margin-top:20px; margin-left:50px;width:1140px; display:none;" class="links" ></div>
+</div>
+</div>
+</body>  
+</html>
