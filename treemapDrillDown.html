@@ -1,0 +1,213 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/treemap.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<meta name="author" content="Anirban Roy, Nov 2015">
+<style>
+#container {
+    min-width: 300px;
+    max-width: 600px;
+    margin: 0 auto;
+	max-height: 50px;
+}
+</style>
+<script>
+
+$(function () {
+var color = d3.scale.ordinal()
+  .domain(['white','african-american','other','hispanic','male','female'])
+  .range(['#fdae6b','#bdbdbd','#a1d99b','#99d8c9','#9ecae1','#feb24c']);
+    $('#container').highcharts({
+        chart: {
+            spacingBottom: 20
+        },
+		legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            layout: 'vertical',
+			enabled: true,
+            x: 0,
+            y: 0
+        },	
+		plotOptions: {
+            series: {
+               
+            }
+        },
+        series: [{
+            type: "treemap",
+            layoutAlgorithm: 'stripes',
+            alternateStartingDirection: true,
+            levels: [{
+                level: 1,
+                layoutAlgorithm: 'sliceAndDice',
+                dataLabels: {
+                    enabled: true,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    style: {
+                        fontSize: '15px',
+                        fontWeight: 'bold'
+                    }
+                }
+            }],
+            data: [{
+                id: 'A',
+                name: 'african-american',
+                color: color('african-american'),
+				value:10,
+				drilldown: 'african-american'
+            }, {
+                id: 'B',
+                name: 'white',
+				color: color('white'),
+				value:20,
+				drilldown: 'animals'
+            }, {
+                id: 'O',
+                name: 'hispanic',
+				color: color('hispanic'),
+				value:4,
+				drilldown: 'animals'
+            },{
+                name: 'other',
+				color: color('other'),
+                parent: 'Kiwi',
+                value: 2,
+				drilldown: 'cars'
+            }]
+        }],
+		drilldown: {
+            series: [{
+                id: 'african-american',
+				type: "treemap",
+            layoutAlgorithm: 'stripes',
+            alternateStartingDirection: true,
+            levels: [{
+                level: 1,
+                layoutAlgorithm: 'sliceAndDice',
+                dataLabels: {
+                    enabled: true,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    style: {
+                        fontSize: '15px',
+                        fontWeight: 'bold'
+                    }
+                }
+            }],
+                data: [
+				{id:'african-americanglottic',name:'glottic'},
+				{id:'african-americanglotticMale',parent:'african-americanglottic',name:'Male', value:15,color: color('male')},
+				{id:'african-americanglotticFemale',parent:'african-americanglottic',name:'Female', value:4,color: color('female')},
+				{id:'african-americansupraglottic',name:'supraglottic'},
+				{id:'african-americansupraglotticMale',parent:'african-americansupraglottic',name:'Male', value:41,color: color('male')},
+				{id:'african-americansupraglotticFemale',parent:'african-americansupraglottic',name:'Female', value:17,color: color('female')},
+				{id:'african-americantransglottic',parent:'african-american',name:'transglottic'},
+				{id:'african-americantransglotticMale',parent:'african-americantransglottic',name:'Male', value:16,color: color('male')},
+				{id:'african-americantransglotticFemale',parent:'african-americantransglottic',name:'Female', value:3,color: color('female')}
+				]
+            }, {
+                id: 'fruits',
+				type: "treemap",
+            layoutAlgorithm: 'stripes',
+            alternateStartingDirection: true,
+            levels: [{
+                level: 1,
+                layoutAlgorithm: 'sliceAndDice',
+                dataLabels: {
+                    enabled: true,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    style: {
+                        fontSize: '15px',
+                        fontWeight: 'bold'
+                    }
+                }
+            }],
+                data: [
+                    {
+                id: 'A1',
+                name: 'Apples',
+                color: "#EC2500",
+				drilldown: 'animals'
+            }, {
+                id: 'B',
+                name: 'Bananas',
+                color: "#ECE100",
+				drilldown: 'animals'
+            }, {
+                id: 'O1',
+                name: 'Oranges',
+                color: '#EC9800',
+				drilldown: 'animals'
+            }, {
+                name: 'Anne',
+                parent: 'A1',
+                value: 5
+            },{
+                name: 'Roy',
+                parent: 'A1',
+                value: 5               
+            }]
+            }, {
+                id: 'cars',
+				type: "treemap",
+            layoutAlgorithm: 'stripes',
+            alternateStartingDirection: true,
+            levels: [{
+                level: 1,
+                layoutAlgorithm: 'sliceAndDice',
+                dataLabels: {
+                    enabled: true,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    style: {
+                        fontSize: '15px',
+                        fontWeight: 'bold'
+                    }
+                }
+            }],
+                data: [
+                    {
+                id: 'A1',
+                name: 'Apples',
+                color: "#EC2500",
+				drilldown: 'animals'
+            }, {
+                id: 'B1',
+                name: 'Bananas',
+                color: "#ECE100",
+				drilldown: 'animals'
+            }, {
+                id: 'O',
+                name: 'Oranges',
+                color: '#EC9800',
+				drilldown: 'animals'
+            }, {
+                name: 'Anne',
+                parent: 'A1',
+                value: 5
+            },{
+                name: 'Roy',
+                parent: 'A',
+                value: 5               
+            }]
+            }]
+        },
+        title: {
+            text: 'Cancer Data - Demographics View'
+        }
+    });
+});
+
+</script>
+</head>
+<body>
+<div id="container"></div>
+<div id="legend" align="center">Legend</div>
+</body>
+</html>
