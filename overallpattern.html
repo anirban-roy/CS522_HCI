@@ -3,66 +3,280 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/treemap.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
 <meta name="author" content="Anirban Roy, Nov 2015">
 <style>
 #container {
-    min-width: 500px;
-    max-width: 800px;
+    min-width: 100px;
+    max-width: 600px;
     margin: 0 auto;
+	max-height: 50px;
 }
 </style>
 <script>
+
 $(function () {
+var color = d3.scale.ordinal()
+  .domain(['white','african-american','other','hispanic','asian/pacific islander','male','female'])
+  .range(['#66c2a5','#8da0cb','#f7f7f7','#fc8d62','#999999','#8da0cb','#fc8d62']);
     $('#container').highcharts({
-		series: [{
+        chart: {
+            spacingBottom: 20
+        },
+		legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            layout: 'vertical',
+			enabled: true,
+            x: 0,
+            y: 0
+        },	
+		plotOptions: {
+            series: {
+               
+            }
+        },
+        series: [{
             type: "treemap",
-            layoutAlgorithm: 'strip',
+            layoutAlgorithm: 'stripes',
             alternateStartingDirection: true,
             levels: [{
                 level: 1,
-                layoutAlgorithm: 'stripes',
+                layoutAlgorithm: 'sliceAndDice',
                 dataLabels: {
                     enabled: true,
                     align: 'left',
                     verticalAlign: 'top',
                     style: {
-                        fontSize: '15px',
+                        fontSize: '12px',
                         fontWeight: 'bold'
                     }
                 }
-            },
-			{
-                level: 2,
-                layoutAlgorithm: 'strip',
-                dataLabels: {
-                    enabled: true,
-                    align: 'right',
-                    verticalAlign: 'bottom',
-                    style: {
-                        fontSize: '10px',
-                        fontWeight: 'bold',
-						color: '#F0F0FF'
-                    }
-                }
-            },
-			{
-                level: 3,
-                layoutAlgorithm: 'squarified',
-				dataLabels: {
-                   enabled: false,
-                }
-            }
-			],
-            data: [{id:'hispanic',name:'hispanic'},{id:'hispanicsubglottic',parent:'hispanic',name:'subglottic'},{id:'hispanicsubglotticMale',parent:'hispanicsubglottic',name:'Male', value:1,color: '#1570E8'},{id:'hispanicglottic',parent:'hispanic',name:'glottic'},{id:'hispanicglotticMale',parent:'hispanicglottic',name:'Male', value:21,color: '#1570E8'},{id:'hispanicglotticFemale',parent:'hispanicglottic',name:'Female', value:1,color: '#E81515'},{id:'hispanicsupraglottic',parent:'hispanic',name:'supraglottic'},{id:'hispanicsupraglotticMale',parent:'hispanicsupraglottic',name:'Male', value:35,color: '#1570E8'},{id:'hispanicsupraglotticFemale',parent:'hispanicsupraglottic',name:'Female', value:4,color: '#E81515'},{id:'hispanictransglottic',parent:'hispanic',name:'transglottic'},{id:'hispanictransglotticMale',parent:'hispanictransglottic',name:'Male', value:16,color: '#1570E8'},{id:'hispanictransglotticFemale',parent:'hispanictransglottic',name:'Female', value:2,color: '#E81515'},{id:'white',name:'white'},{id:'whitetransglottic',parent:'white',name:'transglottic'},{id:'whitetransglotticMale',parent:'whitetransglottic',name:'Male', value:55,color: '#1570E8'},{id:'whitetransglotticFemale',parent:'whitetransglottic',name:'Female', value:6,color: '#E81515'},{id:'whitesubglottic',parent:'white',name:'subglottic'},{id:'whitesubglotticMale',parent:'whitesubglottic',name:'Male', value:2,color: '#1570E8'},{id:'whitesubglotticFemale',parent:'whitesubglottic',name:'Female', value:1,color: '#E81515'},{id:'whitesupraglottic',parent:'white',name:'supraglottic'},{id:'whitesupraglotticMale',parent:'whitesupraglottic',name:'Male', value:199,color: '#1570E8'},{id:'whitesupraglotticFemale',parent:'whitesupraglottic',name:'Female', value:118,color: '#E81515'},{id:'whiteglottic',parent:'white',name:'glottic'},{id:'whiteglotticMale',parent:'whiteglottic',name:'Male', value:50,color: '#1570E8'},{id:'whiteglotticFemale',parent:'whiteglottic',name:'Female', value:8,color: '#E81515'},{id:'whitetransglo',parent:'white',name:'transglo'},{id:'whitetransgloMale',parent:'whitetransglo',name:'Male', value:1,color: '#1570E8'},{id:'whitesupraglo',parent:'white',name:'supraglo'},{id:'whitesupragloFemale',parent:'whitesupraglo',name:'Female', value:1,color: '#E81515'},{id:'other',name:'other'},{id:'otherglottic',parent:'other',name:'glottic'},{id:'otherglotticMale',parent:'otherglottic',name:'Male', value:5,color: '#1570E8'},{id:'othersupraglottic',parent:'other',name:'supraglottic'},{id:'othersupraglotticMale',parent:'othersupraglottic',name:'Male', value:5,color: '#1570E8'},{id:'othersupraglotticFemale',parent:'othersupraglottic',name:'Female', value:1,color: '#E81515'},{id:'asian/pacific islander',name:'asian/pacific islander'},{id:'asian/pacific islanderglottic',parent:'asian/pacific islander',name:'glottic'},{id:'asian/pacific islanderglotticMale',parent:'asian/pacific islanderglottic',name:'Male', value:1,color: '#1570E8'},{id:'asian/pacific islandersupraglottic',parent:'asian/pacific islander',name:'supraglottic'},{id:'asian/pacific islandersupraglotticMale',parent:'asian/pacific islandersupraglottic',name:'Male', value:3,color: '#1570E8'},{id:'african-american',name:'african-american'},{id:'african-americanglottic',parent:'african-american',name:'glottic'},{id:'african-americanglotticMale',parent:'african-americanglottic',name:'Male', value:15,color: '#1570E8'},{id:'african-americanglotticFemale',parent:'african-americanglottic',name:'Female', value:4,color: '#E81515'},{id:'african-americansupraglottic',parent:'african-american',name:'supraglottic'},{id:'african-americansupraglotticMale',parent:'african-americansupraglottic',name:'Male', value:41,color: '#1570E8'},{id:'african-americansupraglotticFemale',parent:'african-americansupraglottic',name:'Female', value:17,color: '#E81515'},{id:'african-americantransglottic',parent:'african-american',name:'transglottic'},{id:'african-americantransglotticMale',parent:'african-americantransglottic',name:'Male', value:16,color: '#1570E8'},{id:'african-americantransglotticFemale',parent:'african-americantransglottic',name:'Female', value:3,color: '#E81515'},]
+            }],
+            data: [{id:'hispanic',name:'hispanic', color: color('hispanic'), value:80, drilldown:'hispanic'},
+					{id:'white',name:'white', color: color('white'), value:441, drilldown:'white'},
+					{id:'other',name:'other', color: color('other'), value:11, drilldown:'other'},
+					{id:'asian/pacific islander',name:'asian/pacific islander', color: color('asian/pacific islander'), value:4, drilldown:'asian/pacific islander'},
+					{id:'african-american',name:'african-american', color: color('african-american'), value:96, drilldown:'african-american'},
+				]
         }],
+		drilldown: {
+            series: [{
+                id: 'african-american',
+				type: "treemap",
+				layoutAlgorithm: 'stripes',
+				alternateStartingDirection: true,
+				levels: [{
+					level: 1,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'left',
+						verticalAlign: 'top',
+						style: {
+							fontSize: '15px',
+							fontWeight: 'bold'
+						}
+					}
+				},
+				{
+					level: 2,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'center',
+						verticalAlign: 'bottom',
+						style: {
+							fontSize: '10px'
+							}
+						}
+					}
+				],
+                data:
+					[{id:'african-americanglottic', name:'glottic'},
+					{id:'african-americanglotticMale',parent:'african-americanglottic',name:'Male', value:15,color: color('male')},
+					{id:'african-americanglotticFemale',parent:'african-americanglottic',name:'Female', value:4,color: color('female')},
+					{id:'african-americansupraglottic', name:'supraglottic'},
+					{id:'african-americansupraglotticMale',parent:'african-americansupraglottic',name:'Male', value:41,color: color('male')},
+					{id:'african-americansupraglotticFemale',parent:'african-americansupraglottic',name:'Female', value:17,color: color('female')},
+					{id:'african-americantransglottic', name:'transglottic'},
+					{id:'african-americantransglotticMale',parent:'african-americantransglottic',name:'Male', value:16,color: color('male')},
+					{id:'african-americantransglotticFemale',parent:'african-americantransglottic',name:'Female', value:3,color: color('female')}]
+            }, 
+			{
+                id: 'hispanic',
+				type: "treemap",
+				layoutAlgorithm: 'stripes',
+				alternateStartingDirection: true,
+				levels: [{
+					level: 1,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'left',
+						verticalAlign: 'top',
+						style: {
+							fontSize: '12px',
+							fontWeight: 'bold'
+							}
+						}
+					},
+					{
+					level: 2,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'center',
+						verticalAlign: 'bottom',
+						style: {
+							fontSize: '10px'
+							}
+						}
+					}
+					],
+                data: 
+					[{id:'hispanicsubglottic', name:'subglottic'},
+					{id:'hispanicsubglotticMale',parent:'hispanicsubglottic',name:'Male', value:1,color: color('male')},
+					{id:'hispanicglottic', name:'glottic'},
+					{id:'hispanicglotticMale',parent:'hispanicglottic',name:'Male', value:21,color: color('male')},
+					{id:'hispanicglotticFemale',parent:'hispanicglottic',name:'Female', value:1,color: color('female')},
+					{id:'hispanicsupraglottic', name:'supraglottic'},
+					{id:'hispanicsupraglotticMale',parent:'hispanicsupraglottic',name:'Male', value:35,color: color('male')},
+					{id:'hispanicsupraglotticFemale',parent:'hispanicsupraglottic',name:'Female', value:4,color: color('female')},
+					{id:'hispanictransglottic', name:'transglottic'},
+					{id:'hispanictransglotticMale',parent:'hispanictransglottic',name:'Male', value:16,color: color('male')},
+					{id:'hispanictransglotticFemale',parent:'hispanictransglottic',name:'Female', value:2,color: color('female')}]
+            }, {
+                id: 'white',
+				type: "treemap",
+				layoutAlgorithm: 'stripes',
+				alternateStartingDirection: true,
+				levels: [{
+					level: 1,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'left',
+						verticalAlign: 'top',
+						style: {
+							fontSize: '15px',
+							fontWeight: 'bold'
+						}
+					}
+				},
+				{
+					level: 2,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'center',
+						verticalAlign: 'bottom',
+						style: {
+							fontSize: '10px'
+							}
+						}
+					}],
+                data: [{id:'whitetransglottic', name:'transglottic'},
+						{id:'whitetransglotticMale',parent:'whitetransglottic',name:'Male', value:55,color: color('male')},
+						{id:'whitetransglotticFemale',parent:'whitetransglottic',name:'Female', value:6,color: color('female')},
+						{id:'whitesubglottic', name:'subglottic'},
+						{id:'whitesubglotticMale',parent:'whitesubglottic',name:'Male', value:2,color: color('male')},
+						{id:'whitesubglotticFemale',parent:'whitesubglottic',name:'Female', value:1,color: color('female')},
+						{id:'whitesupraglottic', name:'supraglottic'},
+						{id:'whitesupraglotticMale',parent:'whitesupraglottic',name:'Male', value:199,color: color('male')},
+						{id:'whitesupraglotticFemale',parent:'whitesupraglottic',name:'Female', value:118,color: color('female')},
+						{id:'whiteglottic', name:'glottic'},
+						{id:'whiteglotticMale',parent:'whiteglottic',name:'Male', value:50,color: color('male')},
+						{id:'whiteglotticFemale',parent:'whiteglottic',name:'Female', value:8,color: color('female')},
+						{id:'whitetransglo', name:'transglo'},
+						{id:'whitetransgloMale',parent:'whitetransglo',name:'Male', value:1,color: color('male')},
+						{id:'whitesupraglo', name:'supraglo'},
+						{id:'whitesupragloFemale',parent:'whitesupraglo',name:'Female', value:1,color: color('female')}]
+            },
+			{
+                id: 'asian/pacific islander',
+				type: "treemap",
+				layoutAlgorithm: 'stripes',
+				alternateStartingDirection: true,
+				levels: [{
+					level: 1,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'left',
+						verticalAlign: 'top',
+						style: {
+							fontSize: '15px',
+							fontWeight: 'bold'
+						}
+					}
+				},
+				{
+					level: 2,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'center',
+						verticalAlign: 'bottom',
+						style: {
+							fontSize: '10px'
+							}
+						}
+					}],
+                data: [{id:'asian/pacific islanderglottic', name:'glottic'},
+					{id:'asian/pacific islanderglotticMale',parent:'asian/pacific islanderglottic',name:'Male', value:1,color: color('male')},
+					{id:'asian/pacific islandersupraglottic', name:'supraglottic'},
+					{id:'asian/pacific islandersupraglotticMale',parent:'asian/pacific islandersupraglottic',name:'Male', value:3,color: color('male')}]
+            },
+			{
+                id: 'other',
+				type: "treemap",
+				layoutAlgorithm: 'stripes',
+				alternateStartingDirection: true,
+				levels: [{
+					level: 1,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'left',
+						verticalAlign: 'top',
+						style: {
+							fontSize: '15px',
+							fontWeight: 'bold'
+						}
+					}
+				},
+				{
+					level: 2,
+					layoutAlgorithm: 'sliceAndDice',
+					dataLabels: {
+						enabled: true,
+						align: 'center',
+						verticalAlign: 'bottom',
+						style: {
+							fontSize: '10px'
+							}
+						}
+					}],
+                data: [{id:'otherglottic', name:'glottic'},
+					{id:'otherglotticMale',parent:'otherglottic',name:'Male', value:5,color: color('male')},
+					{id:'othersupraglottic', name:'supraglottic'},
+					{id:'othersupraglotticMale',parent:'othersupraglottic',name:'Male', value:5,color: color('male')},
+					{id:'othersupraglotticFemale',parent:'othersupraglottic',name:'Female', value:1,color: color('female')}]
+            }
+			]
+        },
         title: {
-            text: 'Overall Statistics of Cancer Data'
+            text: 'Cancer Data - Demographics View'
         }
     });
 });
+
 </script>
 </head>
 <body>
 <div id="container"></div>
+<div id="legend" align="center">Legend</div>
 </body>
 </html>
