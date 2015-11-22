@@ -1,0 +1,6 @@
+[{id:'hispanic',name:'hispanic', color: color('hispanic'), value:80, drilldown:'hispanic'},
+{id:'white',name:'white', color: color('white'), value:441, drilldown:'white'},
+{id:'other',name:'other', color: color('other'), value:11, drilldown:'other'},
+{id:'asian/pacific islander',name:'asian/pacific islander', color: color('asian/pacific islander'), value:4, drilldown:'asian/pacific islander'},
+{id:'african-american',name:'african-american', color: color('african-american'), value:96, drilldown:'african-american'},
+]

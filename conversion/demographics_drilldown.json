@@ -1,0 +1,56 @@
+[{id:'hispanicsubglottic', name:'subglottic'},
+{id:'hispanicsubglotticMale',parent:'hispanicsubglottic',name:'Male', value:1,color: color('male')},
+{id:'hispanicglottic', name:'glottic'},
+{id:'hispanicglotticMale',parent:'hispanicglottic',name:'Male', value:21,color: color('male')},
+{id:'hispanicglotticFemale',parent:'hispanicglottic',name:'Female', value:1,color: color('female')},
+{id:'hispanicsupraglottic', name:'supraglottic'},
+{id:'hispanicsupraglotticMale',parent:'hispanicsupraglottic',name:'Male', value:35,color: color('male')},
+{id:'hispanicsupraglotticFemale',parent:'hispanicsupraglottic',name:'Female', value:4,color: color('female')},
+{id:'hispanictransglottic', name:'transglottic'},
+{id:'hispanictransglotticMale',parent:'hispanictransglottic',name:'Male', value:16,color: color('male')},
+{id:'hispanictransglotticFemale',parent:'hispanictransglottic',name:'Female', value:2,color: color('female')},
+
+
+{id:'whitetransglottic', name:'transglottic'},
+{id:'whitetransglotticMale',parent:'whitetransglottic',name:'Male', value:55,color: color('male')},
+{id:'whitetransglotticFemale',parent:'whitetransglottic',name:'Female', value:6,color: color('female')},
+{id:'whitesubglottic', name:'subglottic'},
+{id:'whitesubglotticMale',parent:'whitesubglottic',name:'Male', value:2,color: color('male')},
+{id:'whitesubglotticFemale',parent:'whitesubglottic',name:'Female', value:1,color: color('female')},
+{id:'whitesupraglottic', name:'supraglottic'},
+{id:'whitesupraglotticMale',parent:'whitesupraglottic',name:'Male', value:199,color: color('male')},
+{id:'whitesupraglotticFemale',parent:'whitesupraglottic',name:'Female', value:118,color: color('female')},
+{id:'whiteglottic', name:'glottic'},
+{id:'whiteglotticMale',parent:'whiteglottic',name:'Male', value:50,color: color('male')},
+{id:'whiteglotticFemale',parent:'whiteglottic',name:'Female', value:8,color: color('female')},
+{id:'whitetransglo', name:'transglo'},
+{id:'whitetransgloMale',parent:'whitetransglo',name:'Male', value:1,color: color('male')},
+{id:'whitesupraglo', name:'supraglo'},
+{id:'whitesupragloFemale',parent:'whitesupraglo',name:'Female', value:1,color: color('female')},
+
+
+{id:'otherglottic', name:'glottic'},
+{id:'otherglotticMale',parent:'otherglottic',name:'Male', value:5,color: color('male')},
+{id:'othersupraglottic', name:'supraglottic'},
+{id:'othersupraglotticMale',parent:'othersupraglottic',name:'Male', value:5,color: color('male')},
+{id:'othersupraglotticFemale',parent:'othersupraglottic',name:'Female', value:1,color: color('female')},
+
+
+{id:'asian/pacific islanderglottic', name:'glottic'},
+{id:'asian/pacific islanderglotticMale',parent:'asian/pacific islanderglottic',name:'Male', value:1,color: color('male')},
+{id:'asian/pacific islandersupraglottic', name:'supraglottic'},
+{id:'asian/pacific islandersupraglotticMale',parent:'asian/pacific islandersupraglottic',name:'Male', value:3,color: color('male')},
+
+
+{id:'african-americanglottic', name:'glottic'},
+{id:'african-americanglotticMale',parent:'african-americanglottic',name:'Male', value:15,color: color('male')},
+{id:'african-americanglotticFemale',parent:'african-americanglottic',name:'Female', value:4,color: color('female')},
+{id:'african-americansupraglottic', name:'supraglottic'},
+{id:'african-americansupraglotticMale',parent:'african-americansupraglottic',name:'Male', value:41,color: color('male')},
+{id:'african-americansupraglotticFemale',parent:'african-americansupraglottic',name:'Female', value:17,color: color('female')},
+{id:'african-americantransglottic', name:'transglottic'},
+{id:'african-americantransglotticMale',parent:'african-americantransglottic',name:'Male', value:16,color: color('male')},
+{id:'african-americantransglotticFemale',parent:'african-americantransglottic',name:'Female', value:3,color: color('female')},
+
+
+]
