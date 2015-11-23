@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta name="author" content="Anirban Roy, Nov 2015">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<body>
+	<div id="control" class="links" align="center">
+	<br><br>
+	<input type='button' id="mybotton1" value="Show TreeMap">
+	<input type='button' id="mybotton2" value="Show Scatter plot">
+	</div><br><br><br>
+	
+<script>
+$(document).ready(function(){
+
+});
+	$("#mybotton1").click(function (){
+		$('#treemap').attr('src', 'overallpattern.html');
+	});
+	$("#mybotton2").click(function (){
+		$('#treemap').attr('src', 'scatterplot.html');
+	});
+</script>
+<div align ="center"> 
+<iframe id="treemap" height=1000 width=800 align="center" frameborder="0"></div>
+</body>
+</html>
