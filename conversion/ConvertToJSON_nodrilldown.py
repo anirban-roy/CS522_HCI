@@ -1,4 +1,5 @@
 __author__ = 'Anirban'
+#Generates JSON for a treemap view of the cancer data without a drill down functionality. Functionality not to be used
 import openpyxl
 wb = openpyxl.load_workbook('data.xlsx')
 ethnicity = dict()

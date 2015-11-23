@@ -1,0 +1,52 @@
+[{id:'hispanicsubglottic', name:'subglottic', value:54.21, avgage: 55.51},
+{id:'hispanicsubglotticMale',parent:'hispanicsubglottic',name:'Male', value:54.21, avgage: 55.51, color: color('male')},
+{id:'hispanicglottic', name:'glottic', value:76.80, avgage: 59.97},
+{id:'hispanicglotticMale',parent:'hispanicglottic',name:'Male', value:76.42, avgage: 60.30, color: color('male')},
+{id:'hispanicglotticFemale',parent:'hispanicglottic',name:'Female', value:84.61, avgage: 53.08,color: color('female')},
+{id:'hispanicsupraglottic', name:'supraglottic', value:47.73, avgage: 59.60},
+{id:'hispanicsupraglotticMale',parent:'hispanicsupraglottic',name:'Male', value:47.11, avgage: 60.03, color: color('male')},
+{id:'hispanicsupraglotticFemale',parent:'hispanicsupraglottic',name:'Female', value:53.10, avgage: 55.86,color: color('female')},
+{id:'hispanictransglottic', name:'transglottic', value:50.71, avgage: 62.39},
+{id:'hispanictransglotticMale',parent:'hispanictransglottic',name:'Male', value:49.16, avgage: 64.65, color: color('male')},
+{id:'hispanictransglotticFemale',parent:'hispanictransglottic',name:'Female', value:63.12, avgage: 44.34,color: color('female')},
+
+
+{id:'whitesubglottic', name:'subglottic', value:45.02, avgage: 60.31},
+{id:'whitesubglotticMale',parent:'whitesubglottic',name:'Male', value:41.20, avgage: 61.05, color: color('male')},
+{id:'whitesubglotticFemale',parent:'whitesubglottic',name:'Female', value:52.66, avgage: 58.83,color: color('female')},
+{id:'whiteglottic', name:'glottic', value:66.70, avgage: 60.14},
+{id:'whiteglotticMale',parent:'whiteglottic',name:'Male', value:67.47, avgage: 60.06, color: color('male')},
+{id:'whiteglotticFemale',parent:'whiteglottic',name:'Female', value:61.89, avgage: 60.65,color: color('female')},
+{id:'whitesupraglottic', name:'supraglottic', value:46.11, avgage: 59.20},
+{id:'whitesupraglotticMale',parent:'whitesupraglottic',name:'Male', value:46.55, avgage: 58.35, color: color('male')},
+{id:'whitesupraglotticFemale',parent:'whitesupraglottic',name:'Female', value:45.36, avgage: 60.62,color: color('female')},
+{id:'whitetransglottic', name:'transglottic', value:47.69, avgage: 59.13},
+{id:'whitetransglotticMale',parent:'whitetransglottic',name:'Male', value:46.49, avgage: 59.99, color: color('male')},
+{id:'whitetransglotticFemale',parent:'whitetransglottic',name:'Female', value:58.83, avgage: 51.14,color: color('female')},
+
+
+{id:'otherglottic', name:'glottic', value:88.36, avgage: 60.74},
+{id:'otherglotticMale',parent:'otherglottic',name:'Male', value:88.36, avgage: 60.74, color: color('male')},
+{id:'othersupraglottic', name:'supraglottic', value:75.50, avgage: 56.97},
+{id:'othersupraglotticMale',parent:'othersupraglottic',name:'Male', value:74.73, avgage: 56.95, color: color('male')},
+{id:'othersupraglotticFemale',parent:'othersupraglottic',name:'Female', value:79.31, avgage: 57.07,color: color('female')},
+
+
+{id:'asian/pacific islanderglottic', name:'glottic', value:76.93, avgage: 62.94},
+{id:'asian/pacific islanderglotticMale',parent:'asian/pacific islanderglottic',name:'Male', value:76.93, avgage: 62.94, color: color('male')},
+{id:'asian/pacific islandersupraglottic', name:'supraglottic', value:60.58, avgage: 59.27},
+{id:'asian/pacific islandersupraglotticMale',parent:'asian/pacific islandersupraglottic',name:'Male', value:60.58, avgage: 59.27, color: color('male')},
+
+
+{id:'african-americanglottic', name:'glottic', value:53.68, avgage: 59.49},
+{id:'african-americanglotticMale',parent:'african-americanglottic',name:'Male', value:52.31, avgage: 63.76, color: color('male')},
+{id:'african-americanglotticFemale',parent:'african-americanglottic',name:'Female', value:58.84, avgage: 43.48,color: color('female')},
+{id:'african-americansupraglottic', name:'supraglottic', value:35.48, avgage: 58.59},
+{id:'african-americansupraglotticMale',parent:'african-americansupraglottic',name:'Male', value:34.95, avgage: 59.59, color: color('male')},
+{id:'african-americansupraglotticFemale',parent:'african-americansupraglottic',name:'Female', value:36.75, avgage: 56.19,color: color('female')},
+{id:'african-americantransglottic', name:'transglottic', value:36.82, avgage: 54.50},
+{id:'african-americantransglotticMale',parent:'african-americantransglottic',name:'Male', value:40.04, avgage: 52.29, color: color('male')},
+{id:'african-americantransglotticFemale',parent:'african-americantransglottic',name:'Female', value:19.60, avgage: 66.31,color: color('female')},
+
+
+]

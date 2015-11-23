@@ -1,0 +1,6 @@
+[{id:'hispanic',name:'hispanic', color: color('hispanic'), value:56.47, avgage: 60.28, drilldown:'hispanic'},
+{id:'white',name:'white', color: color('white'), value:49.03, avgage: 59.32, drilldown:'white'},
+{id:'other',name:'other', color: color('other'), value:81.35, avgage: 58.68, drilldown:'other'},
+{id:'asian/pacific islander',name:'asian/pacific islander', color: color('asian/pacific islander'), value:64.67, avgage: 60.19, drilldown:'asian/pacific islander'},
+{id:'african-american',name:'african-american', color: color('african-american'), value:39.35, avgage: 57.96, drilldown:'african-american'},
+]
