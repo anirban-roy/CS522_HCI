@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+  font: 10px sans-serif;
+  padding: 10px;
+}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .7;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<script>
+
+var width = 1400,
+    size = 250,
+    padding = 19.5;
+
+var x = d3.scale.linear()
+    .range([padding / 2, size - padding / 2]);
+
+var y = d3.scale.linear()
+    .range([size - padding / 2, padding / 2]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .ticks(5);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(5);
+
+//var color = d3.scale.category10();
+var color = d3.scale.ordinal()
+  .domain(['glottic','subglottic', 'supraglottic','transglottic'])
+  .range(['#ffae19','#4ca64c','#4682B4','#c51b8a']);
+
+d3.csv("SurvivalProbability.csv", function(error, data) {
+  if (error) throw error;
+  var domainByTrait = {},
+      traits = d3.keys(data[0]).filter(function(d) { 
+	  if(d=='AgeAtTx' || d=='Probability of Survival') // || d=='OS (months)')
+		return true;
+	  else
+		return false;
+	}),
+      n = traits.length;
+
+  // find max and min value for each columns
+  traits.forEach(function(col) {
+    domainByTrait[col] = d3.extent(data, function(d) { return d[col]; });	
+	//alert(domainByTrait[col]);
+  });
+
+  xAxis.tickSize(size * n);
+  yAxis.tickSize(-size * n);
+
+  var svg = d3.select("body").append("svg")
+      .attr("width", size * n + 5*padding)	// based on number of features plotted, allocate width and height
+      .attr("height", size * n + padding)
+	  .append("g")
+      .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+
+  // create the domain for xAxis
+  svg.selectAll(".x.axis")
+      .data(traits)
+    .enter().append("g")
+      .attr("class", "x axis")
+      .attr("transform", function(d, i) { return "translate(" + (n - i - 1) * size + ",0)"; })
+      .each(function(d) { x.domain(domainByTrait[d]); d3.select(this).call(xAxis); });
+
+  // create the domain for yAxis
+  svg.selectAll(".y.axis")
+      .data(traits)
+    .enter().append("g")
+      .attr("class", "y axis")
+      .attr("transform", function(d, i) { return "translate(0," + i * size + ")"; })
+      .each(function(d) { y.domain(domainByTrait[d]); d3.select(this).call(yAxis); });
+
+  var cell = svg.selectAll(".cell")
+      .data(cross(traits, traits))
+    .enter().append("g")
+      .attr("class", "cell")
+      .attr("transform", function(d) { return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")"; })
+      .each(plot);
+
+  // Titles for the diagonal.
+  cell.filter(function(d) { return d.i === d.j; }).append("text")
+      .attr("x", padding)
+      .attr("y", padding)
+      .attr("dy", ".71em")
+      .text(function(d) { return d.x; });
+
+  function plot(p) {
+    var cell = d3.select(this);
+
+    x.domain(domainByTrait[p.x]);
+    y.domain(domainByTrait[p.y]);
+
+    cell.append("rect")
+        .attr("class", "frame")
+        .attr("x", padding / 2)
+        .attr("y", padding / 2)
+        .attr("width", size - padding)
+        .attr("height", size - padding);
+
+    cell.selectAll("circle")
+        .data(data)
+      .enter().append("circle")
+        .attr("cx", function(d) { return x(d[p.x]); })
+        .attr("cy", function(d) { return y(d[p.y]); })
+        .attr("r", 3)
+        .style("fill", function(d) { return color(d.Site); })
+		.on('mouseover', function(d){
+			var nodeSelection = d3.select(this).style({opacity:'0.8'});
+			nodeSelection.select("text").style({opacity:'1.0'});
+		});
+  }
+  
+
+  function cross(a, b) {
+    var c = [], n = a.length, m = b.length, i, j;
+    for (i = -1; ++i < n;) for (j = -1; ++j < m;) c.push({x: a[i], i: i, y: b[j], j: j});
+    return c;
+  }
+
+  d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
+  
+  /*var svg = d3.select("#chartDiv").append("svg")
+    .attr("width", 200 )
+    .attr("height", 200 )
+  .append("g")
+    .attr("transform", "translate(" + 10 + "," + 10 + ")");*/
+  //svg.append("circle").attr("cx", 25).attr("cy", 25).attr("r", 25).style("fill", "purple");
+  var legendRectSize = 10;
+  var legendSpacing = 10;
+  var legend = svg.append("g")
+    .selectAll("g")
+    .data(color.domain())
+    .enter()
+    .append('g')
+      .attr('class', 'legend')
+      .attr('transform', function(d, i) {
+        var height = legendRectSize;
+        var x = 2*size;
+        var y = (i * height) + 120;
+        return 'translate(' + x + ',' + y + ')';
+    });
+
+    legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
+    .style('fill', color)
+    .style('stroke', color);
+
+legend.append('text')
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y',  legendSpacing)
+    .text(function(d) { return d; });
+});
+
+</script>
+
+
+</body>
+</html>
