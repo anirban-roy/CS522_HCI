@@ -1,0 +1,138 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/treemap.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<meta name="author" content="Anirban Roy, Nov 2015">
+<style>
+#treeContainer {
+    min-width: 400px;
+    max-width: 500px;
+    margin-left:10px;
+	margin- top:10px;
+}
+</style>
+<script type="text/javascript">
+// Instructions to Ashwin: Copy this entire script block. Also copy the above style block for the viz render config options.
+var options='';
+var chart;
+var colors = d3.scale.ordinal()
+  .domain(['no chemo','induction','induction+chemoRT','concurrent','male','female'])
+  .range(['#66c2a5','#8da0cb','#fdae6b','#fc8d62','#999999','#8da0cb','#fc8d62']);
+$(document).ready(function() {
+
+    options = {
+        chart: {
+            renderTo: 'treeContainer',
+			type: 'treemap'            
+        },
+		tooltip: {
+			formatter: function () {
+				return 'Average Survival Probability: <b>' + this.point.value+ '%<br>Average Age:'+this.point.avgage + '</b><br> Population size: ' + this.point.count;
+			}
+		},
+        series: [{
+            layoutAlgorithm: 'stripes',
+            alternateStartingDirection: true,
+            levels: [{
+                level: 1,
+                layoutAlgorithm: 'sliceAndDice',
+                dataLabels: {
+                    enabled: true,
+                    align: 'left',
+                    verticalAlign: 'top',
+                    style: {
+                        fontSize: '12px',
+                        fontWeight: 'bold'
+						}
+					}
+				}]
+			,
+			name: 'cancer',
+            data: []
+        }],
+		title: {
+            text: 'Statistics of Cancer Data'
+        }	
+    };
+$('#showselection').click(function (){
+	radio_ethni =$("input[name=ethnicity]:checked").val();
+	radio_site = $("input[name=site]:checked").val();
+	radio_sex = $("input[name=sex]:checked").val();	
+	
+	$.getJSON('http://localhost:8080/demographics_ethnicity_survivalprobab.json', function(jsonData, error) {
+        console.log(error);
+		// Instructions to Ashwin: "Please pass the demographic input values from users to plotTreeMap below as indicated
+		plotTreeMap(jsonData, radio_ethni, radio_site, radio_sex);
+        chart = new Highcharts.Chart(options);
+    });
+});
+
+});
+
+function plotTreeMap(jsonData, m_ethnicity, m_site, m_sex){
+	data = jsonData.data;
+	for (var i=0;i<data.length;i++){
+		//console.log(data[i].ethnicity);
+		if(data[i].ethnicity == m_ethnicity){
+			sites = data[i].sites;	
+			for(var j=0; j<sites.length; j++){
+				console.log(sites[j].site);
+				if(sites[j].site == m_site){
+					sexes = sites[j].sexes;
+					for(var k=0; k< sexes.length; k++){
+						sex = sexes[k];
+						if(sex.sex == m_sex){
+							for(var l=0; l<sex.therapies.length;l++){
+								sex.therapies[l].color = colors(sex.therapies[l].name);
+							}
+							options.series[0].data = sex.therapies;
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+</script>
+</head>
+<body>
+<!-- Instructions to Ashwin: You need to place the below div with id "treeContainer" in screen where you want the treemap-->
+<div id="treeContainer"></div>
+<div>
+<input type="button" id="showselection" class="btn btn-primary" value="Show Selection">
+<div> <label for="pethnicity" > Ethnicity : </label> </div>
+                                    <div class="radio form-group">
+                                        <div class="radio"><label><input type="radio" name="ethnicity" value="white" checked="checked"> White     </label> </div>
+                                        <div class="radio"><label><input type="radio" name="ethnicity" value="african-american"> African American     </label></div>
+                                        <div class="radio"><label><input type="radio" name="ethnicity" value="hispanic"> Hispanic     </label></div>
+                                        <div class="radio"><label><input type="radio" name="ethnicity" value="asian/pacific islander"> Asian/Pacific Islander     </label></div>
+                                        <div class="radio"><label><input type="radio" name="ethnicity" value="other"> Other     </label></div>
+ </div>
+ <div style="width:398px;height:548px;margin-top:15px;display:inline-block;">
+<div> <label for="psite" > Site of Tumour : </label> </div>
+<div class="radio">
+	<label><input type="radio" name="site" value="glottic" checked="checked">Glottic</label>
+</div>
+<div class="radio">
+	<label><input type="radio" name="site" value="subglottic">Subglottic</label>
+</div>
+<div class="radio">
+	<label><input type="radio" name="site" value="supraglottic">Supraglottic</label>
+</div>
+<div class="radio">
+	<label><input type="radio" name="site" value="transglottic">Transglottic</label>
+</div>
+<br/>
+<div class="radio"> <label for="pgender" > Gender : </label>
+                                        <label><input type="radio" name="sex" value="Male" checked="checked">Male</label>
+                                        <label><input type="radio" name="sex" value="Female">Female</label>
+</div>
+<br/>
+</div>
+</body>
+</html>
