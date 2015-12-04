@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<head>
+    <title> Head and Neck Therapy </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="papaya.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="papaya.js"></script>
+    <style type="text/css">
+
+        .jumbotron {
+            padding: 0.5em 0.6em;
+            h2 {
+                font-size: 1em;
+            }
+            p {
+                font-size: 1.2em;
+                .btn {
+                    padding: 0.5em;
+                }
+            }
+        }
+        h2 {
+            font-family: Georgia;
+        }
+
+        .leftDiv {
+            float: left;
+            width: 34%;
+            height:500px;
+        }
+
+        .rightDiv {
+            float: right;
+            width: 33%;
+            height:500px;
+            text-align: left;;
+        }
+
+        .centerDiv {
+            display:inline-block;
+            width: 33%;
+            height:500px;
+        }
+
+        .container {
+            width: 1350px;
+        }
+
+        .smallViewer {
+            width:420px;
+            display:inline;
+        }
+        #lymphNode img {
+            display:block;
+            margin-left: auto;
+            margin-right: auto;
+            position:auto;
+        }
+        p {
+            font-family: Georgia;
+            font-size: 20px;
+        }
+        #pform label {
+            font: normal 18px Georgia !important;
+        }
+        form {
+            float:left;
+        }
+
+        .buttonWrapper {
+            margin: 0 auto; 
+            float:right;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown-menu li a").click(function (e) {
+                var selText = $(this).text();
+                $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + '<span class="caret"></span>');
+
+            });
+
+            $("#pform").submit(function (event) {
+                event.preventDefault();
+                $this = $(this);
+                var ethnicity = $("#ethnicityButton").text();
+                var site = $("#siteButton").text();
+                var pid = $("#pid").val();
+                var gender = $('input:radio[name=gender]:checked').val();
+
+                var age = $("#page").val();
+                if(age ==0 || age < 0) {
+                    alert("Age cannot be zero or less");
+                    return false;
+                }
+                var stage = $("#pstage").val();
+                if (ethnicity == 'Select Ethnicity' || site == 'Select Site of Tumour' || gender == null || age == null || stage == null) {
+                    var result = confirm("All values are not filled. A preset of values would be taken, do you want to continue?");
+                    if (result == true) {
+                        ethnicity = 'african-american'
+                        site = 'supraglottic'
+                        pid = '1123';
+                        gender = 'male';
+                        age = '46';
+                        stage = 'T3';
+                        var url = $this.attr('action') + '?' + pid + '&' + gender + '&' + age + '&' + ethnicity + '&' + site + '&' + stage;
+                        window.location.href = url;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                var url = $this.attr('action') + '?' + pid + '&' + gender + '&' + age + '&' + ethnicity + '&' + site + '&' + stage;
+                window.location.href = url;
+
+            });
+
+            $("map#imageMap").click(function (event) {
+                var target = $(event.target);
+                var targetId = target.attr('id');
+                var matches = targetId.match(/\d+/)[0];
+                if ($("#div" + matches).css('display') != 'none')
+                {
+                    $("#div" + matches).hide();
+                }
+                else {
+                    $("#div" + matches).show();
+                }
+            });
+
+            $("#lymphNode div").click(function (event) {
+                var clicked = event.target;
+                var currentID = clicked.id || "No ID!";
+                if (currentID.indexOf("div") != -1)
+                    $("#" + currentID).hide();
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">         
+            <h2 style="text-align:center;">Head And Neck Therapy </h2>
+        </div>
+
+        <div style="text-align:center">
+            <div class="leftDiv">
+                <div class="divs smallViewer" id="viewer"> 
+                    <div class="papaya"> </div> 
+                    <div style="float: right;">
+                        <p><small>DICOM Viewer Credits: UTHSCSA</small>
+                            &nbsp;&nbsp;&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+            <div class="centerDiv">
+                <p> <strong> Select affected lymph Nodes </strong></p>
+                <div id="lymphNode" class="divs" style="width:419px; height:54px;display:inline-block;position:relative"> 
+                    <div id="div1" class="divs" title="preauricular Node" style="width:13px;height:13px;position:absolute;top:133px;left:225px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div2" class="divs" title="partoid" style="width:22px;height:22px;position:absolute;top:155px;left:225px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div3" class="divs" title="tonsillar" style="width:15px;height:17px;position:absolute;top:178px;left:218px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div4" class="divs" title="submandibular" style="width:25px;height:19px;position:absolute;top:211px;left:245px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div5" class="divs" title="submental" style="width:23px;height:15px;position:absolute;top:211px;left:285px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div6" class="divs" title="posterior auricular" style="width:19px;height:20px;position:absolute;top:135px;left:180px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div7" class="divs" title="occipital" style="width:18px;height:18px;position:absolute;top:148px;left:150px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div8" class="divs" title="superficial cervical" style="width:22px;height:22px;position:absolute;top:185px;left:185px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div10" class="divs" title="posterior cervical" style="width:20px;height:35px;position:absolute;top:240px;left:162px;background-color:#ff3232;opacity:0.5;display:none;"></div>
+                    <div id="div11" class="divs" title="supraclavicular" style="width:22px;height:12px;position:absolute;top:305px;left:175px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <div id="div12" class="divs" title="deep cervical" style="width:22px;height:87px;position:absolute;top:210px;left:200px;background-color:#ff3232;opacity:0.5;display:none"></div>
+                    <img src="image3.jpg" title="deep cervical" width="420" height="375" alt="Planets" usemap="#imageMap">
+
+                    <map id="imageMap" name="imageMap">
+                        <area shape="circle" coords="230,140,5" href="#" alt="preauricular Node" title="preauricular Node" id="node1"/>
+                        <area shape="circle" coords="240,165,15" href="#" alt="partoid" title="partoid" id="node2"/>
+                        <area shape="circle" coords="225,185,8" href="#" alt="tonsillar" title="tonsillar" id="node3"/>
+                        <area shape="circle" coords="255,220,15" href="#" alt="submandibular" title="submandibular" id="node4"/>
+                        <area shape="circle" coords="297,220,12" href="#" alt="submental" title="submental" id="node5"/>
+                        <area shape="circle" coords="190,145,12" href="#" alt="posterior auricular" title="posterior auricular" id="node6"/>
+                        <area shape="circle" coords="160,160,12" href="#" alt="occipital" title="occipital" id="node7"/>
+                        <area shape="circle" coords="195,195,15" href="#" alt="superficial cervical" title="superficial cervical" id="node8"/>
+                        <area shape="circle" coords="175,260,15" href="#" alt="posterior cervical" title="posterior cervical" id="node10"/>
+                        <area shape="circle" coords="185,315,15" href="#" alt="supraclavicular" title="supraclavicular" id="node11"/>
+                        <area shape="rect" coords="200,205,220,300" href="#" alt="deep cervical" title="deep cervical" id="node12"/>
+                    </map>
+
+                </div>
+            </div>
+            <div class="rightDiv">
+                <p style="text-align:center;"> Enter Patient Details </p>
+                <form action="vizPage.html" class="form-horizontal" method="GET" id="pform">
+                    <div class="form-group">
+                        <label for="pid" class="control-label col-xs-4">Patient ID</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="pid" placeholder="Enter Patient ID" name="pid">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pname" class="control-label col-xs-4">Patient Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="pname" placeholder="Enter patient Name" name="pname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pname" class="control-label col-xs-4">Gender</label>
+                        <div class="col-xs-4">
+                            <input type="radio" value="male" id="gender" name="gender"/> Male
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="radio" value="female" id="gender" name="gender"/> Female
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pname" class="control-label col-xs-4">Patient Age</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="page" placeholder="Enter patient age" name="page">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ethnicity" class="control-label col-xs-4"> Ethnicity </label>
+                        <div class="btn-group col-xs-8">
+                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="ethnicityButton">Select Ethnicity <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">African-American</a></li>
+                                <li><a href="#">Asian</a></li>
+                                <li><a href="#">Hispanic</a></li>
+                                <li><a href="#">White</a></li>
+                                <li><a href="#">Other</a></li>
+                                <li><a href="#">All-Ethnicities</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ethnicity" class="control-label col-xs-4"> Site of Tumour </label>
+                        <div class="btn-group col-xs-8">
+                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="siteButton">Select Site of Tumour<span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Glottic</a></li>
+                                <li><a href="#">Subglottic</a></li>
+                                <li><a href="#">Supraglottic</a></li>
+                                <li><a href="#">Transglottic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pname" class="control-label col-xs-4">Cancer Stage</label>
+                        <div class="col-xs-4">
+                            <input type="radio" id="pstage" name="stage" value="T3"/> T3
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="radio" id="gender" name="stage" value="T4"/> T4
+                        </div>
+                    </div>
+
+                    <div class="buttonWrapper">
+                        <button type="submit" class="btn btn-success" id="submitButton">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
