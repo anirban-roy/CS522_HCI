@@ -227,6 +227,9 @@
                     renderTo: 'chart1',
                     type: 'treemap'
                 },
+				credits: {
+					enabled: false
+				},
                 tooltip: {
                     formatter: function () {
                         return 'Average Survival Probability: <b>' + this.point.value + '%<br>Average Age:' + this.point.avgage + '</b><br> Population size: ' + this.point.count;
