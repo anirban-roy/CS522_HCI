@@ -1,0 +1,409 @@
+[
+    {
+        "key": "glottic",
+        "subregion": "concurrent",
+        "region": "african",
+        "value": 5
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "concurrent",
+        "region": "african",
+        "value": 12
+    },
+    {
+        "key": "transglottic",
+        "subregion": "concurrent",
+        "region": "african",
+        "value": 3
+    },
+    {
+        "key": "subglottic",
+        "subregion": "concurrent",
+        "region": "african",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "concurrent",
+        "region": "asian",
+        "value": 1
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "concurrent",
+        "region": "asian",
+        "value": 1
+    },
+    {
+        "key": "glottic",
+        "subregion": "concurrent",
+        "region": "hispanic",
+        "value": 8
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "concurrent",
+        "region": "hispanic",
+        "value": 9
+    },
+    {
+        "key": "transglottic",
+        "subregion": "concurrent",
+        "region": "hispanic",
+        "value": 5
+    },
+    {
+        "key": "glottic",
+        "subregion": "concurrent",
+        "region": "other",
+        "value": 1
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "concurrent",
+        "region": "other",
+        "value": 2
+    },
+    {
+        "key": "glottic",
+        "subregion": "concurrent",
+        "region": "white",
+        "value": 17
+    },
+    {
+        "key": "subglottic",
+        "subregion": "concurrent",
+        "region": "white",
+        "value": 2
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "concurrent",
+        "region": "white",
+        "value": 66
+    },
+    {
+        "key": "transglottic",
+        "subregion": "concurrent",
+        "region": "white",
+        "value": 10
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction",
+        "region": "african",
+        "value": 1
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction",
+        "region": "african",
+        "value": 4
+    },
+    {
+        "key": "subglottic",
+        "subregion": "induction",
+        "region": "african",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction",
+        "region": "african",
+        "value": 1
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction",
+        "region": "hispanic",
+        "value": 4
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction",
+        "region": "hispanic",
+        "value": 2
+    },
+    {
+        "key": "subglottic",
+        "subregion": "induction",
+        "region": "hispanic",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction",
+        "region": "other",
+        "value": 2
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction",
+        "region": "other",
+        "value": 2
+    },
+    {
+        "key": "subglottic",
+        "subregion": "induction",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction",
+        "region": "white",
+        "value": 10
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction",
+        "region": "african",
+        "value": 35
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "induction",
+        "region": "white",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction",
+        "region": "white",
+        "value": 12
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction + chemo",
+        "region": "african",
+        "value": 2
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction + chemo",
+        "region": "african",
+        "value": 7
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "induction + chemo",
+        "region": "white",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction + chemo",
+        "region": "white",
+        "value": 2
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction + chemo",
+        "region": "hispanic",
+        "value": 1
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction + chemo",
+        "region": "hispanic",
+        "value": 3
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "induction + chemo",
+        "region": "hispanic",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction + chemo",
+        "region": "hispanic",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction + chemo",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction + chemo",
+        "region": "other",
+        "value": 1
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "induction + chemo",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction + chemo",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "induction + chemo",
+        "region": "white",
+        "value": 2
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "induction + chemo",
+        "region": "white",
+        "value": 23
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "induction + chemo",
+        "region": "white",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "induction + chemo",
+        "region": "white",
+        "value": 3
+    },
+    {
+        "key": "glottic",
+        "subregion": "no Chemotherapy",
+        "region": "african",
+        "value": 11
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "no Chemotherapy",
+        "region": "african",
+        "value": 35
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "no Chemotherapy",
+        "region": "african",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "no Chemotherapy",
+        "region": "african",
+        "value": 13
+    },
+    {
+        "key": "glottic",
+        "subregion": "no Chemotherapy",
+        "region": "asian",
+        "value": 0
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "no Chemotherapy",
+        "region": "asian",
+        "value": 2
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "no Chemotherapy",
+        "region": "asian",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "no Chemotherapy",
+        "region": "african",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "no Chemotherapy",
+        "region": "hispanic",
+        "value": 10
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "no Chemotherapy",
+        "region": "hispanic",
+        "value": 25
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "no Chemotherapy",
+        "region": "hispanic",
+        "value": 1
+    },
+    {
+        "key": "transglottic",
+        "subregion": "no Chemotherapy",
+        "region": "hispanic",
+        "value": 13
+    },
+    {
+        "key": "glottic",
+        "subregion": "no Chemotherapy",
+        "region": "other",
+        "value": 2
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "no Chemotherapy",
+        "region": "other",
+        "value": 1
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "no Chemotherapy",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "transglottic",
+        "subregion": "no Chemotherapy",
+        "region": "other",
+        "value": 0
+    },
+    {
+        "key": "glottic",
+        "subregion": "no Chemotherapy",
+        "region": "white",
+        "value": 29
+    },
+    {
+        "key": "supraglottic",
+        "subregion": "no Chemotherapy",
+        "region": "white",
+        "value": 194
+    }
+    ,
+    {
+        "key": "subglottic",
+        "subregion": "no Chemotherapy",
+        "region": "white",
+        "value": 1
+    },
+    {
+        "key": "transglottic",
+        "subregion": "no Chemotherapy",
+        "region": "white",
+        "value": 37
+    }
+    
+]

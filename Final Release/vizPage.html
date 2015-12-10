@@ -1,0 +1,2611 @@
+<html>
+    <head>
+        <title> Head and Neck Therapy Visualization </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://mostapharoudsari.github.io/Honeybee/pc_source_files/css/d3.parcoords.css">
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src = "http://mostapharoudsari.github.io/Honeybee/pc_source_files/d3/d3.parcoords.js"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/treemap.js"></script>
+        <script src="script1.js"></script>
+        <style> 
+            .container {
+                width:1300px;
+            }
+
+            .leftDiv, #chart1 {
+                float: left;
+                width: 34%;
+                height:70%;
+            }
+
+            .rightDiv {
+                float: right;
+                width: 33%;
+                height: 70%;
+                text-align: center;
+            }
+
+            .centerDiv {
+                display:inline-block;
+                width: 33%;
+                height:70%;
+            }
+
+            .bottomDiv {
+                width: 100%;
+                height:30%;
+            }
+
+            #chart4 {
+                position: relative;
+                float: left;
+                font-family: sans-serif;
+                font-size: 10px;
+            }
+
+            #tooltip{
+                font-family: sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                color:black;
+            }
+
+            .axis,
+            .frame {
+                shape-rendering: crispEdges;
+            }
+
+            .axis line {
+                stroke: #ddd;
+            }
+
+            #chart3 .axis path {
+                display: none;
+            }
+
+            .frame {
+                fill: none;
+                stroke: #aaa;
+            }
+
+            circle {
+                fill-opacity: .7;
+            }
+
+            #chart3 svg {
+                font: 10px sans-serif;
+                padding: 10px;
+            }
+            .d3-tip:after {
+                box-sizing: border-box;
+                font-size: 10px;
+                width: 100%;
+                line-height: 1;
+                color: rgba(0, 0, 0, 0.8);
+                content: "\25BC";
+                position: absolute;
+                text-align: center;
+            }
+            .d3-tip {
+                line-height: 1;
+                font-weight: bold;
+                padding: 12px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #fff;
+                border-radius: 2px;
+            }
+
+            .d3-tip.n:after {
+                margin: -1px 0 0 0;
+                top: 100%;
+                left: 0;
+            }
+
+            #chart1Sub {
+                background: #fff;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            #chart1Sub p {
+                font-family: Georgia;
+                font-size: 20px;
+            }
+
+            #chart1Sub .title {
+                font-weight: bold;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 6px;
+                margin-bottom: 6px;
+            }
+            #chart1Sub text {
+                pointer-events: none;
+            }
+
+            #chart1Sub .grandparent text {
+                font-weight: bold;
+            }
+
+            #chart1Sub rect {
+                fill: none;
+                stroke: #fff;
+            }
+
+            #chart1Sub rect.parent,
+            .grandparent rect {
+                stroke-width: 2px;
+            }
+
+            #chart1Sub rect.parent {
+                pointer-events: none;
+            }
+
+            #chart1Sub .grandparent rect {
+                fill: orange;
+            }
+
+            #chart1Sub .grandparent:hover rect {
+                fill: #ee9700;
+            }
+
+            #chart1Sub .children rect.parent,
+            .grandparent rect {
+                cursor: pointer;
+            }
+
+            #chart1Sub .children rect.parent {
+                fill: #bbb;
+                fill-opacity: .5;
+            }
+
+            #chart1Sub .children:hover rect.child {
+                fill: #bbb;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container"> 
+            <div class="leftDiv" id="chart1"> <div id="chart1Sub" style="width:100%; height:98%;"></div> </div>
+            <div class="centerDiv" id="chart2"> </div> 
+            <div class="rightDiv" id="chart3"></div>
+            <div class="parcoords bottomDiv" id="chart4">
+
+                <div style="float:right;">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Open Tutorial </button>
+
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">How to use a parallel Coordinate Chart?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LxpA8hsbgOo" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var queryString = window.location.search.substring(1);
+        var params = queryString.split('&');
+        var id = params[0];
+        var gender = params[1].replace("%20", " ");
+        var age = params[2];
+        var ethnicity = params[3].toLowerCase();
+        var site = params[4].toLowerCase();
+        var tstage = params[5];
+        // Instructions to Ashwin: Copy this entire script block. Also copy the above style block for the viz render config options.
+        var options = '';
+        var chart;
+        var newPatient = ethnicity + ',' + site + ',' + tstage + ',' + 'noChemo' + ',' + 'N0' + ',' + '1' + ',' + age + ',' + 'PLRT' + ',' + '0.5';
+        var colors = d3.scale.ordinal()
+                .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent', 'male', 'female'])
+                .range(['#ffc04c', '#328332', '#6666ff', '#fc8d62', '#ff4c4c', '#8da0cb', '#fc8d62']);
+		var current_therapies;
+        $(document).ready(function () {
+
+            options = {
+                chart: {
+                    renderTo: 'chart1',
+                    type: 'treemap'
+                },
+				credits: {
+					enabled: false
+				},
+                tooltip: {
+                    formatter: function () {
+                        return 'Average Survival Probability: <b>' + this.point.value + '%<br>Average Age:' + this.point.avgage + '</b><br> Population size: ' + this.point.count;
+                    }
+                },
+				plotOptions: {
+					series: {
+						point:{
+							events: {
+								click: function () {
+									// Call the brushNLink methods to highlight the respective therapy data points in them
+									brushNLinkTreeMap(this.name);   // in case a different point in treemap is selected, brushNLink it again to highlight that node
+									brushNLinkLineLineChart(this.name);
+									brushNLinkLineParallelChart(this.name);
+								}
+							}
+						}
+					}
+				},
+                series: [{
+                        layoutAlgorithm: 'stripes',
+                        alternateStartingDirection: true,
+                        levels: [{
+                                level: 1,
+                                layoutAlgorithm: 'sliceAndDice',
+                                dataLabels: {
+                                    enabled: true,
+                                    align: 'left',
+                                    verticalAlign: 'top',
+                                    style: {
+                                        fontSize: '12px',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            }]
+                        ,
+                        name: 'cancer',
+                        data: []
+                    }],
+                title: {
+                    text: 'Statistics of Cancer Data for ' + ethnicity + ' patients'
+                }
+            };
+            if (ethnicity != 'all-ethnicities') {
+                radio_ethni = ethnicity;
+                radio_site = site;
+                radio_sex = gender;
+                $.getJSON('demographics_ethnicity_survivalprobab.json', function (jsonData, error) {
+                    console.log(error);
+                    // Instructions to Ashwin: "Please pass the demographic input values from users to plotTreeMap below as indicated
+                    plotTreeMap(jsonData, radio_ethni, radio_site, radio_sex);
+                    chart = new Highcharts.Chart(options);
+                });
+                parallelChart(ethnicity, site, tstage, gender);
+                lineCurve();
+                scatterPlot();
+            }
+            else {
+                parallelChart(ethnicity, site, tstage, gender);
+                AlllineCurve(ethnicity, site, gender);
+                ScatterPlot2();
+                treemap2();
+            }
+        });
+        function plotTreeMap(jsonData, m_ethnicity, m_site, m_sex) {
+            data = jsonData.data;
+            var colors = d3.scale.ordinal()
+							  .domain(['no chemo','induction','induction+chemoRT','concurrent','male','female','brushedout', 'brushSelected'])
+							  .range(['#66c2a5','#8da0cb','#fdae6b','#fc8d62','#999999','#fc8d62','#bdbdbd', '#ffeda0']);
+            for (var i = 0; i < data.length; i++) {
+                //console.log(data[i].ethnicity);
+                if (data[i].ethnicity == m_ethnicity) {
+                    sites = data[i].sites;
+                    for (var j = 0; j < sites.length; j++) {
+                        console.log(sites[j].site);
+                        if (sites[j].site == m_site) {
+                            sexes = sites[j].sexes;
+                            for (var k = 0; k < sexes.length; k++) {
+                                sex = sexes[k];
+                                if (sex.sex == m_sex) {
+                                    for (var l = 0; l < sex.therapies.length; l++) {
+                                        sex.therapies[l].color = colors(sex.therapies[l].name);
+                                    }
+                                    options.series[0].data = sex.therapies;
+									current_therapies = sex.therapies;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+		
+		// Anirban: Begin Change for final release
+		// call this method passing the therapy name to highlight the treemap node
+		function brushNLinkTreeMap(therapyName){
+		var colors = d3.scale.ordinal()
+						  .domain(['no chemo','induction','induction+chemoRT','concurrent','male','female','brushedout', 'brushSelected'])
+						  .range(['#66c2a5','#8da0cb','#fdae6b','#fc8d62','#999999','#fc8d62','#bdbdbd', '#ffeda0']);
+			var chart=$("#chart1").highcharts();
+			for(var i=0; i < current_therapies.length; i++){
+				if(current_therapies[i].name == therapyName)
+					current_therapies[i].color = colors('brushSelected');
+				else
+					current_therapies[i].color = colors('brushedout');
+			}
+			chart.series[0].update({data:current_therapies})
+		}// end Change
+
+        function parallelChart(m_ethnicity, m_site, m_tstage, m_gender) {
+            var color_set = d3.scale.ordinal()
+                    .domain(['white', 'other', 'african-american', 'hispanic', 'asian'])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c']);
+            var color_set2 = d3.scale.ordinal()
+                    .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo', ])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373']);
+            // load default chart
+            d3.csv("SurvivalProbability.csv", function (data) {
+                makeGraph(data, false);
+                var k = {Ethnicity: "" + ethnicity,
+                    AgeAtTx: "" + age,
+                    Site: "" + site,
+                    Tcategory: "" + tstage,
+                    Nodal_Disease: "N+",
+                    ecog: "1",
+                    Chemotherapy: "induction",
+                    Local_Therapy: "PLRT",
+                    "Probability of Survival": "0.5"
+                }
+                data.push(k);
+                //remove the old DOM
+                d3.selectAll("#chart4 svg").selectAll("*").remove();
+                //make the graph
+                makeGraph(data);
+                console.log(data);
+            });
+
+            function makeGraph(data ) {
+                    if (m_ethnicity != 'all-ethnicities') {
+                        filteredData = data.filter(function (row) {
+                            if (row['Ethnicity'] == m_ethnicity && row['Site'] == m_site && row['Tcategory'] == m_tstage && row['Gender'] == m_gender) {
+                                return row;
+                            }
+                        });
+                    }
+                    else {
+                        filteredData = data.filter(function (row) {
+                            if (row['Site'] == m_site && row['Tcategory'] == m_tstage && row['Gender'] == m_gender) {
+                                return row;
+                            }
+                        });
+                    }
+
+
+                console.log(filteredData);
+                // collect text for first column to adjust left margin
+                var firstCell = data.map(function (d) {
+                    return d3.values(d)[0]
+                });
+                // find the longest text size in the first row to adjust left margin
+                var textLength = 0;
+                firstCell.forEach(function (d) {
+                    if (d.length > textLength)
+                        textLength = d.length;
+                });
+                // get parallel coordinates
+                graph = d3.parcoords()('#chart4')
+                        .data(filteredData)
+                        .margin({top: 30, left: textLength, bottom: 40, right: 0})
+                        .alpha(0.6)
+                        .mode("queue")
+                        .rate(5)
+                        .render()
+                        .brushMode("1D-axes")  // enable brushing
+                        //.reorderable() // I removed this for now as it can mess up with tooltips
+                        .interactive();
+                // add instruction text
+                var instructions = "-Drag around axis to begin brush. -Click axis to clear brush. -Click a label to color data based on axis values. -Hover on each line to highlight."
+
+
+                // set the initial coloring based on the 3rd column
+                if (m_ethnicity != 'all-ethnicities')
+                    update_colors(d3.keys(filteredData[0])[4]);
+                else
+                    update_colors(d3.keys(filteredData[0])[3]);
+                // click label to activate coloring
+                graph.svg.selectAll(".dimension")
+                        .on("click", update_colors)
+                        .selectAll(".label")
+                        .style("font-size", "14px"); // change font sizes of selected lable
+
+                //add hover event
+                d3.select("#chart4 svg")
+                        .on("mousemove", function () {
+                            var mousePosition = d3.mouse(this);
+                            highlightLineOnClick(mousePosition, true); //true will also add tooltip
+                        })
+                        .on("mouseout", function () {
+                            cleanTooltip();
+                            graph.unhighlight();
+                        });
+            }
+            // update color and font weight of chart based on axis selection
+            // modified from here: https://syntagmatic.github.io/parallel-coordinates/
+            function update_colors(dimension) {
+                // change the fonts to bold
+                graph.svg.selectAll(".dimension")
+                        .style("font-weight", "normal")
+                        .filter(function (d) {
+                            return d == dimension;
+                        })
+                        .style("font-weight", "bold");
+                // change colors for each line
+                graph.color(function (d) {
+                    if (dimension == 'Ethnicity')
+                        return color_set([d[dimension]])
+
+                    else
+                        return color_set2([d[dimension]])
+                }).render();
+            }
+            ;
+            // Add highlight for every line on click
+            function getCentroids(data) {
+                // this function returns centroid points for data. I had to change the source
+                // for parallelcoordinates and make compute_centroids public.
+                // I assume this should be already somewhere in graph and I don't need to recalculate it
+                // but I couldn't find it so I just wrote this for now
+                var margins = graph.margin();
+                var graphCentPts = [];
+                data.forEach(function (d) {
+
+                    var initCenPts = graph.compute_centroids(d).filter(function (d, i) {
+                        return i % 2 == 0;
+                    });
+                    // move points based on margins
+                    var cenPts = initCenPts.map(function (d) {
+                        return [d[0] + margins["left"], d[1] + margins["top"]];
+                    });
+                    graphCentPts.push(cenPts);
+                });
+                return graphCentPts;
+            }
+
+            function getActiveData() {
+                // I'm pretty sure this data is already somewhere in graph
+                if (graph.brushed() != false)
+                    return graph.brushed();
+                return graph.data();
+            }
+
+            function isOnLine(startPt, endPt, testPt, tol) {
+                // check if test point is close enough to a line
+                // between startPt and endPt. close enough means smaller than tolerance
+                var x0 = testPt[0];
+                var y0 = testPt[1];
+                var x1 = startPt[0];
+                var y1 = startPt[1];
+                var x2 = endPt[0];
+                var y2 = endPt[1];
+                var Dx = x2 - x1;
+                var Dy = y2 - y1;
+                var delta = Math.abs(Dy * x0 - Dx * y0 - x1 * y2 + x2 * y1) / Math.sqrt(Math.pow(Dx, 2) + Math.pow(Dy, 2));
+                //console.log(delta);
+                if (delta <= tol)
+                    return true;
+                return false;
+            }
+
+            function findAxes(testPt, cenPts) {
+                // finds between which two axis the mouse is
+                var x = testPt[0];
+                var y = testPt[1];
+                // make sure it is inside the range of x
+                if (cenPts[0][0] > x)
+                    return false;
+                if (cenPts[cenPts.length - 1][0] < x)
+                    return false;
+                // find between which segment the point is
+                for (var i = 0; i < cenPts.length; i++) {
+                    if (cenPts[i][0] > x)
+                        return i;
+                }
+            }
+
+            function cleanTooltip() {
+                // removes any object under #tooltip is
+                graph.svg.selectAll("#tooltip")
+                        .remove();
+            }
+
+            function addTooltip(clicked, clickedCenPts) {
+
+                // sdd tooltip to multiple clicked lines
+                var clickedDataSet = [];
+                var margins = graph.margin()
+
+                // get all the values into a single list
+                // I'm pretty sure there is a better way to write this is Javascript
+                for (var i = 0; i < clicked.length; i++) {
+                    for (var j = 0; j < clickedCenPts[i].length; j++) {
+                        if (ethnicity != 'all-ethnicities')
+                            var text = d3.values(clicked[i])[j + 4];
+                        else
+                            var text = d3.values(clicked[i])[j + 1];
+                        // not clean at all!
+                        var x = clickedCenPts[i][j][0] - margins.left;
+                        var y = clickedCenPts[i][j][1] - margins.top;
+                        clickedDataSet.push([x, y, text]);
+                    }
+                }
+                ;
+                // add rectangles
+                var fontSize = 14;
+                var padding = 2;
+                var rectHeight = fontSize + 2 * padding; //based on font size
+
+                graph.svg.selectAll("rect[id='tooltip']")
+                        .data(clickedDataSet).enter()
+                        .append("rect")
+                        .attr("x", function (d) {
+                            return d[0] - d[2].length * 5;
+                        })
+                        .attr("y", function (d) {
+                            return d[1] - rectHeight + 2 * padding;
+                        })
+                        .attr("rx", "2")
+                        .attr("ry", "2")
+                        .attr("id", "tooltip")
+                        .attr("fill", "grey")
+                        .attr("opacity", 0.9)
+                        .attr("width", function (d) {
+                            return d[2].length * 10;
+                        })
+                        .attr("height", rectHeight);
+                // add text on top of rectangle
+                graph.svg.selectAll("text[id='tooltip']")
+                        .data(clickedDataSet).enter()
+                        .append("text")
+                        .attr("x", function (d) {
+                            return d[0];
+                        })
+                        .attr("y", function (d) {
+                            return d[1];
+                        })
+                        .attr("id", "tooltip")
+                        .attr("fill", "white")
+                        .attr("text-anchor", "middle")
+                        .attr("font-size", fontSize)
+                        .text(function (d) {
+                            return d[2];
+                        })
+            }
+
+            function getClickedLines(mouseClick) {
+                var clicked = [];
+                var clickedCenPts = [];
+                // find which data is activated right now
+                var activeData = getActiveData();
+                // find centriod points
+                var graphCentPts = getCentroids(activeData);
+                if (graphCentPts.length == 0)
+                    return false;
+                // find between which axes the point is
+                var axeNum = findAxes(mouseClick, graphCentPts[0]);
+                if (!axeNum)
+                    return false;
+                graphCentPts.forEach(function (d, i) {
+                    if (isOnLine(d[axeNum - 1], d[axeNum], mouseClick, 2)) {
+                        clicked.push(activeData[i]);
+                        clickedCenPts.push(graphCentPts[i]); // for tooltip
+                    }
+                });
+                return [clicked, clickedCenPts]
+            }
+
+
+            function highlightLineOnClick(mouseClick, drawTooltip) {
+
+                var clicked = [];
+                var clickedCenPts = [];
+                clickedData = getClickedLines(mouseClick);
+                if (clickedData && clickedData[0].length != 0) {
+
+                    clicked = clickedData[0];
+                    clickedCenPts = clickedData[1];
+                    // highlight clicked line
+                    graph.highlight(clicked);
+                    if (drawTooltip) {
+                        // clean if anything is there
+                        cleanTooltip();
+                        // add tooltip
+                        addTooltip(clicked, clickedCenPts);
+                    }
+
+                }
+            }
+            ;
+        }
+
+        function lineCurve() {
+
+            african_glottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 84.8667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+                        //induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+                        //inductionchemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 18.8667, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+                        //no chemo
+                        {t: 0, d: 0, n: 2},
+                        {t: 21, d: 1, n: 2},
+                        {t: 50.6333, d: 1, n: 1}
+                    ]
+                ]};
+            african_glottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 4},
+                        {t: 31.2, d: 1, n: 4},
+                        {t: 33.1667, d: 0, n: 3},
+                        {t: 71.3, d: 1, n: 2},
+                        {t: 82.3667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 1, n: 0},
+                        {t: 105.9, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+                        //inductionchemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 35.4333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 9},
+                        {t: 10.267, d: 0, n: 9},
+                        {t: 10.533, d: 0, n: 8},
+                        {t: 26.167, d: 1, n: 7},
+                        {t: 32.633, d: 1, n: 6},
+                        {t: 38.967, d: 1, n: 5},
+                        {t: 44.667, d: 1, n: 4},
+                        {t: 44.833, d: 1, n: 3},
+                        {t: 66.667, d: 1, n: 2},
+                        {t: 279.1, d: 1, n: 1}
+                    ]
+                ]};
+            african_sublgottic_female = {
+                treatments: [
+                    [{t: 0, d: 0, n: 0}],
+                    [{t: 0, d: 0, n: 0}],
+                    [{t: 0, d: 0, n: 0}],
+                    [{t: 0, d: 0, n: 0}]
+                ]};
+            african_sublgottic_male = {
+                treatments: [
+                    [{t: 0, d: 0, n: 0}],
+                    [{t: 0, d: 0, n: 0}],
+                    [{t: 0, d: 0, n: 0}],
+                    [{t: 0, d: 0, n: 0}]
+                ]};
+            african_supraglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 53.8667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 1},
+                        {t: 117.367, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 3},
+                        {t: 12.7, d: 1, n: 3},
+                        {t: 48.4333, d: 1, n: 2},
+                        {t: 48.8333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 12},
+                        {t: 16.2, d: 1, n: 12},
+                        {t: 19.8, d: 1, n: 11},
+                        {t: 20.433, d: 1, n: 10},
+                        {t: 22.3, d: 1, n: 9},
+                        {t: 41.467, d: 1, n: 8},
+                        {t: 47.667, d: 0, n: 7},
+                        {t: 50.333, d: 1, n: 6},
+                        {t: 98.267, d: 1, n: 5},
+                        {t: 192.5, d: 1, n: 4},
+                        {t: 193.8, d: 1, n: 3},
+                        {t: 195.6, d: 0, n: 2},
+                        {t: 241.967, d: 1, n: 1}
+                    ]
+                ]};
+            african_supraglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 11},
+                        {t: 11.267, d: 1, n: 11},
+                        {t: 35.667, d: 1, n: 10},
+                        {t: 39.3, d: 1, n: 9},
+                        {t: 40.067, d: 1, n: 8},
+                        {t: 56.7, d: 1, n: 7},
+                        {t: 57.7, d: 1, n: 6},
+                        {t: 59.4, d: 1, n: 5},
+                        {t: 73.333, d: 1, n: 4},
+                        {t: 81.967, d: 0, n: 3},
+                        {t: 98.667, d: 0, n: 2},
+                        {t: 125.9, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 3},
+                        {t: 5.767, d: 1, n: 3},
+                        {t: 60.733, d: 0, n: 2},
+                        {t: 110.067, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 4},
+                        {t: 33.5333, d: 0, n: 4},
+                        {t: 49.6333, d: 1, n: 2},
+                        {t: 66.9667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 23},
+                        {t: 5.7, d: 1, n: 23},
+                        {t: 6.533, d: 1, n: 22},
+                        {t: 12.167, d: 1, n: 21},
+                        {t: 12.467, d: 0, n: 20},
+                        {t: 12.9, d: 1, n: 19},
+                        {t: 13.1, d: 1, n: 18},
+                        {t: 15.167, d: 1, n: 17},
+                        {t: 17.167, d: 1, n: 16},
+                        {t: 26.6, d: 1, n: 15},
+                        {t: 29.8, d: 1, n: 14},
+                        {t: 31.033, d: 1, n: 13},
+                        {t: 32.4, d: 1, n: 12},
+                        {t: 32.433, d: 1, n: 11},
+                        {t: 42.833, d: 1, n: 10},
+                        {t: 55.533, d: 1, n: 9},
+                        {t: 57.7, d: 1, n: 8},
+                        {t: 61.833, d: 1, n: 7},
+                        {t: 85.467, d: 1, n: 6},
+                        {t: 105.867, d: 0, n: 5},
+                        {t: 109.4, d: 1, n: 4},
+                        {t: 116.267, d: 1, n: 3},
+                        {t: 151.667, d: 1, n: 2},
+                        {t: 152.1, d: 0, n: 1}
+                    ]
+                ]};
+            african_transglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 1},
+                        {t: 287.967, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 2},
+                        {t: 30.6, d: 1, n: 2},
+                        {t: 36.3667, d: 1, n: 1}
+                    ]
+                ]};
+            african_transglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 2},
+                        {t: 30.6, d: 1, n: 2},
+                        {t: 36.3667, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 2},
+                        {t: 15.4667, d: 1, n: 2},
+                        {t: 45.2333, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ],
+                    [
+                        {t: 0, d: 0, n: 11},
+                        {t: 7.2, d: 1, n: 11},
+                        {t: 8.7, d: 1, n: 10},
+                        {t: 11.9, d: 1, n: 9},
+                        {t: 15.1, d: 1, n: 8},
+                        {t: 28.1, d: 1, n: 7},
+                        {t: 63.367, d: 1, n: 6},
+                        {t: 78.633, d: 1, n: 5},
+                        {t: 85.967, d: 1, n: 4},
+                        {t: 116.2, d: 0, n: 3},
+                        {t: 136.133, d: 0, n: 2},
+                        {t: 167.367, d: 1, n: 1}
+                    ]
+                ]};
+            asian_glottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            asian_glottic_male = {
+                treatments: [
+                    [//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 4.66667, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            asian_subglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            asian_subglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            asian_supraglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            asian_supraglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 38.5333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 2},
+                        {t: 15.1, d: 1, n: 2},
+                        {t: 96.0667, d: 1, n: 1}
+                    ]
+
+                ]};
+            asian_transglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            asian_transglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            hispanic_glottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 1},
+                        {t: 264.533, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            hispanic_glottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 8},
+                        {t: 11, d: 1, n: 8},
+                        {t: 22.567, d: 1, n: 7},
+                        {t: 36.4, d: 0, n: 6},
+                        {t: 40.633, d: 0, n: 5},
+                        {t: 41.867, d: 1, n: 4},
+                        {t: 66.2, d: 0, n: 3},
+                        {t: 87.1, d: 1, n: 2},
+                        {t: 115.8, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 3},
+                        {t: 154.533, d: 0, n: 3},
+                        {t: 206.933, d: 1, n: 2},
+                        {t: 260.767, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 49.5, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 10},
+                        {t: 11.967, d: 1, n: 10},
+                        {t: 19.333, d: 0, n: 9},
+                        {t: 23.133, d: 1, n: 8},
+                        {t: 33.933, d: 0, n: 7},
+                        {t: 38.6, d: 0, n: 6},
+                        {t: 49.633, d: 1, n: 5},
+                        {t: 76.4, d: 1, n: 4},
+                        {t: 134.967, d: 1, n: 3},
+                        {t: 171.367, d: 0, n: 2},
+                        {t: 292.967, d: 1, n: 1}
+                    ]
+                ]};
+            hispanic_subglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            hispanic_subglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 144.3, d: 1, n: 1}]
+                ]};
+            hispanic_supraglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 9.33333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 3},
+                        {t: 125.333, d: 1, n: 3},
+                        {t: 132.367, d: 0, n: 2},
+                        {t: 236.2, d: 1, n: 1}
+                    ]
+
+                ]};
+            hispanic_supraglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 8},
+                        {t: 9.133, d: 1, n: 8},
+                        {t: 12.033, d: 1, n: 7},
+                        {t: 14.233, d: 1, n: 6},
+                        {t: 19.833, d: 1, n: 5},
+                        {t: 24.333, d: 0, n: 4},
+                        {t: 55.6, d: 0, n: 3},
+                        {t: 65.733, d: 0, n: 2},
+                        {t: 109.133, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 2},
+                        {t: 41.9667, d: 1, n: 2},
+                        {t: 88.6667, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 3},
+                        {t: 17.8667, d: 1, n: 3},
+                        {t: 22.9667, d: 1, n: 2},
+                        {t: 57.6667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 22},
+                        {t: 5.767, d: 1, n: 22},
+                        {t: 10.733, d: 1, n: 21},
+                        {t: 13.767, d: 0, n: 20},
+                        {t: 16.233, d: 1, n: 19},
+                        {t: 19.9, d: 1, n: 18},
+                        {t: 19.967, d: 1, n: 17},
+                        {t: 22.2, d: 1, n: 16},
+                        {t: 24.633, d: 1, n: 15},
+                        {t: 25.1, d: 1, n: 14},
+                        {t: 31.3, d: 1, n: 13},
+                        {t: 37.9, d: 1, n: 12},
+                        {t: 47.233, d: 0, n: 11},
+                        {t: 59.3, d: 0, n: 10},
+                        {t: 74.8, d: 0, n: 9},
+                        {t: 108.067, d: 1, n: 8},
+                        {t: 115.667, d: 0, n: 7},
+                        {t: 130.767, d: 0, n: 6},
+                        {t: 131.833, d: 1, n: 5},
+                        {t: 140.8, d: 1, n: 4},
+                        {t: 155.233, d: 0, n: 3},
+                        {t: 166.767, d: 1, n: 2},
+                        {t: 223.033, d: 1, n: 1}
+                    ]
+                ]};
+            hispanic_transglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 35.9333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 299.833, d: 0, n: 1}
+                    ]
+                ]};
+            hispanic_transglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 4},
+                        {t: 13.6333, d: 0, n: 4},
+                        {t: 34.3, d: 1, n: 3},
+                        {t: 84.4333, d: 0, n: 2},
+                        {t: 86.2, d: 1, n: 1}
+                    ]
+                            [
+//induction
+                                    {t: 0, d: 0, n: 0}
+                            ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 12},
+                        {t: 12, d: 1, n: 12},
+                        {t: 15.067, d: 1, n: 11},
+                        {t: 16.967, d: 1, n: 10},
+                        {t: 28.467, d: 0, n: 9},
+                        {t: 57.967, d: 1, n: 8},
+                        {t: 84, d: 1, n: 7},
+                        {t: 101.633, d: 1, n: 6},
+                        {t: 117.967, d: 1, n: 5},
+                        {t: 151.233, d: 1, n: 4},
+                        {t: 185.733, d: 1, n: 3},
+                        {t: 252.5, d: 1, n: 2},
+                        {t: 263.1, d: 1, n: 1}
+                    ]
+                ]};
+            other_glottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            other_glottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 78.4333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 2},
+                        {t: 14.167, d: 0, n: 2},
+                        {t: 307.067, d: 0, n: 1}
+                    ]
+                ]};
+            other_subglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            other_subglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            other_supraglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 1},
+                        {t: 173.8, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+
+                ]};
+            other_supraglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 2},
+                        {t: 52.7333, d: 0, n: 2},
+                        {t: 73.6, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 1},
+                        {t: 98.6333, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 16.7, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 296.7, d: 0, n: 1}
+                    ]
+                ]};
+            other_transglottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            other_transglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            white_glottic_female = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 2},
+                        {t: 60.1333, d: 1, n: 2},
+                        {t: 85.4667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 6},
+                        {t: 32, d: 0, n: 6},
+                        {t: 105.033, d: 1, n: 5},
+                        {t: 135.233, d: 0, n: 4},
+                        {t: 137.267, d: 1, n: 3},
+                        {t: 181.367, d: 1, n: 2},
+                        {t: 213.233, d: 0, n: 1}
+                    ]
+                ]};
+            white_glottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 15},
+                        {t: 13.367, d: 2, n: 15},
+                        {t: 16.133, d: 1, n: 13},
+                        {t: 18.833, d: 0, n: 12},
+                        {t: 45.633, d: 0, n: 11},
+                        {t: 48.333, d: 0, n: 10},
+                        {t: 70.967, d: 0, n: 9},
+                        {t: 71.233, d: 1, n: 8},
+                        {t: 80, d: 0, n: 7},
+                        {t: 87.1, d: 0, n: 6},
+                        {t: 97.667, d: 0, n: 5},
+                        {t: 99.967, d: 0, n: 4},
+                        {t: 105.367, d: 0, n: 3},
+                        {t: 117.567, d: 0, n: 2},
+                        {t: 146.4, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 10},
+                        {t: 23.533, d: 1, n: 10},
+                        {t: 23.6, d: 1, n: 9},
+                        {t: 87.333, d: 1, n: 8},
+                        {t: 108.467, d: 1, n: 7},
+                        {t: 123.833, d: 1, n: 6},
+                        {t: 131.6, d: 0, n: 5},
+                        {t: 135.767, d: 1, n: 4},
+                        {t: 141.733, d: 1, n: 3},
+                        {t: 176.5, d: 1, n: 2},
+                        {t: 225.2, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 2},
+                        {t: 41.7333, d: 0, n: 2},
+                        {t: 67.0667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 23},
+                        {t: 6.5, d: 1, n: 23},
+                        {t: 15.3, d: 1, n: 22},
+                        {t: 16.133, d: 1, n: 21},
+                        {t: 16.5, d: 1, n: 20},
+                        {t: 17.167, d: 1, n: 19},
+                        {t: 17.667, d: 1, n: 18},
+                        {t: 32.7, d: 0, n: 17},
+                        {t: 36.333, d: 1, n: 16},
+                        {t: 50.167, d: 0, n: 15},
+                        {t: 50.567, d: 0, n: 14},
+                        {t: 61.567, d: 0, n: 13},
+                        {t: 68.867, d: 0, n: 12},
+                        {t: 72.833, d: 0, n: 11},
+                        {t: 79.633, d: 0, n: 10},
+                        {t: 86.933, d: 1, n: 9},
+                        {t: 122.033, d: 0, n: 8},
+                        {t: 140.933, d: 1, n: 7},
+                        {t: 165.6, d: 1, n: 6},
+                        {t: 177.867, d: 1, n: 5},
+                        {t: 203.033, d: 1, n: 4},
+                        {t: 258.833, d: 1, n: 3},
+                        {t: 288.2, d: 0, n: 2},
+                        {t: 320.633, d: 1, n: 1}
+                    ]
+                ]};
+            white_subglottic_female = {
+                treatments: [
+                    [//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 20.4667, d: 1, n: 1}
+                    ],
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                ]};
+            white_subglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 1},
+                        {t: 150.6, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 1},
+                        {t: 20.2667, d: 1, n: 1}]
+                ]};
+            white_supraglottic_female = {
+                treatments: [
+                    [//concurrent
+                        {t: 0, d: 0, n: 24},
+                        {t: 11.2, d: 1, n: 24},
+                        {t: 16.033, d: 1, n: 23},
+                        {t: 20.267, d: 1, n: 22},
+                        {t: 23.667, d: 1, n: 21},
+                        {t: 24.033, d: 1, n: 20},
+                        {t: 24.733, d: 1, n: 19},
+                        {t: 36.733, d: 1, n: 18},
+                        {t: 41.7, d: 1, n: 17},
+                        {t: 48.367, d: 0, n: 16},
+                        {t: 50.7, d: 1, n: 15},
+                        {t: 50.967, d: 1, n: 14},
+                        {t: 64.067, d: 1, n: 13},
+                        {t: 69.9, d: 1, n: 12},
+                        {t: 70.167, d: 1, n: 11},
+                        {t: 70.533, d: 0, n: 10},
+                        {t: 71.6, d: 0, n: 9},
+                        {t: 75.6, d: 1, n: 8},
+                        {t: 79.8, d: 0, n: 7},
+                        {t: 93.133, d: 1, n: 6},
+                        {t: 97.9, d: 1, n: 5},
+                        {t: 102.833, d: 0, n: 4},
+                        {t: 122.733, d: 0, n: 3},
+                        {t: 150.933, d: 1, n: 2},
+                        {t: 176.1, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 16},
+                        {t: 7.867, d: 1, n: 16},
+                        {t: 18.433, d: 1, n: 15},
+                        {t: 20.333, d: 1, n: 14},
+                        {t: 26.8, d: 1, n: 13},
+                        {t: 28.6, d: 1, n: 12},
+                        {t: 30.567, d: 1, n: 11},
+                        {t: 33.4, d: 1, n: 10},
+                        {t: 38.4, d: 1, n: 9},
+                        {t: 126.2, d: 1, n: 8},
+                        {t: 141.1, d: 1, n: 7},
+                        {t: 148.533, d: 0, n: 6},
+                        {t: 158.633, d: 1, n: 5},
+                        {t: 173.1, d: 1, n: 4},
+                        {t: 192.3, d: 0, n: 3},
+                        {t: 198.9, d: 1, n: 2},
+                        {t: 202.1, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 6},
+                        {t: 17.7, d: 1, n: 6},
+                        {t: 25.033, d: 1, n: 5},
+                        {t: 42.167, d: 0, n: 4},
+                        {t: 47.667, d: 0, n: 3},
+                        {t: 52.333, d: 0, n: 2},
+                        {t: 108.367, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 73},
+                        {t: 3.567, d: 1, n: 73},
+                        {t: 5.9, d: 1, n: 72},
+                        {t: 9.5, d: 1, n: 71},
+                        {t: 9.6, d: 1, n: 70},
+                        {t: 10.233, d: 1, n: 69},
+                        {t: 10.3, d: 1, n: 68},
+                        {t: 10.333, d: 1, n: 67},
+                        {t: 10.767, d: 1, n: 66},
+                        {t: 15.2, d: 1, n: 65},
+                        {t: 17.533, d: 1, n: 64},
+                        {t: 19.033, d: 1, n: 63},
+                        {t: 20.133, d: 1, n: 62},
+                        {t: 20.233, d: 1, n: 61},
+                        {t: 23.867, d: 1, n: 60},
+                        {t: 24.333, d: 1, n: 59},
+                        {t: 25.5, d: 1, n: 58},
+                        {t: 25.9, d: 1, n: 57},
+                        {t: 28.733, d: 1, n: 56},
+                        {t: 29.5, d: 1, n: 55},
+                        {t: 32.767, d: 1, n: 54},
+                        {t: 32.967, d: 1, n: 53},
+                        {t: 33.533, d: 1, n: 52},
+                        {t: 35.6, d: 1, n: 51},
+                        {t: 36.233, d: 0, n: 50},
+                        {t: 39.333, d: 1, n: 49},
+                        {t: 40.6, d: 1, n: 48},
+                        {t: 40.833, d: 1, n: 47},
+                        {t: 41.733, d: 1, n: 46},
+                        {t: 41.933, d: 1, n: 45},
+                        {t: 42.167, d: 1, n: 44},
+                        {t: 43.4, d: 1, n: 43},
+                        {t: 45.567, d: 1, n: 42},
+                        {t: 46.733, d: 1, n: 41},
+                        {t: 47, d: 1, n: 40},
+                        {t: 48.167, d: 1, n: 39},
+                        {t: 52.333, d: 1, n: 38},
+                        {t: 52.967, d: 1, n: 37},
+                        {t: 54.167, d: 1, n: 36},
+                        {t: 58.367, d: 1, n: 35},
+                        {t: 59.967, d: 1, n: 34},
+                        {t: 61.133, d: 1, n: 33},
+                        {t: 62.6, d: 1, n: 32},
+                        {t: 68.1, d: 0, n: 31},
+                        {t: 69.1, d: 1, n: 30},
+                        {t: 70.5, d: 1, n: 29},
+                        {t: 71.433, d: 1, n: 28},
+                        {t: 73.2, d: 1, n: 27},
+                        {t: 74.7, d: 1, n: 26},
+                        {t: 75.067, d: 1, n: 25},
+                        {t: 78.5, d: 1, n: 24},
+                        {t: 88.033, d: 1, n: 23},
+                        {t: 97.267, d: 1, n: 22},
+                        {t: 103.9, d: 1, n: 21},
+                        {t: 105.9, d: 1, n: 20},
+                        {t: 112, d: 1, n: 19},
+                        {t: 112.9, d: 1, n: 18},
+                        {t: 113.067, d: 1, n: 17},
+                        {t: 117.2, d: 1, n: 16},
+                        {t: 118.567, d: 0, n: 15},
+                        {t: 129.9, d: 1, n: 14},
+                        {t: 131.9, d: 1, n: 13},
+                        {t: 134.067, d: 1, n: 12},
+                        {t: 138.033, d: 1, n: 11},
+                        {t: 142.167, d: 1, n: 10},
+                        {t: 143.133, d: 1, n: 9},
+                        {t: 149.067, d: 1, n: 8},
+                        {t: 157.067, d: 1, n: 7},
+                        {t: 157.7, d: 1, n: 6},
+                        {t: 162.5, d: 1, n: 5},
+                        {t: 165.133, d: 1, n: 4},
+                        {t: 169.467, d: 1, n: 3},
+                        {t: 229.933, d: 1, n: 2},
+                        {t: 280, d: 1, n: 1}]
+                ]};
+            white_supraglottic_male = {
+                treatments: [
+                    [//concurrent
+                        {t: 0, d: 0, n: 42},
+                        {t: 6.433, d: 0, n: 42},
+                        {t: 7.267, d: 1, n: 41},
+                        {t: 8.167, d: 1, n: 40},
+                        {t: 9.8, d: 1, n: 39},
+                        {t: 10.767, d: 1, n: 38},
+                        {t: 12.567, d: 1, n: 37},
+                        {t: 14.967, d: 1, n: 36},
+                        {t: 15.433, d: 1, n: 35},
+                        {t: 15.467, d: 1, n: 34},
+                        {t: 19.4, d: 1, n: 33},
+                        {t: 20.5, d: 1, n: 32},
+                        {t: 24.167, d: 0, n: 31},
+                        {t: 24.3, d: 1, n: 30},
+                        {t: 28.5, d: 1, n: 29},
+                        {t: 35.367, d: 1, n: 28},
+                        {t: 36.333, d: 0, n: 27},
+                        {t: 38.967, d: 1, n: 26},
+                        {t: 40.5, d: 0, n: 25},
+                        {t: 44.533, d: 1, n: 24},
+                        {t: 45.3, d: 0, n: 23},
+                        {t: 48.5, d: 0, n: 22},
+                        {t: 49.067, d: 1, n: 21},
+                        {t: 51.767, d: 0, n: 20},
+                        {t: 59.067, d: 1, n: 19},
+                        {t: 63.567, d: 1, n: 18},
+                        {t: 65.233, d: 1, n: 17},
+                        {t: 67.167, d: 0, n: 16},
+                        {t: 70.067, d: 1, n: 15},
+                        {t: 71.033, d: 1, n: 14},
+                        {t: 78.6, d: 1, n: 13},
+                        {t: 79.9, d: 0, n: 12},
+                        {t: 80.833, d: 1, n: 11},
+                        {t: 81.2, d: 1, n: 10},
+                        {t: 84.5, d: 0, n: 9},
+                        {t: 90.4, d: 0, n: 8},
+                        {t: 93.5, d: 0, n: 7},
+                        {t: 101.933, d: 1, n: 6},
+                        {t: 112.733, d: 0, n: 5},
+                        {t: 134.267, d: 0, n: 4},
+                        {t: 151.4, d: 1, n: 3},
+                        {t: 200.167, d: 0, n: 2},
+                        {t: 223.1, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 19},
+                        {t: 4.5, d: 1, n: 19},
+                        {t: 17.2, d: 1, n: 18},
+                        {t: 20.533, d: 1, n: 17},
+                        {t: 24.1, d: 1, n: 16},
+                        {t: 24.767, d: 1, n: 15},
+                        {t: 26.3, d: 1, n: 14},
+                        {t: 29.2, d: 1, n: 13},
+                        {t: 32.567, d: 1, n: 12},
+                        {t: 36.967, d: 1, n: 11},
+                        {t: 39.867, d: 1, n: 10},
+                        {t: 42.567, d: 0, n: 9},
+                        {t: 53.233, d: 1, n: 8},
+                        {t: 92.867, d: 1, n: 7},
+                        {t: 134.933, d: 1, n: 6},
+                        {t: 156, d: 1, n: 5},
+                        {t: 174.267, d: 1, n: 4},
+                        {t: 175.533, d: 0, n: 3},
+                        {t: 196.067, d: 0, n: 2},
+                        {t: 235.4, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 17},
+                        {t: 14.033, d: 1, n: 17},
+                        {t: 20.9, d: 1, n: 16},
+                        {t: 32.433, d: 0, n: 15},
+                        {t: 39.367, d: 0, n: 14},
+                        {t: 39.533, d: 0, n: 13},
+                        {t: 43.767, d: 1, n: 12},
+                        {t: 46.933, d: 0, n: 11},
+                        {t: 47.6, d: 0, n: 10},
+                        {t: 49.467, d: 0, n: 9},
+                        {t: 52.167, d: 0, n: 8},
+                        {t: 56.167, d: 0, n: 7},
+                        {t: 56.867, d: 0, n: 6},
+                        {t: 70.9, d: 0, n: 5},
+                        {t: 82.533, d: 0, n: 4},
+                        {t: 94.833, d: 0, n: 3},
+                        {t: 99, d: 0, n: 2},
+                        {t: 106.3, d: 1, n: 1}
+                    ]
+                            ,
+                    [//nochemo
+                        {t: 0, d: 0, n: 73},
+                        {t: 3.567, d: 1, n: 73},
+                        {t: 5.9, d: 1, n: 72},
+                        {t: 9.5, d: 1, n: 71},
+                        {t: 9.6, d: 1, n: 70},
+                        {t: 10.233, d: 1, n: 69},
+                        {t: 10.3, d: 1, n: 68},
+                        {t: 10.333, d: 1, n: 67},
+                        {t: 10.767, d: 1, n: 66},
+                        {t: 15.2, d: 1, n: 65},
+                        {t: 17.533, d: 1, n: 64},
+                        {t: 19.033, d: 1, n: 63},
+                        {t: 20.133, d: 1, n: 62},
+                        {t: 20.233, d: 1, n: 61},
+                        {t: 23.867, d: 1, n: 60},
+                        {t: 24.333, d: 1, n: 59},
+                        {t: 25.5, d: 1, n: 58},
+                        {t: 25.9, d: 1, n: 57},
+                        {t: 28.733, d: 1, n: 56},
+                        {t: 29.5, d: 1, n: 55},
+                        {t: 32.767, d: 1, n: 54},
+                        {t: 32.967, d: 1, n: 53},
+                        {t: 33.533, d: 1, n: 52},
+                        {t: 35.6, d: 1, n: 51},
+                        {t: 36.233, d: 0, n: 50},
+                        {t: 39.333, d: 1, n: 49},
+                        {t: 40.6, d: 1, n: 48},
+                        {t: 40.833, d: 1, n: 47},
+                        {t: 41.733, d: 1, n: 46},
+                        {t: 41.933, d: 1, n: 45},
+                        {t: 42.167, d: 1, n: 44},
+                        {t: 43.4, d: 1, n: 43},
+                        {t: 45.567, d: 1, n: 42},
+                        {t: 46.733, d: 1, n: 41},
+                        {t: 47, d: 1, n: 40},
+                        {t: 48.167, d: 1, n: 39},
+                        {t: 52.333, d: 1, n: 38},
+                        {t: 52.967, d: 1, n: 37},
+                        {t: 54.167, d: 1, n: 36},
+                        {t: 58.367, d: 1, n: 35},
+                        {t: 59.967, d: 1, n: 34},
+                        {t: 61.133, d: 1, n: 33},
+                        {t: 62.6, d: 1, n: 32},
+                        {t: 68.1, d: 0, n: 31},
+                        {t: 69.1, d: 1, n: 30},
+                        {t: 70.5, d: 1, n: 29},
+                        {t: 71.433, d: 1, n: 28},
+                        {t: 73.2, d: 1, n: 27},
+                        {t: 74.7, d: 1, n: 26},
+                        {t: 75.067, d: 1, n: 25},
+                        {t: 78.5, d: 1, n: 24},
+                        {t: 88.033, d: 1, n: 23},
+                        {t: 97.267, d: 1, n: 22},
+                        {t: 103.9, d: 1, n: 21},
+                        {t: 105.9, d: 1, n: 20},
+                        {t: 112, d: 1, n: 19},
+                        {t: 112.9, d: 1, n: 18},
+                        {t: 113.067, d: 1, n: 17},
+                        {t: 117.2, d: 1, n: 16},
+                        {t: 118.567, d: 0, n: 15},
+                        {t: 129.9, d: 1, n: 14},
+                        {t: 131.9, d: 1, n: 13},
+                        {t: 134.067, d: 1, n: 12},
+                        {t: 138.033, d: 1, n: 11},
+                        {t: 142.167, d: 1, n: 10},
+                        {t: 143.133, d: 1, n: 9},
+                        {t: 149.067, d: 1, n: 8},
+                        {t: 157.067, d: 1, n: 7},
+                        {t: 157.7, d: 1, n: 6},
+                        {t: 162.5, d: 1, n: 5},
+                        {t: 165.133, d: 1, n: 4},
+                        {t: 169.467, d: 1, n: 3},
+                        {t: 229.933, d: 1, n: 2},
+                        {t: 280, d: 1, n: 1}
+                    ]
+                ]};
+            white_transglottic_female = {
+                treatments: [
+                    [//concurrent
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 1},
+                        {t: 177.633, d: 1, n: 1}
+                    ]
+                            ,
+                    [//inductionchemo
+                        {t: 0, d: 0, n: 0}
+                    ]
+                            ,
+                    [
+                        //nochemo
+                        {t: 0, d: 0, n: 5},
+                        {t: 26.667, d: 1, n: 5},
+                        {t: 65.6, d: 0, n: 4},
+                        {t: 82.4, d: 1, n: 3},
+                        {t: 86.933, d: 0, n: 2},
+                        {t: 221.733, d: 0, n: 1}
+                    ]
+                ]};
+            white_transglottic_male = {
+                treatments: [
+                    [
+//concurrent
+                        {t: 0, d: 0, n: 10},
+                        {t: 11.333, d: 1, n: 10},
+                        {t: 29.067, d: 1, n: 9},
+                        {t: 35.533, d: 0, n: 8},
+                        {t: 36.167, d: 0, n: 7},
+                        {t: 39.533, d: 0, n: 6},
+                        {t: 57.433, d: 1, n: 5},
+                        {t: 74.367, d: 0, n: 4},
+                        {t: 75.733, d: 0, n: 3},
+                        {t: 119.967, d: 1, n: 2},
+                        {t: 135.6, d: 1, n: 1}
+                    ]
+                            ,
+                    [
+//induction
+                        {t: 0, d: 0, n: 11},
+                        {t: 8.967, d: 1, n: 11},
+                        {t: 12.7, d: 1, n: 10},
+                        {t: 25.367, d: 1, n: 9},
+                        {t: 35.833, d: 1, n: 8},
+                        {t: 57.2, d: 1, n: 7},
+                        {t: 59.933, d: 1, n: 6},
+                        {t: 74.467, d: 1, n: 5},
+                        {t: 109.733, d: 1, n: 4},
+                        {t: 163.6, d: 1, n: 3},
+                        {t: 203.167, d: 0, n: 2},
+                        {t: 263.633, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//inductionchemo
+                        {t: 0, d: 0, n: 3},
+                        {t: 23.2667, d: 0, n: 3},
+                        {t: 41.6333, d: 0, n: 2},
+                        {t: 48.1667, d: 0, n: 1}
+                    ]
+                            ,
+                    [
+//nochemo
+                        {t: 0, d: 0, n: 32},
+                        {t: 4.833, d: 1, n: 32},
+                        {t: 5.5, d: 0, n: 31},
+                        {t: 6.867, d: 1, n: 30},
+                        {t: 7.2, d: 0, n: 29},
+                        {t: 10.333, d: 1, n: 28},
+                        {t: 11.2, d: 1, n: 27},
+                        {t: 11.6, d: 1, n: 26},
+                        {t: 12.5, d: 1, n: 25},
+                        {t: 12.967, d: 1, n: 24},
+                        {t: 14.467, d: 1, n: 23},
+                        {t: 15.067, d: 1, n: 22},
+                        {t: 24.4, d: 1, n: 21},
+                        {t: 33.767, d: 1, n: 20},
+                        {t: 43.433, d: 1, n: 19},
+                        {t: 43.633, d: 1, n: 18},
+                        {t: 56.633, d: 0, n: 17},
+                        {t: 59.4, d: 1, n: 16},
+                        {t: 61.433, d: 1, n: 15},
+                        {t: 71.433, d: 0, n: 14},
+                        {t: 92.933, d: 0, n: 13},
+                        {t: 105.7, d: 0, n: 12},
+                        {t: 118.333, d: 1, n: 11},
+                        {t: 121.367, d: 1, n: 10},
+                        {t: 125.333, d: 1, n: 9},
+                        {t: 141.533, d: 1, n: 8},
+                        {t: 192.633, d: 1, n: 7},
+                        {t: 193.2, d: 1, n: 6},
+                        {t: 207.867, d: 0, n: 5},
+                        {t: 215.933, d: 1, n: 4},
+                        {t: 239.167, d: 0, n: 3},
+                        {t: 264.9, d: 0, n: 2},
+                        {t: 293.067, d: 0, n: 1}
+                    ]
+
+                ]};
+            if (ethnicity == 'african-american' && site == 'glottic' && gender == 'male')
+                data = african_glottic_male;
+            else if (ethnicity == 'african-american' && site == 'glottic' && gender == 'female')
+                data = african_glottic_female;
+            else if (ethnicity == 'african-american' && site == 'subglottic' && gender == 'male')
+                data = african_subglottic_male;
+            else if (ethnicity == 'african-american' && site == 'subglottic' && gender == 'female')
+                data = african_subglottic_female;
+            else if (ethnicity == 'african-american' && site == 'supraglottic' && gender == 'male')
+                data = african_supraglottic_male;
+            else if (ethnicity == 'african-american' && site == 'supraglottic' && gender == 'female')
+                data = african_supraglottic_female;
+            else if (ethnicity == 'african-american' && site == 'transglottic' && gender == 'male')
+                data = african_transglottic_male;
+            else if (ethnicity == 'african-american' && site == 'transglottic' && gender == 'female')
+                data = african_transglottic_female;
+            else if (ethnicity == 'asian' && site == 'glottic' && gender == 'male')
+                data = asian_glottic_male;
+            else if (ethnicity == 'asian' && site == 'glottic' && gender == 'female')
+                data = asian_glottic_female;
+            else if (ethnicity == 'asian' && site == 'subglottic' && gender == 'male')
+                data = asian_subglottic_male;
+            else if (ethnicity == 'asian' && site == 'subglottic' && gender == 'female')
+                data = asian_subglottic_female;
+            else if (ethnicity == 'asian' && site == 'supraglottic' && gender == 'male')
+                data = asian_supraglottic_male;
+            else if (ethnicity == 'asian' && site == 'supraglottic' && gender == 'female')
+                data = asian_supraglottic_female;
+            else if (ethnicity == 'asian' && site == 'transglottic' && gender == 'male')
+                data = asian_transglottic_male;
+            else if (ethnicity == 'asian' && site == 'transglottic' && gender == 'female')
+                data = asian_transglottic_female;
+            else if (ethnicity == 'hispanic' && site == 'glottic' && gender == 'male')
+                data = hispanic_glottic_male;
+            else if (ethnicity == 'hispanic' && site == 'glottic' && gender == 'female')
+                data = hispanic_glottic_female;
+            else if (ethnicity == 'hispanic' && site == 'subglottic' && gender == 'male')
+                data = hispanic_subglottic_male;
+            else if (ethnicity == 'hispanic' && site == 'subglottic' && gender == 'female')
+                data = hispanic_subglottic_female;
+            else if (ethnicity == 'hispanic' && site == 'supraglottic' && gender == 'male')
+                data = hispanic_supraglottic_male;
+            else if (ethnicity == 'hispanic' && site == 'supraglottic' && gender == 'female')
+                data = hispanic_supraglottic_female;
+            else if (ethnicity == 'hispanic' && site == 'transglottic' && gender == 'male')
+                data = hispanic_transglottic_male;
+            else if (ethnicity == 'hispanic' && site == 'transglottic' && gender == 'female')
+                data = hispanic_transglottic_female;
+            else if (ethnicity == 'other' && site == 'glottic' && gender == 'male')
+                data = other_glottic_male;
+            else if (ethnicity == 'other' && site == 'glottic' && gender == 'female')
+                data = other_glottic_female;
+            else if (ethnicity == 'other' && site == 'subglottic' && gender == 'male')
+                data = other_subglottic_male;
+            else if (ethnicity == 'other' && site == 'subglottic' && gender == 'female')
+                data = other_subglottic_female;
+            else if (ethnicity == 'other' && site == 'supraglottic' && gender == 'male')
+                data = other_supraglottic_male;
+            else if (ethnicity == 'other' && site == 'supraglottic' && gender == 'female')
+                data = other_supraglottic_female;
+            else if (ethnicity == 'other' && site == 'transglottic' && gender == 'male')
+                data = other_transglottic_male;
+            else if (ethnicity == 'other' && site == 'transglottic' && gender == 'female')
+                data = other_transglottic_female;
+            else if (ethnicity == 'white' && site == 'glottic' && gender == 'male')
+                data = white_glottic_male;
+            else if (ethnicity == 'white' && site == 'glottic' && gender == 'female')
+                data = white_glottic_female;
+            else if (ethnicity == 'white' && site == 'subglottic' && gender == 'male')
+                data = white_subglottic_male;
+            else if (ethnicity == 'white' && site == 'subglottic' && gender == 'female')
+                data = white_subglottic_female;
+            else if (ethnicity == 'white' && site == 'supraglottic' && gender == 'male')
+                data = white_supraglottic_male;
+            else if (ethnicity == 'white' && site == 'supraglottic' && gender == 'female')
+                data = white_supraglottic_female;
+            else if (ethnicity == 'white' && site == 'transglottic' && gender == 'male')
+                data = white_transglottic_male;
+            else if (ethnicity == 'white' && site == 'transglottic' && gender == 'female')
+                data = white_transglottic_female;
+            var w = 430, h = 412, m = 30, max = min = 0;
+            /* Computed Data progression, survival, prob, censored */
+            for (var a = 0; a < data.treatments.length; a++) {
+                for (var b = 0; b < data.treatments[a].length; b++) {
+                    var reed = data.treatments[a][b];
+                    var brad = (b > 0) ? data.treatments[a][b - 1].n - reed.d : reed.n;
+                    reed.progression = reed.d / reed.n;
+                    reed.survival = 1 - reed.progression;
+                    reed.prob = (b == 0) ? reed.survival : data.treatments[a][b - 1].prob * reed.survival;
+                    max = (max < reed.t) ? reed.t : max;
+                    reed.censored = (reed.n < brad) ? true : false;
+                }
+            }
+
+
+            /* Begin d3.js */
+            //Scalar functions
+
+            var tip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .offset(function () {
+                        return [(this.getBBox().height / 2) + 100, ((this.getBBox().height / 2) - 50)];
+                    })
+                    .html(function (d) {
+                        var coordinates = d3.mouse(this);
+                        xValue = x.invert(coordinates[0]);
+                        yValue = y.invert(coordinates[1]) + 0.2;
+                        return "<strong> Months Survived : " + d3.format(".2f")(xValue) +
+                                " months <br/> Risk : " + d3.format(".2f")(100 * yValue) + " % </strong>";
+                    });
+            var x = d3.scale.linear().domain([0, max]).range([0, w - m - 60]);
+            var y = d3.scale.linear().domain([1, 0]).range([10, h - 75]);
+            //Define axses
+            var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .tickSize(2)
+                    .tickPadding(6)
+                    .orient("bottom");
+            var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .tickSize(2)
+                    .tickPadding(6)
+                    .orient("left");
+            //This is the accessor function
+            var lineFunction = d3.svg.line()
+                    .x(function (d) {
+                        return x(d.t) + (2.25 * m);
+                    })
+                    .y(function (d) {
+                        return (y(d.prob) + 40);
+                    })
+                    .interpolate("step-before");
+            //Draw the svg container
+            var kaplan = d3.select("#chart2").append("svg")
+                    .attr("width", w + (2 * m))
+                    .attr("height", h + (2 * m));
+            kaplan.call(tip);
+            //Draw the lines
+            var concurrentTherapy = kaplan.append("path")
+                    .attr("d", lineFunction(data.treatments[0]))
+                    .attr("stroke", "#ff4c4c")
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .attr('id', 'concurrentTherapy')
+                    .attr("opacity", 0.7)
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+            if (data.treatments[0][0].n != 0) {
+                var Concurrentlabel = kaplan.append("text")
+                        .attr("transform", "translate(" + (x(data.treatments[0][data.treatments[0].length - 1].t) + 70) + "," + (y(data.treatments[0][data.treatments[0].length - 1].prob) + 40) + ")")
+                        .attr("dy", ".35em")
+                        .attr("text-anchor", "start")
+                        .style("fill", "#ff4c4c")
+                        .text("Concurrent Therapy");
+            }
+            var inductionTherapy = kaplan.append("path")
+                    .attr("d", lineFunction(data.treatments[1]))
+                    .attr("stroke", "#197319")
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .attr('id', 'inductionTherapy')
+                    .attr("opacity", 0.7).on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+            if (data.treatments[1][0].n != 0) {
+                var inductionlabel = kaplan.append("text")
+                        .attr("transform", "translate(" + (x(data.treatments[1][data.treatments[1].length - 1].t) - 50) + "," + (y(data.treatments[1][data.treatments[1].length - 1].prob) + 30) + ")")
+                        .attr("dy", ".35em")
+                        .attr("text-anchor", "start")
+                        .style("fill", "#197319")
+                        .text("Induction Therapy");
+            }
+
+            var inductionConcurrent = kaplan.append("path")
+                    .attr("d", lineFunction(data.treatments[2]))
+                    .attr("stroke", "#6666ff")
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .attr('id', 'inductionConcu')
+                    .attr("opacity", 0.7).on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+            if (data.treatments[2][0].n != 0) {
+                var inductionConculabel = kaplan.append("text")
+                        .attr("transform", "translate(" + (x(data.treatments[2][data.treatments[2].length - 1].t)) + "," + (y(data.treatments[2][data.treatments[2].length - 1].prob) + 60) + ")")
+                        .attr("dy", ".35em")
+                        .attr("text-anchor", "start")
+                        .style("fill", "#6666ff")
+                        .text("Induction + Chemotherapy");
+            }
+            var noChemoTherapy = kaplan.append("path")
+                    .attr("d", lineFunction(data.treatments[3]))
+                    .attr("stroke", "#ffc04c")
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .attr('id', 'noChemoTherapy')
+                    .attr("opacity", 0.7).on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+            if (data.treatments[0][0].n != 0) {
+                var noChemolabel = kaplan.append("text")
+                        .attr("transform", "translate(" + (x(data.treatments[3][data.treatments[3].length - 1].t) - 95) + "," + (y(data.treatments[3][data.treatments[3].length - 1].prob) + 35) + ")")
+                        .attr("dy", ".35em")
+                        .attr("text-anchor", "start")
+                        .style("fill", "#ffc04c")
+                        .text("No Chemotherapy");
+            }
+            //Draw the x-axis
+            var theXAxis = kaplan.append("g")
+                    .attr("class", "xaxis")
+                    .attr("transform", "translate(" + 2 * m + "," + (h - 25) + ")")
+                    .call(xAxis)
+
+            //Draw the y-axis
+            var theYAxis = kaplan.append("g")
+                    .attr("class", "yaxis")
+                    .attr("transform", "translate(" + 2 * m + ", " + 1.5 * m + ")")
+                    .call(yAxis)
+
+            kaplan.append("text")
+                    .attr("x", (w / 2))
+                    .attr("y", (h + 15))
+                    .style("text-anchor", "middle")
+                    .text("Overall Survival Rate in months");
+            kaplan.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("x", h - (1.5 * h))
+                    .attr("y", ((h / 10) - (h / 20) - 10))
+                    .attr("dy", "1em")
+                    .style("text-anchor", "middle")
+                    .text("Probability of Survival");
+            var color_set = d3.scale.ordinal()
+                    .domain(['concurrent therapy', ' No Chemotherapy'])
+                    .range(['#ff4c4c', '#197319']);
+        }
+
+        function scatterPlot() {
+
+            var width = 200,
+                    size = 130,
+                    padding = 19.5;
+            var x = d3.scale.linear()
+                    .range([padding / 2, size - padding / 2]);
+            var y = d3.scale.linear()
+                    .range([size - padding / 2, padding / 2]);
+            var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .ticks(5);
+            var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .ticks(5);
+            //var color = d3.scale.category10();
+            var color = d3.scale.ordinal()
+                    .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent'])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#c51b8a']);
+            d3.csv("SurvivalProbability.csv", function (error, data) {
+                if (error)
+                    throw error;
+                var domainByTrait = {},
+                        traits = d3.keys(data[0]).filter(function (d) {
+                    if ((d == 'AgeAtTx' || d == 'Probability of Survival')) // || d=='OS (months)')
+                        return true;
+                    else
+                        return false;
+                }),
+                        n = traits.length;
+                data = data.filter(function (row) {
+                    if (row['Ethnicity'] == ethnicity && row['Site'] == site && row['Tcategory'] == tstage) {
+                        return row;
+                    }
+                });
+                // find max and min value for each columns
+                traits.forEach(function (col) {
+                    domainByTrait[col] = d3.extent(data, function (d) {
+                        return d[col];
+                    });
+                    //alert(domainByTrait[col]);
+                });
+                xAxis.tickSize(size * n);
+                yAxis.tickSize(-size * n);
+                var svg = d3.select("#chart3").append("svg")
+                        .attr("width", size * n + 7 * padding)	// based on number of features plotted, allocate width and height
+                        .attr("height", size * n + 25 * padding)
+                        .append("g")
+                        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+                // create the domain for xAxis
+                svg.selectAll(".x.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(" + (n - i - 1) * size + ",0)";
+                        })
+                        .each(function (d) {
+                            x.domain(domainByTrait[d]);
+                            d3.select(this).call(xAxis);
+                        });
+                // create the domain for yAxis
+                svg.selectAll(".y.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(0," + i * size + ")";
+                        })
+                        .each(function (d) {
+                            y.domain(domainByTrait[d]);
+                            d3.select(this).call(yAxis);
+                        });
+                var cell = svg.selectAll(".cell")
+                        .data(cross(traits, traits))
+                        .enter().append("g")
+                        .attr("class", "cell")
+                        .attr("transform", function (d) {
+                            return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
+                        })
+                        .each(plot);
+                // Titles for the diagonal.
+                cell.filter(function (d) {
+                    return d.i === d.j;
+                }).append("text")
+                        .attr("x", padding)
+                        .attr("y", padding)
+                        .attr("dy", ".71em")
+                        .text(function (d) {
+                            return d.x;
+                        });
+                function plot(p) {
+                    var cell = d3.select(this);
+                    x.domain(domainByTrait[p.x]);
+                    y.domain(domainByTrait[p.y]);
+                    cell.append("rect")
+                            .attr("class", "frame")
+                            .attr("x", padding / 2)
+                            .attr("y", padding / 2)
+                            .attr("width", size - padding)
+                            .attr("height", size - padding);
+                    cell.selectAll("circle")
+                            .data(data)
+                            .enter().append("circle")
+                            .attr("cx", function (d) {
+                                return x(d[p.x]);
+                            })
+                            .attr("cy", function (d) {
+                                return y(d[p.y]);
+                            })
+                            .attr("r", 3)
+                            .style("fill", function (d) {
+                                return color(d.Chemotherapy);
+                            })
+                            .on('mouseover', function (d) {
+                                var nodeSelection = d3.select(this).style({opacity: '0.8'});
+                                nodeSelection.select("text").style({opacity: '1.0'});
+                            });
+                }
+
+
+                function cross(a, b) {
+                    var c = [], n = a.length, m = b.length, i, j;
+                    for (i = - 1; ++i < n; )
+                        for (j = - 1; ++j < m; )
+                            c.push({x: a[i], i: i, y: b[j], j: j});
+                    return c;
+                }
+
+                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
+                /*var svg = d3.select("#chartDiv").append("svg")
+                 .attr("width", 200 )
+                 .attr("height", 200 )
+                 .append("g")
+                 .attr("transform", "translate(" + 10 + "," + 10 + ")");*/
+                //svg.append("circle").attr("cx", 25).attr("cy", 25).attr("r", 25).style("fill", "purple");
+                var legendRectSize = 10;
+                var legendSpacing = 10;
+                var legend = svg.append("g")
+                        .selectAll("g")
+                        .data(color.domain())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'legend')
+                        .attr('transform', function (d, i) {
+                            var height = legendRectSize;
+                            var x = 2 * size;
+                            var y = (i * height) + 120;
+                            return 'translate(' + x + ',' + y + ')';
+                        });
+                legend.append('rect')
+                        .attr('width', legendRectSize)
+                        .attr('height', legendRectSize)
+                        .style('fill', color)
+                        .style('stroke', color);
+                legend.append('text')
+                        .attr('x', legendRectSize + legendSpacing)
+                        .attr('y', legendSpacing)
+                        .text(function (d) {
+                            return d;
+                        });
+            });
+        }
+
+        function ScatterPlot2() {
+            var width = 200,
+                    size = 130,
+                    padding = 19.5;
+            var x = d3.scale.linear()
+                    .range([padding / 2, size - padding / 2]);
+            var y = d3.scale.linear()
+                    .range([size - padding / 2, padding / 2]);
+            var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .ticks(5);
+            var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .ticks(5);
+            //var color = d3.scale.category10();
+            var color_set_scatter = d3.scale.ordinal()
+                    .domain(['white', 'other', 'african-american', 'hispanic', 'asian'])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c']);
+            d3.csv("SurvivalProbability.csv", function (error, data) {
+                if (error)
+                    throw error;
+                var domainByTrait = {},
+                        traits = d3.keys(data[0]).filter(function (d) {
+                    if ((d == 'AgeAtTx' || d == 'Probability of Survival')) // || d=='OS (months)')
+                        return true;
+                    else
+                        return false;
+                }),
+                        n = traits.length;
+                data = data.filter(function (row) {
+                    if (row['Site'] == site && row['Tcategory'] == tstage) {
+                        return row;
+                    }
+                });
+                // find max and min value for each columns
+                traits.forEach(function (col) {
+                    domainByTrait[col] = d3.extent(data, function (d) {
+                        return d[col];
+                    });
+                    //alert(domainByTrait[col]);
+                });
+                xAxis.tickSize(size * n);
+                yAxis.tickSize(-size * n);
+                var svg = d3.select("#chart3").append("svg")
+                        .attr("width", size * n + 7 * padding)	// based on number of features plotted, allocate width and height
+                        .attr("height", size * n + 25 * padding)
+                        .append("g")
+                        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+                // create the domain for xAxis
+                svg.selectAll(".x.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(" + (n - i - 1) * size + ",0)";
+                        })
+                        .each(function (d) {
+                            x.domain(domainByTrait[d]);
+                            d3.select(this).call(xAxis);
+                        });
+                // create the domain for yAxis
+                svg.selectAll(".y.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(0," + i * size + ")";
+                        })
+                        .each(function (d) {
+                            y.domain(domainByTrait[d]);
+                            d3.select(this).call(yAxis);
+                        });
+                var cell = svg.selectAll(".cell")
+                        .data(cross(traits, traits))
+                        .enter().append("g")
+                        .attr("class", "cell")
+                        .attr("transform", function (d) {
+                            return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
+                        })
+                        .each(plot);
+                // Titles for the diagonal.
+                cell.filter(function (d) {
+                    return d.i === d.j;
+                }).append("text")
+                        .attr("x", padding)
+                        .attr("y", padding)
+                        .attr("dy", ".71em")
+                        .text(function (d) {
+                            return d.x;
+                        });
+                function plot(p) {
+                    var cell = d3.select(this);
+                    x.domain(domainByTrait[p.x]);
+                    y.domain(domainByTrait[p.y]);
+                    cell.append("rect")
+                            .attr("class", "frame")
+                            .attr("x", padding / 2)
+                            .attr("y", padding / 2)
+                            .attr("width", size - padding)
+                            .attr("height", size - padding);
+                    cell.selectAll("circle")
+                            .data(data)
+                            .enter().append("circle")
+                            .attr("cx", function (d) {
+                                return x(d[p.x]);
+                            })
+                            .attr("cy", function (d) {
+                                return y(d[p.y]);
+                            })
+                            .attr("r", 3)
+                            .style("fill", function (d) {
+                                return color_set_scatter(d.Ethnicity);
+                            })
+                            .on('mouseover', function (d) {
+                                var nodeSelection = d3.select(this).style({opacity: '0.8'});
+                                nodeSelection.select("text").style({opacity: '1.0'});
+                            });
+                }
+
+
+                function cross(a, b) {
+                    var c = [], n = a.length, m = b.length, i, j;
+                    for (i = - 1; ++i < n; )
+                        for (j = - 1; ++j < m; )
+                            c.push({x: a[i], i: i, y: b[j], j: j});
+                    return c;
+                }
+
+                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
+                /*var svg = d3.select("#chartDiv").append("svg")
+                 .attr("width", 200 )
+                 .attr("height", 200 )
+                 .append("g")
+                 .attr("transform", "translate(" + 10 + "," + 10 + ")");*/
+                //svg.append("circle").attr("cx", 25).attr("cy", 25).attr("r", 25).style("fill", "purple");
+                var legendRectSize = 10;
+                var legendSpacing = 10;
+                var legend = svg.append("g")
+                        .selectAll("g")
+                        .data(color_set_scatter.domain())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'legend')
+                        .attr('transform', function (d, i) {
+                            var height = legendRectSize;
+                            var x = 2 * size;
+                            var y = (i * height) + 120;
+                            return 'translate(' + x + ',' + y + ')';
+                        });
+                legend.append('rect')
+                        .attr('width', legendRectSize)
+                        .attr('height', legendRectSize)
+                        .style('fill', color_set_scatter)
+                        .style('stroke', color_set_scatter);
+                legend.append('text')
+                        .attr('x', legendRectSize + legendSpacing)
+                        .attr('y', legendSpacing)
+                        .text(function (d) {
+                            return d;
+                        });
+            });
+        }
+    </script>
+</html>

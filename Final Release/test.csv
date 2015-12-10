@@ -1,0 +1,634 @@
+Ethnicity,AgeAtTx,Site,Tcategory,Nodal_Disease,ecog,Chemotherapy,Local_Therapy,Probability of Survival
+white,65.93972603,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.366190068
+white,69.42465753,supraglottic,T3,N+,0,induction,PLRT,0.396018836
+white,68.14246575,supraglottic,T3,N0,3,no chemo,LP/RT alone,0.439289384
+white,40.30410959,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.512773973
+white,47.96438356,supraglottic,T3,N+,0,no chemo,PLRT,0.472208904
+white,70.3369863,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.324965753
+white,60.50136986,supraglottic,T3,N+,2,no chemo,LP/RT alone,0.323424658
+white,60.72328767,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.321344178
+white,59.36986301,supraglottic,T3,N0,1,induction,LP/chemoRT,0.646532534
+other,57.64931507,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.662662671
+asian,62.93972603,glottic,T3,N+,2,concurrent,LP/chemoRT,0.769315068
+white,60.56712329,transglottic,T3,N+,1,no chemo,PLRT,0.260308219
+white,70.15068493,glottic,T3,N0,0,no chemo,LP/RT alone,0.670462329
+african-american,57.89589041,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.441601027
+white,66.01917808,transglottic,T3,N+,0,no chemo,PLRT,0.302945205
+other,63.85753425,glottic,T3,N0,1,induction,LP/chemoRT,0.979460616
+white,37.35342466,transglottic,T3,N+,0,no chemo,PLRT,0.571686644
+african-american,72.31780822,supraglottic,T3,N0,1,induction,LP/chemoRT,0.431395548
+hispanic,51.32876712,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.487542808
+white,74.62465753,supraglottic,T3,N0,1,no chemo,PLRT,0.316018836
+white,60.45479452,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.605111301
+white,53.01369863,supraglottic,T3,N0,1,induction,LP/chemoRT,0.706121575
+white,48.32328767,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.625094178
+white,46.00547945,glottic,T3,N+,0,no chemo,LP/RT alone,0.70932363
+african-american,65.79452055,supraglottic,T3,N0,0,no chemo,PLRT,0.39880137
+white,43.95890411,transglottic,T3,N0,0,induction,PLRT,0.822260274
+african-american,58.29589041,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.531601027
+african-american,62.57260274,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.585256849
+white,40.91232877,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.600821918
+white,78.14246575,supraglottic,T3,N+,1,no chemo,PLRT,0.095539384
+african-american,51.60821918,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.500547945
+white,58.7260274,supraglottic,T3,N0,0,induction,LP/chemoRT,0.746318493
+white,61.09863014,supraglottic,T3,N+,2,no chemo,LP/RT alone,0.317825342
+white,60.60821918,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.509922945
+white,65.23013699,supraglottic,T3,N+,0,induction,LP/chemoRT,0.497842466
+white,70.30410959,supraglottic,T3,N+,0,no chemo,PLRT,0.262773973
+hispanic,39.74520548,transglottic,T3,N0,1,no chemo,LP/RT alone,0.783638699
+other,51.65205479,glottic,T3,N0,0,no chemo,LP/RT alone,1
+white,60.97260274,glottic,T3,N0,0,induction,LP/chemoRT,0.881506849
+white,58.92328767,supraglottic,T3,N+,2,concurrent,LP/chemoRT,0.431969178
+white,52.73150685,glottic,T3,N0,0,induction,LP/chemoRT,0.958767123
+white,33.16986301,supraglottic,T3,N+,0,induction,LP/chemoRT,0.798407534
+white,56.19452055,glottic,T3,N0,0,induction,LP/chemoRT,0.92630137
+white,51.6630137,supraglottic,T3,N+,0,no chemo,PLRT,0.437534247
+white,69.56712329,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.425933219
+hispanic,65.25479452,supraglottic,T3,N+,1,concurrent,PLRT,0.388236301
+white,75.57808219,transglottic,T3,N0,1,concurrent,LP/chemoRT,0.463330479
+hispanic,37.78356164,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.80202911
+white,62.35068493,glottic,T3,N0,0,induction,LP/chemoRT,0.868587329
+white,69.44931507,supraglottic,T3,N0,1,induction,LP/chemoRT,0.552037671
+white,69.3369863,supraglottic,T3,N+,1,concurrent,PLRT,0.271840753
+white,59.63835616,transglottic,T3,N+,1,concurrent,LP/chemoRT,0.425265411
+white,43.76986301,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.480282534
+white,63.96438356,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.572208904
+white,69.60821918,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.238047945
+white,49.70136986,supraglottic,T3,N+,0,no chemo,PLRT,0.455924658
+white,77.08767123,transglottic,T3,N+,1,no chemo,PLRT,0.105428082
+white,65.66849315,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.368732877
+white,34.31232877,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.568946918
+african-american,59.7890411,glottic,T3,N0,2,no chemo,LP/RT alone,0.58010274
+hispanic,50.05753425,supraglottic,T3,N+,0,no chemo,PLRT,0.530710616
+african-american,52.28767123,supraglottic,T3,N0,0,no chemo,PLRT,0.525428082
+white,60.36438356,glottic,T3,N0,0,induction,LP/chemoRT,0.887208904
+hispanic,66.63835616,glottic,T3,N0,1,concurrent,LP/chemoRT,0.781515411
+white,68.67123288,transglottic,T3,N+,1,no chemo,LP/RT alone,0.246832192
+white,58.70136986,transglottic,T3,N0,1,induction,LP/chemoRT,0.652799658
+white,69.14246575,supraglottic,T3,N+,3,concurrent,LP/chemoRT,0.336164384
+other,57.06575342,supraglottic,T3,N+,0,induction,LP/chemoRT,0.793133562
+white,68.54520548,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.341763699
+white,69.22739726,transglottic,T3,N0,0,no chemo,PLRT,0.460368151
+african-american,61.29041096,supraglottic,T3,N+,1,no chemo,PLRT,0.159777397
+white,46.21917808,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.738570206
+white,62.01369863,supraglottic,T3,N+,0,no chemo,PLRT,0.340496575
+white,48.73972603,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.433690068
+white,65.70410959,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.368398973
+white,70.03287671,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.499691781
+white,45.93424658,supraglottic,T3,N0,0,no chemo,PLRT,0.678741438
+white,67.80821918,transglottic,T3,N0,0,induction,LP/chemoRT,0.661172945
+hispanic,65.25753425,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.638210616
+hispanic,53.81369863,transglottic,T3,N0,0,concurrent,LP/chemoRT,0.839246575
+white,65.41643836,supraglottic,T3,N+,0,induction,PLRT,0.43359589
+white,62.84383562,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.301464041
+hispanic,53.16986301,supraglottic,T3,N+,2,induction+chemoRT,LP/chemoRT,0.735907534
+white,59.98356164,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.51577911
+white,60.99452055,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.60005137
+white,67.84109589,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.535864726
+african-american,54.77534247,glottic,T3,N+,0,no chemo,PLRT,0.470856164
+white,59.02465753,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.431018836
+white,69.95616438,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.422285959
+white,59.45205479,glottic,T3,N0,1,no chemo,LP/RT alone,0.677011986
+hispanic,54.31506849,supraglottic,T3,N+,0,no chemo,PLRT,0.490796233
+white,69.04931507,glottic,T3,N0,2,no chemo,LP/RT alone,0.587037671
+african-american,53.42739726,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.295993151
+white,73.2739726,glottic,T3,N0,0,no chemo,LP/RT alone,0.641181507
+white,65.59178082,supraglottic,T3,N0,0,induction,LP/chemoRT,0.681952055
+hispanic,46.3260274,supraglottic,T3,N+,0,no chemo,PLRT,0.565693493
+white,61.75342466,supraglottic,T3,N+,0,no chemo,PLRT,0.342936644
+white,49.73424658,transglottic,T3,N0,1,induction,LP/chemoRT,0.736866438
+white,60.39178082,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.418202055
+white,62.24109589,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.494614726
+white,50.56438356,supraglottic,T3,N+,1,induction,LP/chemoRT,0.541583904
+white,50.76438356,glottic,T3,N+,0,concurrent,LP/chemoRT,0.758458904
+white,61.68493151,supraglottic,T3,N+,0,no chemo,PLRT,0.343578767
+white,74.23561644,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.475916096
+white,62.46027397,supraglottic,T3,N+,1,induction,LP/chemoRT,0.430059932
+hispanic,81.44383562,glottic,T3,N0,0,no chemo,LP/RT alone,0.642714041
+african-american,60.86575342,supraglottic,T3,N+,2,no chemo,PLRT,0.163758562
+white,67.17260274,supraglottic,T3,N+,1,no chemo,PLRT,0.198381849
+white,72.71232877,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.302696918
+white,71.63287671,subglottic,T3,N0,0,no chemo,PLRT,0.437816781
+white,51.55342466,supraglottic,T3,N+,1,induction,PLRT,0.469811644
+hispanic,79.2630137,glottic,T3,N0,1,concurrent,LP/chemoRT,0.663159247
+african-american,67.68767123,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.256053082
+white,61.3890411,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.59635274
+white,71.41917808,supraglottic,T3,N0,2,concurrent,LP/chemoRT,0.502320206
+hispanic,70.54794521,supraglottic,T3,N+,1,no chemo,PLRT,0.244863014
+white,57.4739726,supraglottic,T3,N+,0,no chemo,PLRT,0.383056507
+white,61.2739726,glottic,T3,N0,1,no chemo,LP/RT alone,0.659931507
+white,64.45479452,supraglottic,T3,N+,0,no chemo,PLRT,0.317611301
+white,88.43013699,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.342842466
+white,42.11780822,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.495770548
+african-american,57.15890411,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.354760274
+hispanic,83.88767123,transglottic,T3,N0,1,no chemo,LP/RT alone,0.369803082
+white,60.90958904,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.413347603
+white,82.92328767,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.394469178
+white,56.76438356,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.452208904
+white,61.45753425,transglottic,T3,N0,1,induction+chemoRT,LP/chemoRT,0.767585616
+white,57.46027397,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.633184932
+white,54.15616438,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.570410959
+white,60.71780822,supraglottic,T3,N+,0,no chemo,PLRT,0.352645548
+white,59.01643836,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.52484589
+white,53.58356164,supraglottic,T3,N+,0,induction,LP/chemoRT,0.60702911
+white,51.54520548,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.594888699
+white,51.65753425,transglottic,T3,N0,1,induction,LP/chemoRT,0.718835616
+white,63.78082192,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.573929794
+white,58.08767123,supraglottic,T3,N+,0,no chemo,PLRT,0.377303082
+white,60.01917808,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.327945205
+white,82.1369863,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.308090753
+african-american,69.51506849,supraglottic,T3,N0,3,no chemo,PLRT,0.270171233
+white,63.96438356,transglottic,T3,N0,0,no chemo,PLRT,0.509708904
+african-american,56.14520548,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.551763699
+white,74.93150685,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.281892123
+white,64.05205479,supraglottic,T3,N+,0,no chemo,PLRT,0.321386986
+white,63.8739726,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.291806507
+hispanic,77.14520548,transglottic,T3,N+,0,no chemo,PLRT,0.276763699
+white,58.42465753,glottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.764768836
+white,76.63835616,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.172140411
+white,66.69589041,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.265351027
+african-american,64.46027397,supraglottic,T3,N+,0,no chemo,PLRT,0.223809932
+white,35.09863014,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.842825342
+african-american,69.06027397,transglottic,T3,N+,1,no chemo,PLRT,0.086934932
+hispanic,75.61643836,supraglottic,T3,N+,0,no chemo,PLRT,0.29109589
+african-american,66.92328767,supraglottic,T3,N+,1,no chemo,PLRT,0.106969178
+african-american,62.94520548,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.300513699
+white,57.95616438,supraglottic,T3,N+,1,no chemo,PLRT,0.284785959
+african-american,60.97808219,glottic,T3,N0,1,no chemo,LP/RT alone,0.568955479
+african-american,57.98356164,glottic,T3,N0,0,concurrent,LP/chemoRT,0.78452911
+white,69.56164384,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.425984589
+white,58.66849315,supraglottic,T3,N+,0,no chemo,PLRT,0.371857877
+white,68.15068493,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.439212329
+african-american,64.32328767,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.459469178
+white,55.66849315,supraglottic,T3,N+,0,no chemo,PLRT,0.399982877
+white,33.38630137,supraglottic,T3,N+,0,no chemo,PLRT,0.608878425
+hispanic,68.75890411,transglottic,T3,N0,0,concurrent,LP/chemoRT,0.699135274
+white,45.36164384,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.652859589
+white,68.31232877,supraglottic,T3,N+,3,no chemo,PLRT,0.187696918
+white,62.63561644,supraglottic,T3,N+,1,concurrent,PLRT,0.334666096
+hispanic,77.27671233,glottic,T3,N0,1,concurrent,LP/chemoRT,0.681780822
+white,61.60273973,supraglottic,T3,N+,0,induction,LP/chemoRT,0.531849315
+asian,56.39726027,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.768150685
+white,55.53150685,supraglottic,T3,N+,1,no chemo,PLRT,0.307517123
+african-american,67.07945205,glottic,T3,N0,1,no chemo,PLRT,0.449255137
+white,71.97808219,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.590830479
+african-american,52.13972603,transglottic,T3,N0,1,concurrent,LP/chemoRT,0.589315068
+white,61.24657534,supraglottic,T3,N+,0,no chemo,PLRT,0.347688356
+white,56.05753425,supraglottic,T3,N0,1,no chemo,PLRT,0.490085616
+white,54.53150685,supraglottic,T3,N+,2,induction+chemoRT,LP/chemoRT,0.645017123
+white,64.32054795,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.553244863
+white,57.31506849,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.634546233
+white,74.41369863,supraglottic,T3,N+,0,no chemo,PLRT,0.224246575
+hispanic,53.99452055,glottic,T3,N0,1,concurrent,LP/chemoRT,0.90005137
+white,57.34246575,transglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.712414384
+white,67.96438356,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.440958904
+white,71.84383562,supraglottic,T3,N+,1,no chemo,PLRT,0.154589041
+hispanic,62.36986301,glottic,T3,N0,0,concurrent,LP/chemoRT,0.915282534
+white,64.18356164,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.57015411
+white,56.1369863,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.551840753
+hispanic,60.69315068,supraglottic,T3,N+,0,induction,LP/chemoRT,0.618501712
+white,62.94246575,supraglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.659914384
+white,68.69315068,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.434126712
+white,48.66849315,supraglottic,T3,N+,1,no chemo,PLRT,0.371857877
+white,71.48493151,supraglottic,T3,N+,0,induction,LP/chemoRT,0.439203767
+african-american,50.9260274,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.506943493
+white,58.3890411,transglottic,T3,N0,0,no chemo,PLRT,0.56197774
+white,68.7890411,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.43322774
+white,51.12876712,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.692542808
+white,68.38082192,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.530804795
+african-american,59.19726027,transglottic,T3,N0,1,induction+chemoRT,LP/chemoRT,0.695025685
+white,69.69589041,supraglottic,T3,N0,2,concurrent,LP/chemoRT,0.518476027
+white,71.36438356,supraglottic,T3,N+,0,no chemo,PLRT,0.252833904
+white,59.64109589,glottic,T3,N0,0,concurrent,LP/chemoRT,0.862739726
+white,74.67123288,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.284332192
+white,70.1369863,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.233090753
+white,63.50684932,supraglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.654623288
+african-american,58.32876712,supraglottic,T3,N0,1,no chemo,PLRT,0.375042808
+white,70.24931507,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.497662671
+white,61.74246575,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.499289384
+white,63.6,glottic,T3,N0,0,concurrent,LP/chemoRT,0.825625
+white,58.18356164,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.62640411
+african-american,54.60547945,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.55057363
+white,74.80821918,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.470547945
+hispanic,60.78630137,glottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.914503425
+african-american,63.34520548,supraglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.562388699
+african-american,63.7369863,supraglottic,T3,N+,1,no chemo,PLRT,0.136840753
+white,44.5890411,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.84760274
+white,72.97808219,supraglottic,T3,N0,2,no chemo,LP/RT alone,0.393955479
+white,62.12876712,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.495667808
+white,64.52876712,supraglottic,T3,N+,0,no chemo,PLRT,0.316917808
+white,64.65753425,supraglottic,T3,N+,2,induction+chemoRT,LP/chemoRT,0.550085616
+white,71.00821918,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.224922945
+white,47.02191781,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.715419521
+white,69.5890411,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.51947774
+white,48.43835616,supraglottic,T3,N0,0,no chemo,PLRT,0.655265411
+white,53.78630137,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.480128425
+white,73.55068493,supraglottic,T3,N+,0,no chemo,PLRT,0.232337329
+african-american,69.13424658,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.336241438
+white,50.39726027,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.683775685
+white,52.40821918,supraglottic,T3,N0,0,no chemo,PLRT,0.618047945
+white,55.12876712,transglottic,T3,N+,1,no chemo,PLRT,0.311292808
+african-american,69.71780822,supraglottic,T3,N+,2,concurrent,LP/chemoRT,0.237020548
+white,65.84657534,supraglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.632688356
+white,69.55890411,transglottic,T3,N+,1,induction,LP/chemoRT,0.363510274
+hispanic,76.84109589,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.513989726
+african-american,46.96164384,supraglottic,T3,N+,0,no chemo,PLRT,0.387859589
+white,64.96712329,supraglottic,T3,N+,1,no chemo,PLRT,0.219058219
+white,63.8739726,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.573056507
+african-american,56.15616438,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.457910959
+white,49.43013699,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.520967466
+white,81.47945205,glottic,T3,N0,2,concurrent,LP/chemoRT,0.564255137
+white,62.71506849,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.583921233
+african-american,55.24657534,supraglottic,T3,N+,1,no chemo,PLRT,0.216438356
+white,58.26027397,supraglottic,T3,N0,1,no chemo,PLRT,0.469434932
+white,59.83835616,supraglottic,T3,N+,0,induction,LP/chemoRT,0.548390411
+hispanic,55.43835616,glottic,T3,N0,0,no chemo,LP/RT alone,0.886515411
+white,64.79726027,supraglottic,T3,N+,0,no chemo,PLRT,0.314400685
+white,46.74520548,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.546138699
+white,62.21917808,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.494820206
+white,70.31232877,supraglottic,T3,N+,0,no chemo,PLRT,0.262696918
+white,53.00273973,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.768724315
+white,68.87123288,transglottic,T3,N0,2,no chemo,PLRT,0.369957192
+hispanic,70.96164384,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.490984589
+african-american,69.88219178,glottic,T3,N0,3,no chemo,LP/RT alone,0.485479452
+african-american,68.41917808,supraglottic,T3,N+,2,induction+chemoRT,LP/chemoRT,0.421070206
+white,59.27671233,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.616155822
+white,58.82739726,supraglottic,T3,N+,0,concurrent,PLRT,0.464118151
+white,68.78082192,supraglottic,T3,N0,1,concurrent,PLRT,0.464554795
+white,61.74794521,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.499238014
+white,53.29863014,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.484700342
+white,72.50684932,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.492123288
+white,66.78356164,supraglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.62390411
+white,68,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.346875
+african-american,87.35342466,glottic,T3,N0,1,concurrent,LP/chemoRT,0.415436644
+white,56.6630137,supraglottic,T3,N0,0,no chemo,PLRT,0.578159247
+white,43.09589041,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.580351027
+other,67.71506849,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.662046233
+white,48.15342466,transglottic,T3,N0,0,induction,LP/chemoRT,0.845436644
+white,68.71232877,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.433946918
+hispanic,53.16986301,supraglottic,T3,N+,0,no chemo,PLRT,0.501532534
+white,66.35616438,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.362285959
+white,65.06849315,transglottic,T3,N0,0,concurrent,LP/chemoRT,0.655607877
+other,69.47671233,glottic,T3,N+,1,concurrent,LP/chemoRT,0.708030822
+white,51.67671233,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.593655822
+african-american,48.27945205,transglottic,T3,N0,0,no chemo,PLRT,0.563005137
+white,59.29589041,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.615976027
+white,52.74794521,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.489863014
+white,60.24383562,glottic,T3,N0,1,concurrent,LP/chemoRT,0.763339041
+white,64.10410959,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.664648973
+white,46.54520548,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.548013699
+white,77.0739726,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.449306507
+white,29.84109589,transglottic,T3,N0,0,no chemo,PLRT,0.829614726
+white,59.9890411,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.59385274
+white,51.10136986,supraglottic,T3,N0,1,no chemo,PLRT,0.536549658
+white,45.32328767,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.746969178
+african-american,58.56164384,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.341609589
+white,45.71506849,glottic,T3,N0,0,concurrent,LP/chemoRT,0.993296233
+hispanic,76.07945205,transglottic,T3,N0,0,concurrent,LP/chemoRT,0.630505137
+hispanic,48.96712329,glottic,T3,N0,1,concurrent,LP/chemoRT,0.947183219
+white,57.23287671,glottic,T3,N0,0,concurrent,LP/chemoRT,0.885316781
+white,46.54520548,supraglottic,T3,N0,2,no chemo,LP/RT alone,0.641763699
+white,62.35890411,supraglottic,T3,N+,0,no chemo,PLRT,0.337260274
+hispanic,74.15068493,supraglottic,T3,N+,1,induction,LP/chemoRT,0.398587329
+white,65.68493151,supraglottic,T3,N+,0,no chemo,PLRT,0.306078767
+white,52.13150685,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.589392123
+white,62.06027397,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.683809932
+white,54.16712329,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.570308219
+white,63.01643836,supraglottic,T3,N+,0,induction+chemoRT,LP/chemoRT,0.65922089
+asian,53.47123288,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.608082192
+white,63.61643836,supraglottic,T3,N0,2,no chemo,LP/RT alone,0.48172089
+white,56.81369863,glottic,T3,N+,1,concurrent,LP/chemoRT,0.607996575
+white,56.55890411,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.735385274
+other,48.58082192,supraglottic,T3,N+,0,induction,LP/chemoRT,0.872679795
+white,58.93972603,supraglottic,T3,N0,0,induction+chemoRT,LP/chemoRT,0.884940068
+white,64.24109589,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.569614726
+white,63.49041096,supraglottic,T3,N+,1,concurrent,LP/chemoRT,0.389152397
+white,69.84657534,supraglottic,T3,N+,1,no chemo,PLRT,0.173313356
+white,52.55890411,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.679135274
+white,60.33972603,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.606190068
+white,52.30410959,supraglottic,T3,N+,1,no chemo,PLRT,0.337773973
+white,62.78356164,glottic,T3,N+,0,no chemo,PLRT,0.48952911
+white,66.64109589,glottic,T3,N0,0,concurrent,LP/chemoRT,0.797114726
+african-american,62.60273973,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.491224315
+white,46.04109589,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.552739726
+african-american,60.00273973,glottic,T3,N0,0,induction,PLRT,0.734349315
+white,60.81917808,supraglottic,T3,N+,1,induction+chemoRT,LP/chemoRT,0.586070206
+white,69.08767123,glottic,T3,N0,0,induction,LP/chemoRT,0.805428082
+hispanic,42.10684932,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.948998288
+african-american,44.10958904,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.570847603
+white,72.91506849,transglottic,T3,N0,1,induction,LP/chemoRT,0.519546233
+african-american,70.27945205,supraglottic,T3,N0,0,induction,LP/chemoRT,0.544255137
+african-american,57.95890411,supraglottic,T3,N+,0,no chemo,PLRT,0.284760274
+white,58,supraglottic,T3,N0,0,no chemo,PLRT,0.565625
+white,51.97808219,supraglottic,T3,N+,1,no chemo,LP/RT alone,0.403330479
+white,56.51232877,supraglottic,T3,N+,0,concurrent,LP/chemoRT,0.548321918
+white,59.22191781,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.616669521
+hispanic,66.10410959,glottic,T3,N0,0,concurrent,LP/chemoRT,0.880273973
+white,51.47671233,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.501780822
+african-american,59.56712329,supraglottic,T3,N0,1,induction,LP/chemoRT,0.550933219
+white,79.76986301,glottic,T3,N0,0,concurrent,LP/chemoRT,0.674032534
+white,47.06849315,supraglottic,T3,N+,0,no chemo,PLRT,0.480607877
+white,46.9890411,transglottic,T3,N+,0,concurrent,LP/chemoRT,0.63760274
+white,67.57808219,transglottic,T3,N0,0,no chemo,LP/RT alone,0.538330479
+white,56.43287671,glottic,T3,N+,1,no chemo,PLRT,0.455316781
+white,51.29041096,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.691027397
+hispanic,43.25479452,supraglottic,T3,N+,0,no chemo,PLRT,0.594486301
+african-american,60.83835616,supraglottic,T3,N0,1,concurrent,LP/chemoRT,0.507765411
+white,74.24931507,supraglottic,T3,N0,1,induction,LP/chemoRT,0.507037671
+white,51.70410959,transglottic,T3,N0,1,concurrent,LP/chemoRT,0.687148973
+white,50.90410959,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.507148973
+white,58.73150685,glottic,T3,N0,0,induction,LP/chemoRT,0.902517123
+hispanic,64.74520548,supraglottic,T3,N+,0,no chemo,PLRT,0.393013699
+white,62.6630137,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.396909247
+hispanic,40.09863014,supraglottic,T3,N+,0,no chemo,PLRT,0.624075342
+white,59.97808219,supraglottic,T3,N+,1,no chemo,PLRT,0.265830479
+white,61.20273973,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.691849315
+white,45.46575342,supraglottic,T3,N+,0,induction,LP/chemoRT,0.683133562
+hispanic,67.15342466,glottic,T3,N0,0,no chemo,PLRT,0.714186644
+white,52.10410959,glottic,T3,N0,1,no chemo,LP/RT alone,0.745898973
+white,53.81917808,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.667320206
+white,72.32328767,glottic,T3,N+,0,induction,LP/chemoRT,0.587594178
+white,65.89589041,glottic,T3,N0,1,no chemo,LP/RT alone,0.616601027
+white,60.69315068,glottic,T3,N0,1,no chemo,PLRT,0.602876712
+white,47.0739726,supraglottic,T3,N+,0,induction,LP/chemoRT,0.668056507
+white,62.92328767,transglottic,T3,N0,0,no chemo,PLRT,0.519469178
+white,64.30958904,supraglottic,T3,N+,0,no chemo,LP/RT alone,0.381472603
+white,63.72876712,transglottic,T3,N0,0,no chemo,PLRT,0.511917808
+white,56.56438356,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.547833904
+white,57.35068493,supraglottic,T3,N0,1,no chemo,PLRT,0.477962329
+white,45.69863014,glottic,T3,N+,0,concurrent,LP/chemoRT,0.805950342
+white,46.4739726,supraglottic,T3,N0,0,no chemo,PLRT,0.673681507
+white,56.74246575,supraglottic,T3,N+,0,no chemo,PLRT,0.389914384
+white,54.79178082,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.564452055
+white,46.07671233,supraglottic,T3,N+,0,induction,LP/chemoRT,0.677405822
+white,62.97808219,supraglottic,T3,N0,0,no chemo,PLRT,0.518955479
+hispanic,58.2,transglottic,T3,N0,0,no chemo,PLRT,0.641875
+white,62.19726027,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.682525685
+white,63.62739726,supraglottic,T3,N+,0,no chemo,PLRT,0.325368151
+white,59.46575342,supraglottic,T3,N+,0,no chemo,PLRT,0.364383562
+white,52.89041096,supraglottic,T3,N+,1,no chemo,PLRT,0.332277397
+white,65.98082192,supraglottic,T3,N+,0,induction,LP/chemoRT,0.490804795
+white,50.48493151,supraglottic,T3,N+,1,no chemo,PLRT,0.354828767
+white,50.92876712,supraglottic,T3,N+,1,induction,PLRT,0.475667808
+white,57.5260274,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.632568493
+white,62.76712329,transglottic,T3,N+,0,induction,LP/chemoRT,0.520933219
+white,63.50684932,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.576498288
+white,66.91232877,glottic,T3,N0,1,no chemo,LP/RT alone,0.607071918
+hispanic,63.10684932,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.564623288
+white,49.98356164,supraglottic,T3,N0,0,no chemo,PLRT,0.64077911
+white,57.96438356,supraglottic,T3,N+,1,induction,LP/chemoRT,0.472208904
+white,68.03835616,supraglottic,T3,N+,0,induction,LP/chemoRT,0.471515411
+white,59.32876712,supraglottic,T3,N0,0,induction,LP/chemoRT,0.740667808
+white,52.59178082,glottic,T3,N0,1,induction,LP/chemoRT,0.866327055
+white,61.94520548,transglottic,T3,N0,1,induction,LP/chemoRT,0.622388699
+white,69.71232877,glottic,T3,N0,2,no chemo,LP/RT alone,0.580821918
+white,64.33150685,glottic,T3,N0,1,no chemo,PLRT,0.568767123
+white,46.77808219,supraglottic,T3,N+,0,no chemo,PLRT,0.483330479
+white,43.6,supraglottic,T3,N+,0,no chemo,PLRT,0.513125
+african-american,50.09041096,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.608527397
+african-american,49.97260274,supraglottic,T3,N0,0,no chemo,PLRT,0.547131849
+african-american,61.9890411,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.49697774
+white,48.32054795,supraglottic,T3,N0,0,induction,LP/chemoRT,0.843869863
+white,58.86849315,supraglottic,T3,N0,0,induction,LP/chemoRT,0.744982877
+white,55.96164384,transglottic,T3,N0,0,no chemo,LP/RT alone,0.647234589
+white,53.47671233,glottic,T3,N+,0,no chemo,PLRT,0.576780822
+white,66.89863014,transglottic,T3,N0,0,no chemo,PLRT,0.482200342
+white,38.68493151,transglottic,T3,N+,0,no chemo,LP/RT alone,0.621703767
+hispanic,56.8109589,supraglottic,T3,N0,0,no chemo,PLRT,0.65489726
+white,68.40547945,supraglottic,T3,N0,0,concurrent,LP/chemoRT,0.62432363
+white,57.38082192,supraglottic,T3,N0,1,no chemo,PLRT,0.477679795
+white,69.14794521,supraglottic,T3,N0,1,no chemo,LP/RT alone,0.429863014
+white,51.61643836,supraglottic,T3,N+,1,induction,LP/chemoRT,0.53172089
+hispanic,70.33424658,supraglottic,T3,N0,0,no chemo,PLRT,0.528116438
+white,51.65753425,supraglottic,T3,N+,0,no chemo,PLRT,0.437585616
+hispanic,46.45205479,glottic,T3,N0,0,induction,LP/chemoRT,1
+hispanic,40.61369863,transglottic,T3,N0,1,no chemo,PLRT,0.712996575
+white,59.46849315,transglottic,T3,N0,0,induction,LP/chemoRT,0.739357877
+hispanic,53.08219178,glottic,T3,N+,0,induction,LP/chemoRT,0.846104452
+white,42.17534247,supraglottic,T3,N0,0,no chemo,LP/RT alone,0.776481164
+african-american,50.25205479,transglottic,T3,N+,0,induction,PLRT,0.482011986
+white,59.64931507,glottic,T3,N0,0,no chemo,PLRT,0.706412671
+white,58.99452055,transglottic,T3,N+,1,no chemo,PLRT,0.27505137
+other,56.48493151,supraglottic,T3,N0,1,no chemo,PLRT,0.704828767
+other,54.8630137,glottic,T3,N+,0,no chemo,PLRT,0.782534247
+african-american,57.4109589,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.16489726
+african-american,57.76164384,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.161609589
+african-american,42.93972603,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.300565068
+white,57.38630137,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.321378425
+white,55.07671233,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.374280822
+other,63.85753425,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,induction,LP/chemoRT,0.948210616
+white,47.11232877,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.698946918
+white,72.17808219,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.182705479
+white,75.49589041,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.089101027
+african-american,61.59178082,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,LP/RT alone,0.375702055
+white,59.07945205,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.305505137
+hispanic,65.4109589,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction+chemoRT,LP/chemoRT,0.32427226
+white,46.84109589,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.357739726
+hispanic,65.46027397,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.323809932
+white,50.47123288,subglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,LP/chemoRT,0.386207192
+hispanic,44.60547945,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,PLRT,0.51932363
+african-american,52.2739726,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,LP/chemoRT,0.541181507
+white,60.58082192,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction,LP/chemoRT,0.416429794
+hispanic,73.92876712,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,LP/RT alone,0.431917808
+hispanic,54.57534247,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.425856164
+white,69.62465753,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.206643836
+white,38.37808219,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.593330479
+white,58.73424658,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.246241438
+hispanic,69.73424658,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.377491438
+white,57.71780822,transglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,LP/RT alone,0.318270548
+hispanic,59.29315068,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.537876712
+african-american,53.50410959,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction+chemoRT,PLRT,0.264023973
+hispanic,56.00547945,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",induction,LP/chemoRT,0.75619863
+african-american,57.43287671,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.508441781
+white,57.09589041,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.261601027
+african-american,58.46027397,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.561309932
+white,56.34794521,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.424863014
+white,54.75342466,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,LP/chemoRT,0.611686644
+white,71.28219178,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.191104452
+african-american,54.30684932,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,LP/RT alone,0.256498288
+white,47.84657534,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.348313356
+white,50.60821918,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,induction+chemoRT,PLRT,0.588047945
+african-american,55.62465753,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.181643836
+african-american,53.10136986,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.205299658
+white,57.00821918,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.262422945
+african-american,65.33424658,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.090616438
+white,52.29863014,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.650325342
+white,64.6739726,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.346806507
+white,42.66027397,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.646934932
+white,51.81917808,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,PLRT,0.529820206
+hispanic,59.50410959,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.379648973
+white,54.49041096,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,LP/chemoRT,0.614152397
+white,49.34794521,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.396738014
+asian,67.94794521,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.441113014
+white,50.04931507,supraglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.608912671
+african-american,50.73150685,transglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,induction+chemoRT,LP/chemoRT,0.555642123
+white,56.53972603,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.423065068
+hispanic,62.95068493,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",induction,LP/chemoRT,0.691087329
+white,50.02465753,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.327893836
+white,58.95616438,glottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.494160959
+african-american,59.70136986,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.143424658
+other,54.32876712,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,LP/chemoRT,0.834417808
+white,57.96712329,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.440933219
+hispanic,72.11506849,transglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.198921233
+african-american,49.10684932,supraglottic,T4,N+,"Capable of only limited selfcare, confined to bed or chair m",no chemo,PLRT,0.305248288
+white,55.91780822,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",induction,LP/chemoRT,0.522645548
+african-american,65.59726027,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction+chemoRT,PLRT,0.306900685
+white,64.85479452,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.407611301
+african-american,51.15342466,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.286061644
+hispanic,63.54520548,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.435513699
+hispanic,67.47945205,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.242380137
+white,60.38630137,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.230753425
+white,58.83287671,subglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.526566781
+white,49.41369863,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.396121575
+white,53.34246575,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction,PLRT,0.421789384
+white,36.89315068,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.513501712
+hispanic,79.1260274,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.133193493
+hispanic,47.0739726,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.589931507
+white,60.90684932,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.382123288
+hispanic,49.66849315,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.565607877
+white,61.8109589,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.46739726
+white,52.63561644,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.303416096
+white,72.34520548,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,induction,LP/chemoRT,0.493638699
+white,60.65479452,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.290736301
+white,57.90958904,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.316472603
+white,69.40821918,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",induction,PLRT,0.396172945
+white,53.36164384,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.484109589
+white,50.53150685,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,concurrent,LP/chemoRT,0.479392123
+white,66.63287671,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction,LP/chemoRT,0.359691781
+white,53.0739726,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.799306507
+african-american,57.72876712,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",concurrent,LP/chemoRT,0.568167808
+white,48.34246575,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.406164384
+white,59.42191781,glottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.396044521
+african-american,61.03835616,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.130890411
+white,62.93972603,supraglottic,T4,N+,"Capable of only limited selfcare, confined to bed or chair m",induction+chemoRT,LP/chemoRT,0.269315068
+white,91.00273973,glottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.287474315
+african-american,68.0109589,transglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.15927226
+white,47.58082192,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,induction,LP/chemoRT,0.538304794
+african-american,64.32328767,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,LP/chemoRT,0.428219178
+white,58.89589041,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.244726027
+hispanic,63.95342466,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,LP/RT alone,0.681686644
+white,42.79726027,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.395650685
+african-american,70.24109589,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,PLRT,0.466489726
+white,72.96986301,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.206532534
+african-american,60.10136986,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.295924658
+hispanic,48.93150685,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,LP/chemoRT,0.478767123
+white,57.57534247,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.350856164
+white,70.50410959,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.479648973
+african-american,79.62739726,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,LP/RT alone,0.019118151
+hispanic,57.33424658,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.399991438
+white,70.47123288,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.136207192
+white,64.82191781,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction,LP/chemoRT,0.251669521
+hispanic,47.1369863,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.776840753
+african-american,50.85753425,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.320085616
+white,62.55616438,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.366660959
+white,51.19452055,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.66067637
+african-american,62.5260274,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.210693493
+white,68.44931507,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.311412671
+white,51.35068493,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",induction+chemoRT,LP/chemoRT,0.721712329
+african-american,75.74794521,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.492988014
+white,62.28767123,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.400428082
+white,48.31780822,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.531395548
+white,66.93972603,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,induction+chemoRT,LP/chemoRT,0.497440068
+african-american,65.12328767,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.498844178
+white,59.3890411,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction+chemoRT,LP/chemoRT,0.30260274
+hispanic,61.60273973,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.297474315
+white,65.20821918,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",induction+chemoRT,LP/chemoRT,0.435547945
+white,60.09863014,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.327200342
+white,48.50136986,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.435924658
+white,65.04657534,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,induction+chemoRT,LP/chemoRT,0.515188356
+hispanic,47.86027397,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.582559932
+white,62.16986301,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.557782534
+white,75.17260274,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.435881849
+african-american,48.55068493,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.466712329
+white,66.87671233,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,PLRT,0.232405822
+white,65.48219178,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.432979452
+white,46.92328767,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.356969178
+african-american,58.9369863,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.306840753
+african-american,53.26027397,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.453809932
+hispanic,50.70958904,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,PLRT,0.462097603
+white,54.91232877,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.469571918
+african-american,36.92054795,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.450744863
+white,70.39178082,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.480702055
+white,55.32328767,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.528219178
+african-american,47.66027397,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction,LP/chemoRT,0.318809932
+white,63.64657534,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.262688356
+white,64.76164384,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.533484589
+african-american,66.26027397,transglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.269434932
+white,50.97534247,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.568981164
+white,43.92876712,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.697542808
+hispanic,78.80821918,glottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,concurrent,PLRT,0.573672945
+white,63.24657534,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.203938356
+white,75.38630137,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.277628425
+white,64.67123288,supraglottic,T4,N+,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.190582192
+white,51.64931507,glottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.468912671
+white,66.31506849,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.175171233
+white,65.7369863,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.430590753
+hispanic,69.96986301,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.406532534
+white,47.17260274,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",concurrent,LP/chemoRT,0.604631849
+white,40.66849315,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.665607877
+white,61.59726027,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.719400685
+white,69.43287671,transglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.333441781
+white,66.36438356,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",concurrent,LP/chemoRT,0.424708904
+white,54.64109589,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.628364726
+white,63.53972603,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.201190068
+white,67.56438356,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.257208904
+white,72.90958904,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,LP/RT alone,0.363347603
+white,51.82739726,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.310993151
+white,56.38630137,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.268253425
+white,65.39726027,supraglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.371275685
+white,54.05205479,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.352636986
+white,43.71232877,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.387071918
+african-american,58.01643836,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.25297089
+hispanic,54.24931507,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.710162671
+african-american,0,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,1
+white,60.6109589,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,LP/RT alone,0.29114726
+white,43.51780822,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.576395548
+white,61.23835616,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.629015411
+white,53.48219178,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",induction,LP/chemoRT,0.514229452
+white,69.7260274,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.143193493
+white,45.42739726,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.558493151
+white,45.4,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,PLRT,0.43375
+white,49.48493151,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.332953767
+white,72.30410959,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.369023973
+african-american,54.95616438,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.250410959
+african-american,61.7890411,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,PLRT,0.18635274
+white,53.94520548,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.291138699
+hispanic,51.96712329,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.387808219
+hispanic,60.19452055,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.37317637
+white,49.83013699,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,concurrent,PLRT,0.423467466
+white,32.08219178,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.746104452
+white,49.89315068,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.329126712
+white,60.31232877,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,induction+chemoRT,LP/chemoRT,0.559571918
+hispanic,67.26849315,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.306857877
+white,56.6,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.26625
+white,56.90684932,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.325873288
+hispanic,62.52328767,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.351344178
+african-american,41.95616438,transglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.497285959
+white,63.42739726,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.264743151
+white,57.62465753,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.319143836
+hispanic,55.50684932,subglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.542123288
+hispanic,46.96712329,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.684683219
+african-american,60.75342466,transglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.196061644
+white,60.8739726,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.288681507
+hispanic,70.83287671,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.273441781
+white,61.92876712,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.403792808
+white,65.75890411,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.242885274
+white,54.44931507,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,concurrent,LP/chemoRT,0.630162671
+african-american,55.23287671,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.185316781
+hispanic,63.67671233,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.340530822
+white,52.07123288,supraglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.496207192
+white,52.01369863,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.371746575
+african-american,31.66849315,transglottic,T4,N0,Ambulatory and capable of all selfcare but unable to carry o,no chemo,PLRT,0.593732877
+white,56.32876712,supraglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,LP/RT alone,0.331292808
+hispanic,37.27123288,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.931832192
+white,51.01917808,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",concurrent,LP/chemoRT,0.381070205
+hispanic,75.9890411,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.35010274
+white,61.21917808,transglottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.410445206
+hispanic,56.06849315,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.599357877
+white,50.78630137,supraglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.570753425
+white,53.15068493,transglottic,T4,N+,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.298587329
+african-american,38.47945205,supraglottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.404880137
+african-american,53.52328767,glottic,T4,N0,Restricted in physically strenuous activity but ambulatory a,no chemo,PLRT,0.545094178
+white,54.14246575,glottic,T4,N+,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.508039384
+white,41.82465753,transglottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.654768836
+hispanic,61.49315068,glottic,T4,N0,"Fully active, able to carry on all pre-disease performance w",no chemo,PLRT,0.704751712
