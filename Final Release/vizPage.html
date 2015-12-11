@@ -166,6 +166,47 @@
             #chart1Sub .children:hover rect.child {
                 fill: #bbb;
             }
+
+
+
+            #chart3 svg {
+                font: 10px sans-serif;
+                padding: 10px;
+            }
+
+            #chart3 .axis,
+            .frame {
+                shape-rendering: crispEdges;
+            }
+
+            #chart3 .axis line {
+                stroke: #ddd;
+            }
+
+            #chart3 .axis path {
+                display: none;
+            }
+
+            #chart3 .frame {
+                fill: none;
+                stroke: #aaa;
+            }
+
+            #chart3 circle {
+                fill-opacity: .7;
+            }
+
+            #chart3 circle.hidden {
+                fill: #ccc !important;
+            }
+
+            #chart3 .extent {
+                fill: #000;
+                fill-opacity: .125;
+                stroke: #fff;
+            }
+
+
         </style>
     </head>
     <body>
@@ -205,6 +246,7 @@
     </body>
 
     <script>
+
         var queryString = window.location.search.substring(1);
         var params = queryString.split('&');
         var id = params[0];
@@ -216,11 +258,12 @@
         // Instructions to Ashwin: Copy this entire script block. Also copy the above style block for the viz render config options.
         var options = '';
         var chart;
+        var pointNumber = 0;
         var newPatient = ethnicity + ',' + site + ',' + tstage + ',' + 'noChemo' + ',' + 'N0' + ',' + '1' + ',' + age + ',' + 'PLRT' + ',' + '0.5';
         var colors = d3.scale.ordinal()
-                .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent', 'male', 'female'])
-                .range(['#ffc04c', '#328332', '#6666ff', '#fc8d62', '#ff4c4c', '#8da0cb', '#fc8d62']);
-		var current_therapies;
+                .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo', 'male', 'female'])
+                .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c', '#8da0cb', '#fc8d62']);
+        var current_therapies;
         $(document).ready(function () {
 
             options = {
@@ -228,28 +271,50 @@
                     renderTo: 'chart1',
                     type: 'treemap'
                 },
-				credits: {
-					enabled: false
-				},
+                credits: {
+                    enabled: false
+                },
                 tooltip: {
                     formatter: function () {
+                        pointNumber = this.point.index;
+                        tagName = this.point.name;
+                        if (tagName == 'no chemo') {
+                            tagName = 'no-chemo';
+                        }
+
+                        if (tagName == 'induction+chemoRT')
+                            tagName = "induction-chemoRT"
+                        d3.select("#chart2").select("svg").select("#" + tagName).style("stroke-width", "6px");
+                        d3.select("#chart3").select("svg").selectAll(".circle" + tagName).attr("r", function (d) {
+                            return 8;
+                        })
                         return 'Average Survival Probability: <b>' + this.point.value + '%<br>Average Age:' + this.point.avgage + '</b><br> Population size: ' + this.point.count;
                     }
                 },
-				plotOptions: {
-					series: {
-						point:{
-							events: {
-								click: function () {
-									// Call the brushNLink methods to highlight the respective therapy data points in them
-									brushNLinkTreeMap(this.name);   // in case a different point in treemap is selected, brushNLink it again to highlight that node
-									brushNLinkLineLineChart(this.name);
-									brushNLinkLineParallelChart(this.name);
-								}
-							}
-						}
-					}
-				},
+                plotOptions: {
+                    series: {
+                        point: {
+                            events: {
+                                click: function () {
+                                    // Call the brushNLink methods to highlight the respective therapy data points in them
+                                    brushNLinkTreeMap(this.name);   // in case a different point in treemap is selected, brushNLink it again to highlight that node
+                                },
+                                mouseOut: function (d) {
+                                    chart.tooltip.hide();
+                                    var tempName = chart.series[0].points[pointNumber].name;
+                                    if (tempName == 'no chemo')
+                                        tempName = 'no-chemo'
+                                    else if (tempName == 'induction+chemoRT')
+                                        tempName = 'induction-chemoRT';
+                                    d3.select("#chart2").select("svg").select("#" + tempName).style("stroke-width", "3px");
+                                    d3.select("#chart3").select("svg").selectAll(".circle" + tempName).attr("r", function (d) {
+                                        return 5;
+                                    });
+                                }
+                            }
+                        }
+                    }
+                },
                 series: [{
                         layoutAlgorithm: 'stripes',
                         alternateStartingDirection: true,
@@ -271,7 +336,7 @@
                         data: []
                     }],
                 title: {
-                    text: 'Statistics of Cancer Data for ' + ethnicity + ' patients'
+                    text: 'Statistics of Cancer Data for ' + ethnicity + ' ' + gender + ' patients with ' + tstage + ' cancer at ' + site + ' site'
                 }
             };
             if (ethnicity != 'all-ethnicities') {
@@ -292,14 +357,14 @@
                 parallelChart(ethnicity, site, tstage, gender);
                 AlllineCurve(ethnicity, site, gender);
                 ScatterPlot2();
-                treemap2();
+                treemap2(site, tstage);
             }
         });
         function plotTreeMap(jsonData, m_ethnicity, m_site, m_sex) {
             data = jsonData.data;
             var colors = d3.scale.ordinal()
-							  .domain(['no chemo','induction','induction+chemoRT','concurrent','male','female','brushedout', 'brushSelected'])
-							  .range(['#66c2a5','#8da0cb','#fdae6b','#fc8d62','#999999','#fc8d62','#bdbdbd', '#ffeda0']);
+                    .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo', 'male', 'female'])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c', '#8da0cb', '#fc8d62']);
             for (var i = 0; i < data.length; i++) {
                 //console.log(data[i].ethnicity);
                 if (data[i].ethnicity == m_ethnicity) {
@@ -315,7 +380,7 @@
                                         sex.therapies[l].color = colors(sex.therapies[l].name);
                                     }
                                     options.series[0].data = sex.therapies;
-									current_therapies = sex.therapies;
+                                    current_therapies = sex.therapies;
                                     return;
                                 }
                             }
@@ -324,66 +389,60 @@
                 }
             }
         }
-		
-		// Anirban: Begin Change for final release
-		// call this method passing the therapy name to highlight the treemap node
-		function brushNLinkTreeMap(therapyName){
-		var colors = d3.scale.ordinal()
-						  .domain(['no chemo','induction','induction+chemoRT','concurrent','male','female','brushedout', 'brushSelected'])
-						  .range(['#66c2a5','#8da0cb','#fdae6b','#fc8d62','#999999','#fc8d62','#bdbdbd', '#ffeda0']);
-			var chart=$("#chart1").highcharts();
-			for(var i=0; i < current_therapies.length; i++){
-				if(current_therapies[i].name == therapyName)
-					current_therapies[i].color = colors('brushSelected');
-				else
-					current_therapies[i].color = colors('brushedout');
-			}
-			chart.series[0].update({data:current_therapies})
-		}// end Change
+
+        // Anirban: Begin Change for final release
+        // call this method passing the therapy name to highlight the treemap node
+        function brushNLinkTreeMap(therapyName) {
+            var colors = d3.scale.ordinal()
+                    .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent', 'male', 'female', 'brushedout', 'brushSelected'])
+                    .range(['#66c2a5', '#8da0cb', '#fdae6b', '#fc8d62', '#999999', '#fc8d62', '#bdbdbd', '#ffeda0']);
+            var chart = $("#chart1").highcharts();
+            for (var i = 0; i < current_therapies.length; i++) {
+                if (current_therapies[i].name == therapyName)
+                    current_therapies[i].color = colors('brushSelected');
+                else
+                    current_therapies[i].color = colors('brushedout');
+            }
+            chart.series[0].update({data: current_therapies})
+            if (therapyName == 'concurrent')
+                indexNumber = 0;
+            else if (therapyName == 'no chemo')
+                indexNumber = 1;
+            else if (therapyName == 'induction')
+                indexNumber = 2;
+            else if (therapyName == 'induction+chemoRT')
+                indexNumber = 3;
+            chart.tooltip.refresh(chart.series[0].points[indexNumber]);
+
+        }// end Change
 
         function parallelChart(m_ethnicity, m_site, m_tstage, m_gender) {
+
+            lineName = '';
             var color_set = d3.scale.ordinal()
                     .domain(['white', 'other', 'african-american', 'hispanic', 'asian'])
                     .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c']);
             var color_set2 = d3.scale.ordinal()
-                    .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo', ])
+                    .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo'])
                     .range(['#ffae19', '#4ca64c', '#4682B4', '#737373']);
             // load default chart
             d3.csv("SurvivalProbability.csv", function (data) {
-                makeGraph(data, false);
-                var k = {Ethnicity: "" + ethnicity,
-                    AgeAtTx: "" + age,
-                    Site: "" + site,
-                    Tcategory: "" + tstage,
-                    Nodal_Disease: "N+",
-                    ecog: "1",
-                    Chemotherapy: "induction",
-                    Local_Therapy: "PLRT",
-                    "Probability of Survival": "0.5"
-                }
-                data.push(k);
-                //remove the old DOM
-                d3.selectAll("#chart4 svg").selectAll("*").remove();
-                //make the graph
-                makeGraph(data);
                 console.log(data);
-            });
 
-            function makeGraph(data ) {
-                    if (m_ethnicity != 'all-ethnicities') {
-                        filteredData = data.filter(function (row) {
-                            if (row['Ethnicity'] == m_ethnicity && row['Site'] == m_site && row['Tcategory'] == m_tstage && row['Gender'] == m_gender) {
-                                return row;
-                            }
-                        });
-                    }
-                    else {
-                        filteredData = data.filter(function (row) {
-                            if (row['Site'] == m_site && row['Tcategory'] == m_tstage && row['Gender'] == m_gender) {
-                                return row;
-                            }
-                        });
-                    }
+                if (m_ethnicity != 'all-ethnicities') {
+                    filteredData = data.filter(function (row) {
+                        if (row['Ethnicity'] == m_ethnicity && row['Site'] == m_site && row['Tcategory'] == m_tstage && row['Gender'] == m_gender) {
+                            return row;
+                        }
+                    });
+                }
+                else {
+                    filteredData = data.filter(function (row) {
+                        if (row['Site'] == m_site && row['Tcategory'] == m_tstage && row['Gender'] == m_gender) {
+                            return row;
+                        }
+                    });
+                }
 
 
                 console.log(filteredData);
@@ -419,7 +478,6 @@
                     update_colors(d3.keys(filteredData[0])[3]);
                 // click label to activate coloring
                 graph.svg.selectAll(".dimension")
-                        .on("click", update_colors)
                         .selectAll(".label")
                         .style("font-size", "14px"); // change font sizes of selected lable
 
@@ -431,9 +489,23 @@
                         })
                         .on("mouseout", function () {
                             cleanTooltip();
+                            var chart = $("#chart1").highcharts();
+                            for (var i = 0; i < current_therapies.length; i++) {
+                                current_therapies[i].color = colors(current_therapies[i].name);
+                            }
+                            chart.series[0].update({data: current_therapies})
+
+                            if (lineName == 'no chemo')
+                                lineName = 'no-chemo';
+                            else if (lineName == 'induction+chemoRT')
+                                lineName = 'induction-chemoRT';
+                            d3.select("#chart2").select("svg").select("#" + lineName).style("stroke-width", "3px");
+                            d3.select("#chart3").select("svg").selectAll(".circle" + lineName).attr("r", function (d) {
+                                return 5;
+                            })
                             graph.unhighlight();
                         });
-            }
+            });
             // update color and font weight of chart based on axis selection
             // modified from here: https://syntagmatic.github.io/parallel-coordinates/
             function update_colors(dimension) {
@@ -446,11 +518,13 @@
                         .style("font-weight", "bold");
                 // change colors for each line
                 graph.color(function (d) {
+
                     if (dimension == 'Ethnicity')
                         return color_set([d[dimension]])
 
                     else
                         return color_set2([d[dimension]])
+
                 }).render();
             }
             ;
@@ -541,6 +615,25 @@
                         var x = clickedCenPts[i][j][0] - margins.left;
                         var y = clickedCenPts[i][j][1] - margins.top;
                         clickedDataSet.push([x, y, text]);
+
+                        if (text == 'no chemo') {
+                            brushNLinkTreeMap(text);
+                            lineName = text;
+                        }
+                        else if (text == 'concurrent') {
+                            brushNLinkTreeMap(text);
+                            lineName = text;
+                        }
+                        else if (text == ' induction+chemoRT') {
+                            brushNLinkTreeMap(text);
+                            lineName = text;
+                        }
+                        else if (text == 'induction') {
+                            brushNLinkTreeMap(text);
+                            lineName = text;
+                        }
+                        else
+                            ;
                     }
                 }
                 ;
@@ -2142,18 +2235,7 @@
             /* Begin d3.js */
             //Scalar functions
 
-            var tip = d3.tip()
-                    .attr('class', 'd3-tip')
-                    .offset(function () {
-                        return [(this.getBBox().height / 2) + 100, ((this.getBBox().height / 2) - 50)];
-                    })
-                    .html(function (d) {
-                        var coordinates = d3.mouse(this);
-                        xValue = x.invert(coordinates[0]);
-                        yValue = y.invert(coordinates[1]) + 0.2;
-                        return "<strong> Months Survived : " + d3.format(".2f")(xValue) +
-                                " months <br/> Risk : " + d3.format(".2f")(100 * yValue) + " % </strong>";
-                    });
+
             var x = d3.scale.linear().domain([0, max]).range([0, w - m - 60]);
             var y = d3.scale.linear().domain([1, 0]).range([10, h - 75]);
             //Define axses
@@ -2167,6 +2249,30 @@
                     .tickSize(2)
                     .tickPadding(6)
                     .orient("left");
+
+            var lineChartTip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .attr('id', 'lineChartTip')
+                    .offset(function () {
+                        return [(this.getBBox().height / 2) + 100, ((this.getBBox().height / 2) - 50)];
+                    })
+                    .html(function (d) {
+                        var coordinates = d3.mouse(this);
+                        var therapy = d3.select(this).attr('id');
+                        d3.select(this).style("stroke-width", "6px");
+                        xValue = x.invert(coordinates[0]) - (1.5 * m);
+                        yValue = y.invert(coordinates[1] - 45);
+
+                        if (therapy == 'no-chemo')
+                            therapy = 'no chemo';
+                        else if (therapy == 'induction-chemoRT')
+                            therapy = 'induction+chemoRT';
+
+                        brushNLinkTreeMap(therapy);
+                        return "<strong> Months Survived : " + d3.format(".2f")(xValue) +
+                                " months <br/> Risk : " + d3.format(".2f")(100 * (yValue > 1.0 ? 1.0 : yValue)) + " % </strong>";
+
+                    });
             //This is the accessor function
             var lineFunction = d3.svg.line()
                     .x(function (d) {
@@ -2180,72 +2286,117 @@
             var kaplan = d3.select("#chart2").append("svg")
                     .attr("width", w + (2 * m))
                     .attr("height", h + (2 * m));
-            kaplan.call(tip);
+            kaplan.call(lineChartTip);
             //Draw the lines
             var concurrentTherapy = kaplan.append("path")
                     .attr("d", lineFunction(data.treatments[0]))
-                    .attr("stroke", "#ff4c4c")
+                    .attr("stroke", "#4ca64c")
                     .attr("stroke-width", 3)
                     .attr("fill", "none")
-                    .attr('id', 'concurrentTherapy')
+                    .attr('id', 'concurrent')
                     .attr("opacity", 0.7)
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                    .on('mouseover', lineChartTip.show)
+                    .on('mouseout', function () {
+                        lineChartTip.hide();
+                        d3.select(this).style("stroke-width", "3px");
+                        var chart = $("#chart1").highcharts();
+                        for (var i = 0; i < current_therapies.length; i++) {
+                            current_therapies[i].color = colors(current_therapies[i].name);
+                        }
+                        chart.series[0].update({data: current_therapies})
+                        d3.select("#chart3").select("svg").selectAll(".circleconcurrent").attr("r", function (d) {
+                            return 5;
+                        })
+
+                    });
             if (data.treatments[0][0].n != 0) {
                 var Concurrentlabel = kaplan.append("text")
                         .attr("transform", "translate(" + (x(data.treatments[0][data.treatments[0].length - 1].t) + 70) + "," + (y(data.treatments[0][data.treatments[0].length - 1].prob) + 40) + ")")
                         .attr("dy", ".35em")
                         .attr("text-anchor", "start")
-                        .style("fill", "#ff4c4c")
+                        .style("fill", "#4ca64c")
                         .text("Concurrent Therapy");
             }
             var inductionTherapy = kaplan.append("path")
                     .attr("d", lineFunction(data.treatments[1]))
-                    .attr("stroke", "#197319")
+                    .attr("stroke", "#ffae19")
                     .attr("stroke-width", 3)
                     .attr("fill", "none")
-                    .attr('id', 'inductionTherapy')
-                    .attr("opacity", 0.7).on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                    .attr('id', 'induction')
+                    .attr("opacity", 0.7).on('mouseover', lineChartTip.show)
+                    .on('mouseout', function () {
+                        lineChartTip.hide();
+                        d3.select(this).style("stroke-width", "3px");
+                        var chart = $("#chart1").highcharts();
+                        for (var i = 0; i < current_therapies.length; i++) {
+                            current_therapies[i].color = colors(current_therapies[i].name);
+                        }
+                        chart.series[0].update({data: current_therapies})
+                        d3.select("#chart3").select("svg").selectAll(".circleinduction").attr("r", function (d) {
+                            return 5;
+                        })
+                    });
             if (data.treatments[1][0].n != 0) {
                 var inductionlabel = kaplan.append("text")
                         .attr("transform", "translate(" + (x(data.treatments[1][data.treatments[1].length - 1].t) - 50) + "," + (y(data.treatments[1][data.treatments[1].length - 1].prob) + 30) + ")")
                         .attr("dy", ".35em")
                         .attr("text-anchor", "start")
-                        .style("fill", "#197319")
+                        .style("fill", "#ffae19")
                         .text("Induction Therapy");
             }
 
             var inductionConcurrent = kaplan.append("path")
                     .attr("d", lineFunction(data.treatments[2]))
-                    .attr("stroke", "#6666ff")
+                    .attr("stroke", "#4682B4")
                     .attr("stroke-width", 3)
                     .attr("fill", "none")
-                    .attr('id', 'inductionConcu')
-                    .attr("opacity", 0.7).on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                    .attr('id', 'induction-chemoRT')
+                    .attr("opacity", 0.7).on('mouseover', lineChartTip.show)
+                    .on('mouseout', function () {
+                        lineChartTip.hide();
+                        d3.select(this).style("stroke-width", "3px");
+                        var chart = $("#chart1").highcharts();
+                        for (var i = 0; i < current_therapies.length; i++) {
+                            current_therapies[i].color = colors(current_therapies[i].name);
+                        }
+                        chart.series[0].update({data: current_therapies})
+                        d3.select("#chart3").select("svg").selectAll(".circleinduction-chemoRT").attr("r", function (d) {
+                            return 5;
+                        })
+                    });
             if (data.treatments[2][0].n != 0) {
                 var inductionConculabel = kaplan.append("text")
                         .attr("transform", "translate(" + (x(data.treatments[2][data.treatments[2].length - 1].t)) + "," + (y(data.treatments[2][data.treatments[2].length - 1].prob) + 60) + ")")
                         .attr("dy", ".35em")
                         .attr("text-anchor", "start")
-                        .style("fill", "#6666ff")
+                        .style("fill", "#4682B4")
                         .text("Induction + Chemotherapy");
             }
             var noChemoTherapy = kaplan.append("path")
                     .attr("d", lineFunction(data.treatments[3]))
-                    .attr("stroke", "#ffc04c")
+                    .attr("stroke", "#737373")
                     .attr("stroke-width", 3)
                     .attr("fill", "none")
-                    .attr('id', 'noChemoTherapy')
-                    .attr("opacity", 0.7).on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                    .attr('id', 'no-chemo')
+                    .attr("opacity", 0.7).on('mouseover', lineChartTip.show)
+                    .on('mouseout', function () {
+                        lineChartTip.hide();
+                        d3.select(this).style("stroke-width", "3px");
+                        var chart = $("#chart1").highcharts();
+                        for (var i = 0; i < current_therapies.length; i++) {
+                            current_therapies[i].color = colors(current_therapies[i].name);
+                        }
+                        chart.series[0].update({data: current_therapies})
+                        d3.select("#chart3").select("svg").selectAll(".circleno-chemo").attr("r", function (d) {
+                            return 5;
+                        })
+                    });
             if (data.treatments[0][0].n != 0) {
                 var noChemolabel = kaplan.append("text")
                         .attr("transform", "translate(" + (x(data.treatments[3][data.treatments[3].length - 1].t) - 95) + "," + (y(data.treatments[3][data.treatments[3].length - 1].prob) + 35) + ")")
                         .attr("dy", ".35em")
                         .attr("text-anchor", "start")
-                        .style("fill", "#ffc04c")
+                        .style("fill", "#737373")
                         .text("No Chemotherapy");
             }
             //Draw the x-axis
@@ -2277,171 +2428,6 @@
                     .range(['#ff4c4c', '#197319']);
         }
 
-        function scatterPlot() {
-
-            var width = 200,
-                    size = 130,
-                    padding = 19.5;
-            var x = d3.scale.linear()
-                    .range([padding / 2, size - padding / 2]);
-            var y = d3.scale.linear()
-                    .range([size - padding / 2, padding / 2]);
-            var xAxis = d3.svg.axis()
-                    .scale(x)
-                    .orient("bottom")
-                    .ticks(5);
-            var yAxis = d3.svg.axis()
-                    .scale(y)
-                    .orient("left")
-                    .ticks(5);
-            //var color = d3.scale.category10();
-            var color = d3.scale.ordinal()
-                    .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent'])
-                    .range(['#ffae19', '#4ca64c', '#4682B4', '#c51b8a']);
-            d3.csv("SurvivalProbability.csv", function (error, data) {
-                if (error)
-                    throw error;
-                var domainByTrait = {},
-                        traits = d3.keys(data[0]).filter(function (d) {
-                    if ((d == 'AgeAtTx' || d == 'Probability of Survival')) // || d=='OS (months)')
-                        return true;
-                    else
-                        return false;
-                }),
-                        n = traits.length;
-                data = data.filter(function (row) {
-                    if (row['Ethnicity'] == ethnicity && row['Site'] == site && row['Tcategory'] == tstage) {
-                        return row;
-                    }
-                });
-                // find max and min value for each columns
-                traits.forEach(function (col) {
-                    domainByTrait[col] = d3.extent(data, function (d) {
-                        return d[col];
-                    });
-                    //alert(domainByTrait[col]);
-                });
-                xAxis.tickSize(size * n);
-                yAxis.tickSize(-size * n);
-                var svg = d3.select("#chart3").append("svg")
-                        .attr("width", size * n + 7 * padding)	// based on number of features plotted, allocate width and height
-                        .attr("height", size * n + 25 * padding)
-                        .append("g")
-                        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
-                // create the domain for xAxis
-                svg.selectAll(".x.axis")
-                        .data(traits)
-                        .enter().append("g")
-                        .attr("class", "x axis")
-                        .attr("transform", function (d, i) {
-                            return "translate(" + (n - i - 1) * size + ",0)";
-                        })
-                        .each(function (d) {
-                            x.domain(domainByTrait[d]);
-                            d3.select(this).call(xAxis);
-                        });
-                // create the domain for yAxis
-                svg.selectAll(".y.axis")
-                        .data(traits)
-                        .enter().append("g")
-                        .attr("class", "y axis")
-                        .attr("transform", function (d, i) {
-                            return "translate(0," + i * size + ")";
-                        })
-                        .each(function (d) {
-                            y.domain(domainByTrait[d]);
-                            d3.select(this).call(yAxis);
-                        });
-                var cell = svg.selectAll(".cell")
-                        .data(cross(traits, traits))
-                        .enter().append("g")
-                        .attr("class", "cell")
-                        .attr("transform", function (d) {
-                            return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
-                        })
-                        .each(plot);
-                // Titles for the diagonal.
-                cell.filter(function (d) {
-                    return d.i === d.j;
-                }).append("text")
-                        .attr("x", padding)
-                        .attr("y", padding)
-                        .attr("dy", ".71em")
-                        .text(function (d) {
-                            return d.x;
-                        });
-                function plot(p) {
-                    var cell = d3.select(this);
-                    x.domain(domainByTrait[p.x]);
-                    y.domain(domainByTrait[p.y]);
-                    cell.append("rect")
-                            .attr("class", "frame")
-                            .attr("x", padding / 2)
-                            .attr("y", padding / 2)
-                            .attr("width", size - padding)
-                            .attr("height", size - padding);
-                    cell.selectAll("circle")
-                            .data(data)
-                            .enter().append("circle")
-                            .attr("cx", function (d) {
-                                return x(d[p.x]);
-                            })
-                            .attr("cy", function (d) {
-                                return y(d[p.y]);
-                            })
-                            .attr("r", 3)
-                            .style("fill", function (d) {
-                                return color(d.Chemotherapy);
-                            })
-                            .on('mouseover', function (d) {
-                                var nodeSelection = d3.select(this).style({opacity: '0.8'});
-                                nodeSelection.select("text").style({opacity: '1.0'});
-                            });
-                }
-
-
-                function cross(a, b) {
-                    var c = [], n = a.length, m = b.length, i, j;
-                    for (i = - 1; ++i < n; )
-                        for (j = - 1; ++j < m; )
-                            c.push({x: a[i], i: i, y: b[j], j: j});
-                    return c;
-                }
-
-                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
-                /*var svg = d3.select("#chartDiv").append("svg")
-                 .attr("width", 200 )
-                 .attr("height", 200 )
-                 .append("g")
-                 .attr("transform", "translate(" + 10 + "," + 10 + ")");*/
-                //svg.append("circle").attr("cx", 25).attr("cy", 25).attr("r", 25).style("fill", "purple");
-                var legendRectSize = 10;
-                var legendSpacing = 10;
-                var legend = svg.append("g")
-                        .selectAll("g")
-                        .data(color.domain())
-                        .enter()
-                        .append('g')
-                        .attr('class', 'legend')
-                        .attr('transform', function (d, i) {
-                            var height = legendRectSize;
-                            var x = 2 * size;
-                            var y = (i * height) + 120;
-                            return 'translate(' + x + ',' + y + ')';
-                        });
-                legend.append('rect')
-                        .attr('width', legendRectSize)
-                        .attr('height', legendRectSize)
-                        .style('fill', color)
-                        .style('stroke', color);
-                legend.append('text')
-                        .attr('x', legendRectSize + legendSpacing)
-                        .attr('y', legendSpacing)
-                        .text(function (d) {
-                            return d;
-                        });
-            });
-        }
 
         function ScatterPlot2() {
             var width = 200,
@@ -2599,6 +2585,234 @@
                         .attr('height', legendRectSize)
                         .style('fill', color_set_scatter)
                         .style('stroke', color_set_scatter);
+                legend.append('text')
+                        .attr('x', legendRectSize + legendSpacing)
+                        .attr('y', legendSpacing)
+                        .text(function (d) {
+                            return d;
+                        });
+            });
+        }
+
+        function scatterPlot() {
+            var width = 419,
+                    size = 130,
+                    padding = 19.5,
+                    height = 313;
+
+            var x = d3.scale.linear().domain([0, 100])
+                    .range([padding / 2, size - padding / 2]);
+
+            var y = d3.scale.linear().domain([0, 1])
+                    .range([size - padding / 2, padding / 2]);
+
+            var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .ticks(5);
+
+            var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .ticks(5);
+
+            var color = d3.scale.ordinal()
+                    .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo'])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373']);
+
+            var tip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .offset([50, 70])
+                    .html(function (d) {
+                        var coordinates = d3.mouse(this);
+                        xValue = x.invert(coordinates[0]);
+                        yValue = y.invert(coordinates[1]);
+
+                        return "<strong> Age Of Patient " + d3.format(".2f")(xValue * 100) +
+                                " <br/> Probability of Survival : " + d3.format(".2f")(yValue * 100) + " % </strong>";
+                    });
+
+            d3.csv("SurvivalProbability.csv", function (error, data) {
+                if (error)
+                    throw error;
+
+                var domainByTrait = {},
+                        traits = d3.keys(data[0]).filter(function (d) {
+                    return (d == 'AgeAtTx' || d == 'Probability of Survival')
+                }),
+                        n = traits.length;
+
+                data = data.filter(function (row) {
+                    if (row['Ethnicity'] == ethnicity && row['Site'] == site && row['Gender'] == gender && row['Tcategory'] == tstage)
+                        return row;
+                })
+                traits.forEach(function (trait) {
+                    domainByTrait[trait] = d3.extent(data, function (d) {
+                        return d[trait];
+                    });
+                });
+
+                xAxis.tickSize(size * n);
+                yAxis.tickSize(-size * n);
+
+                var brush = d3.svg.brush()
+                        .x(x)
+                        .y(y)
+                        .on("brushstart", brushstart)
+                        .on("brush", brushmove)
+                        .on("brushend", brushend);
+
+                var svg = d3.select("#chart3").append("svg")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .append("g")
+                        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+
+                svg.call(tip);
+
+                svg.selectAll(".x.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(" + (n - i - 1) * size + ",0)";
+                        })
+                        .each(function (d) {
+                            x.domain(domainByTrait[d]);
+                            d3.select(this).call(xAxis);
+                        });
+
+                svg.selectAll(".y.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(0," + i * size + ")";
+                        })
+                        .each(function (d) {
+                            y.domain(domainByTrait[d]);
+                            d3.select(this).call(yAxis);
+                        });
+
+                var cell = svg.selectAll(".cell")
+                        .data(cross(traits, traits))
+                        .enter().append("g")
+                        .attr("class", "cell")
+                        .attr("transform", function (d) {
+                            return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
+                        })
+                        .each(plot)
+                        .on('mouseover', tip.show)
+                        .on('mouseout', tip.hide);
+
+
+                // Titles for the diagonal.
+                cell.filter(function (d) {
+                    return d.i === d.j;
+                }).append("text")
+                        .attr("x", padding)
+                        .attr("y", padding)
+                        .attr("dy", ".71em")
+                        .text(function (d) {
+                            return d.x;
+                        });
+
+                cell.call(brush);
+
+                function plot(p) {
+                    var cell = d3.select(this);
+
+                    x.domain(domainByTrait[p.x]);
+                    y.domain(domainByTrait[p.y]);
+
+                    cell.append("rect")
+                            .attr("class", "frame")
+                            .attr("x", padding / 2)
+                            .attr("y", padding / 2)
+                            .attr("width", size - padding)
+                            .attr("height", size - padding);
+
+                    cell.selectAll("circle")
+                            .data(data)
+                            .enter().append("circle")
+                            .attr("class", function (d) {
+                                if (d['Chemotherapy'] == 'no chemo')
+                                    return "circle" + 'no-chemo';
+
+                                else if (d['Chemotherapy'] == 'induction+chemoRT')
+                                    return "circle" + 'induction-chemoRT';
+                                else
+                                    return "circle" + d['Chemotherapy'];
+                            })
+                            .attr("cx", function (d) {
+                                return x(d[p.x]);
+                            })
+                            .attr("cy", function (d) {
+                                return y(d[p.y]);
+                            })
+                            .attr("r", 5)
+                            .style("fill", function (d) {
+                                return color(d.Chemotherapy);
+                            });
+
+                }
+
+                var brushCell;
+
+                // Clear the previously-active brush, if any.
+                function brushstart(p) {
+                    if (brushCell !== this) {
+                        d3.select(brushCell).call(brush.clear());
+                        x.domain(domainByTrait[p.x]);
+                        y.domain(domainByTrait[p.y]);
+                        brushCell = this;
+                    }
+                }
+
+                // Highlight the selected circles.
+                function brushmove(p) {
+                    var e = brush.extent();
+                    svg.selectAll("circle").classed("hidden", function (d) {
+                        return e[0][0] > d[p.x] || d[p.x] > e[1][0]
+                                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+                    });
+                }
+
+                // If the brush is empty, select all circles.
+                function brushend() {
+                    if (brush.empty())
+                        svg.selectAll(".hidden").classed("hidden", false);
+                }
+
+                function cross(a, b) {
+                    var c = [], n = a.length, m = b.length, i, j;
+                    for (i = - 1; ++i < n; )
+                        for (j = - 1; ++j < m; )
+                            c.push({x: a[i], i: i, y: b[j], j: j});
+                    return c;
+                }
+
+                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
+
+                var legendRectSize = 10;
+                var legendSpacing = 10;
+                var legend = svg.append("g")
+                        .selectAll("g")
+                        .data(color.domain())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'legend')
+                        .attr('transform', function (d, i) {
+                            var height = legendRectSize;
+                            var x = 2 * size;
+                            var y = (i * height) + 120;
+                            return 'translate(' + x + ',' + y + ')';
+                        });
+                legend.append('rect')
+                        .attr('width', legendRectSize)
+                        .attr('height', legendRectSize)
+                        .style('fill', color)
+                        .style('stroke', color);
                 legend.append('text')
                         .attr('x', legendRectSize + legendSpacing)
                         .attr('y', legendSpacing)
