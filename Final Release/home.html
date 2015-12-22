@@ -93,7 +93,7 @@
                 var gender = $('input:radio[name=gender]:checked').val();
 
                 var age = $("#page").val();
-                if(age ==0 || age < 0) {
+                if((age == 0 || age < 0) && ethnicity != 'All-Ethnicities') {
                     alert("Age cannot be zero or less");
                     return false;
                 }

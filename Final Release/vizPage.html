@@ -78,6 +78,7 @@
             }
 
             #chart3 svg {
+                margin-left: 20px;
                 font: 10px sans-serif;
                 padding: 10px;
             }
@@ -118,7 +119,7 @@
 
             #chart1Sub .title {
                 font-weight: bold;
-                font-size: 24px;
+                font-size: 20px;
                 text-align: center;
                 margin-top: 6px;
                 margin-bottom: 6px;
@@ -215,7 +216,7 @@
             <div class="centerDiv" id="chart2"> </div> 
             <div class="rightDiv" id="chart3"></div>
             <div class="parcoords bottomDiv" id="chart4">
-
+                <div style="float:left"> <span> Click and drag on axis to filter data, Click axis to remove filters </span> </div>
                 <div style="float:right;">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">Open Tutorial </button>
 
@@ -246,6 +247,11 @@
     </body>
 
     <script>
+        $(document).ready(function () {
+            $("#myModal").on('hidden.bs.modal', function (e) {
+                $("#myModal iframe").attr("src", $("#myModal iframe").attr("src"));
+            });
+        });
 
         var queryString = window.location.search.substring(1);
         var params = queryString.split('&');
@@ -396,23 +402,25 @@
             var colors = d3.scale.ordinal()
                     .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent', 'male', 'female', 'brushedout', 'brushSelected'])
                     .range(['#66c2a5', '#8da0cb', '#fdae6b', '#fc8d62', '#999999', '#fc8d62', '#bdbdbd', '#ffeda0']);
-            var chart = $("#chart1").highcharts();
-            for (var i = 0; i < current_therapies.length; i++) {
-                if (current_therapies[i].name == therapyName)
-                    current_therapies[i].color = colors('brushSelected');
-                else
-                    current_therapies[i].color = colors('brushedout');
+            if (ethnicity != 'all-ethnicities') {
+                var chart = $("#chart1").highcharts();
+                for (var i = 0; i < current_therapies.length; i++) {
+                    if (current_therapies[i].name == therapyName)
+                        current_therapies[i].color = colors('brushSelected');
+                    else
+                        current_therapies[i].color = colors('brushedout');
+                }
+                chart.series[0].update({data: current_therapies})
+                if (therapyName == 'concurrent')
+                    indexNumber = 0;
+                else if (therapyName == 'no chemo')
+                    indexNumber = 1;
+                else if (therapyName == 'induction')
+                    indexNumber = 2;
+                else if (therapyName == 'induction+chemoRT')
+                    indexNumber = 3;
+                chart.tooltip.refresh(chart.series[0].points[indexNumber]);
             }
-            chart.series[0].update({data: current_therapies})
-            if (therapyName == 'concurrent')
-                indexNumber = 0;
-            else if (therapyName == 'no chemo')
-                indexNumber = 1;
-            else if (therapyName == 'induction')
-                indexNumber = 2;
-            else if (therapyName == 'induction+chemoRT')
-                indexNumber = 3;
-            chart.tooltip.refresh(chart.series[0].points[indexNumber]);
 
         }// end Change
 
@@ -489,22 +497,25 @@
                         })
                         .on("mouseout", function () {
                             cleanTooltip();
-                            var chart = $("#chart1").highcharts();
-                            for (var i = 0; i < current_therapies.length; i++) {
-                                current_therapies[i].color = colors(current_therapies[i].name);
-                            }
-                            chart.series[0].update({data: current_therapies})
+                            if (ethnicity != 'all-ethnicities') {
+                                var chart = $("#chart1").highcharts();
+                                for (var i = 0; i < current_therapies.length; i++) {
+                                    current_therapies[i].color = colors(current_therapies[i].name);
+                                }
+                                chart.series[0].update({data: current_therapies})
 
-                            if (lineName == 'no chemo')
-                                lineName = 'no-chemo';
-                            else if (lineName == 'induction+chemoRT')
-                                lineName = 'induction-chemoRT';
-                            d3.select("#chart2").select("svg").select("#" + lineName).style("stroke-width", "3px");
-                            d3.select("#chart3").select("svg").selectAll(".circle" + lineName).attr("r", function (d) {
-                                return 5;
-                            })
+                                if (lineName == 'no chemo')
+                                    lineName = 'no-chemo';
+                                else if (lineName == 'induction+chemoRT')
+                                    lineName = 'induction-chemoRT';
+                                d3.select("#chart2").select("svg").select("#" + lineName).style("stroke-width", "3px");
+                                d3.select("#chart3").select("svg").selectAll(".circle" + lineName).attr("r", function (d) {
+                                    return 5;
+                                })
+                            }
                             graph.unhighlight();
                         });
+
             });
             // update color and font weight of chart based on axis selection
             // modified from here: https://syntagmatic.github.io/parallel-coordinates/
@@ -610,7 +621,7 @@
                         if (ethnicity != 'all-ethnicities')
                             var text = d3.values(clicked[i])[j + 4];
                         else
-                            var text = d3.values(clicked[i])[j + 1];
+                            var text = d3.values(clicked[i])[j + 3];
                         // not clean at all!
                         var x = clickedCenPts[i][j][0] - margins.left;
                         var y = clickedCenPts[i][j][1] - margins.top;
@@ -2429,176 +2440,11 @@
         }
 
 
-        function ScatterPlot2() {
-            var width = 200,
-                    size = 130,
-                    padding = 19.5;
-            var x = d3.scale.linear()
-                    .range([padding / 2, size - padding / 2]);
-            var y = d3.scale.linear()
-                    .range([size - padding / 2, padding / 2]);
-            var xAxis = d3.svg.axis()
-                    .scale(x)
-                    .orient("bottom")
-                    .ticks(5);
-            var yAxis = d3.svg.axis()
-                    .scale(y)
-                    .orient("left")
-                    .ticks(5);
-            //var color = d3.scale.category10();
-            var color_set_scatter = d3.scale.ordinal()
-                    .domain(['white', 'other', 'african-american', 'hispanic', 'asian'])
-                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c']);
-            d3.csv("SurvivalProbability.csv", function (error, data) {
-                if (error)
-                    throw error;
-                var domainByTrait = {},
-                        traits = d3.keys(data[0]).filter(function (d) {
-                    if ((d == 'AgeAtTx' || d == 'Probability of Survival')) // || d=='OS (months)')
-                        return true;
-                    else
-                        return false;
-                }),
-                        n = traits.length;
-                data = data.filter(function (row) {
-                    if (row['Site'] == site && row['Tcategory'] == tstage) {
-                        return row;
-                    }
-                });
-                // find max and min value for each columns
-                traits.forEach(function (col) {
-                    domainByTrait[col] = d3.extent(data, function (d) {
-                        return d[col];
-                    });
-                    //alert(domainByTrait[col]);
-                });
-                xAxis.tickSize(size * n);
-                yAxis.tickSize(-size * n);
-                var svg = d3.select("#chart3").append("svg")
-                        .attr("width", size * n + 7 * padding)	// based on number of features plotted, allocate width and height
-                        .attr("height", size * n + 25 * padding)
-                        .append("g")
-                        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
-                // create the domain for xAxis
-                svg.selectAll(".x.axis")
-                        .data(traits)
-                        .enter().append("g")
-                        .attr("class", "x axis")
-                        .attr("transform", function (d, i) {
-                            return "translate(" + (n - i - 1) * size + ",0)";
-                        })
-                        .each(function (d) {
-                            x.domain(domainByTrait[d]);
-                            d3.select(this).call(xAxis);
-                        });
-                // create the domain for yAxis
-                svg.selectAll(".y.axis")
-                        .data(traits)
-                        .enter().append("g")
-                        .attr("class", "y axis")
-                        .attr("transform", function (d, i) {
-                            return "translate(0," + i * size + ")";
-                        })
-                        .each(function (d) {
-                            y.domain(domainByTrait[d]);
-                            d3.select(this).call(yAxis);
-                        });
-                var cell = svg.selectAll(".cell")
-                        .data(cross(traits, traits))
-                        .enter().append("g")
-                        .attr("class", "cell")
-                        .attr("transform", function (d) {
-                            return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
-                        })
-                        .each(plot);
-                // Titles for the diagonal.
-                cell.filter(function (d) {
-                    return d.i === d.j;
-                }).append("text")
-                        .attr("x", padding)
-                        .attr("y", padding)
-                        .attr("dy", ".71em")
-                        .text(function (d) {
-                            return d.x;
-                        });
-                function plot(p) {
-                    var cell = d3.select(this);
-                    x.domain(domainByTrait[p.x]);
-                    y.domain(domainByTrait[p.y]);
-                    cell.append("rect")
-                            .attr("class", "frame")
-                            .attr("x", padding / 2)
-                            .attr("y", padding / 2)
-                            .attr("width", size - padding)
-                            .attr("height", size - padding);
-                    cell.selectAll("circle")
-                            .data(data)
-                            .enter().append("circle")
-                            .attr("cx", function (d) {
-                                return x(d[p.x]);
-                            })
-                            .attr("cy", function (d) {
-                                return y(d[p.y]);
-                            })
-                            .attr("r", 3)
-                            .style("fill", function (d) {
-                                return color_set_scatter(d.Ethnicity);
-                            })
-                            .on('mouseover', function (d) {
-                                var nodeSelection = d3.select(this).style({opacity: '0.8'});
-                                nodeSelection.select("text").style({opacity: '1.0'});
-                            });
-                }
-
-
-                function cross(a, b) {
-                    var c = [], n = a.length, m = b.length, i, j;
-                    for (i = - 1; ++i < n; )
-                        for (j = - 1; ++j < m; )
-                            c.push({x: a[i], i: i, y: b[j], j: j});
-                    return c;
-                }
-
-                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
-                /*var svg = d3.select("#chartDiv").append("svg")
-                 .attr("width", 200 )
-                 .attr("height", 200 )
-                 .append("g")
-                 .attr("transform", "translate(" + 10 + "," + 10 + ")");*/
-                //svg.append("circle").attr("cx", 25).attr("cy", 25).attr("r", 25).style("fill", "purple");
-                var legendRectSize = 10;
-                var legendSpacing = 10;
-                var legend = svg.append("g")
-                        .selectAll("g")
-                        .data(color_set_scatter.domain())
-                        .enter()
-                        .append('g')
-                        .attr('class', 'legend')
-                        .attr('transform', function (d, i) {
-                            var height = legendRectSize;
-                            var x = 2 * size;
-                            var y = (i * height) + 120;
-                            return 'translate(' + x + ',' + y + ')';
-                        });
-                legend.append('rect')
-                        .attr('width', legendRectSize)
-                        .attr('height', legendRectSize)
-                        .style('fill', color_set_scatter)
-                        .style('stroke', color_set_scatter);
-                legend.append('text')
-                        .attr('x', legendRectSize + legendSpacing)
-                        .attr('y', legendSpacing)
-                        .text(function (d) {
-                            return d;
-                        });
-            });
-        }
-
         function scatterPlot() {
             var width = 419,
-                    size = 130,
+                    size = 140,
                     padding = 19.5,
-                    height = 313;
+                    height = 350;
 
             var x = d3.scale.linear().domain([0, 100])
                     .range([padding / 2, size - padding / 2]);
@@ -2617,24 +2463,35 @@
                     .ticks(5);
 
             var color = d3.scale.ordinal()
-                    .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo'])
-                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373']);
+                    .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent'])
+                    .range(['#737373', '#ffae19', '#4682B4', '#4ca64c']);
 
             var tip = d3.tip()
                     .attr('class', 'd3-tip')
                     .offset([50, 70])
                     .html(function (d) {
+                        console.log(d)
                         var coordinates = d3.mouse(this);
                         xValue = x.invert(coordinates[0]);
                         yValue = y.invert(coordinates[1]);
-
+                        var tempName = d3.select(this).attr('class');
+                        if (tempName.indexOf('concurrent') != -1)
+                            d3.select("#chart2").select("svg").select("#concurrent").style("stroke-width", "5px");
+                        else if (tempName.indexOf("induction-chemoRT") != -1)
+                            d3.select("#chart2").select("svg").select("#induction-chemoRT").style("stroke-width", "5px");
+                        else if (tempName.indexOf("induction") != -1)
+                            d3.select("#chart2").select("svg").select("#induction").style("stroke-width", "5px");
+                        else if (tempName.indexOf("no-chemo") != -1)
+                            d3.select("#chart2").select("svg").select("#no-chemo").style("stroke-width", "5px");
                         return "<strong> Age Of Patient " + d3.format(".2f")(xValue * 100) +
                                 " <br/> Probability of Survival : " + d3.format(".2f")(yValue * 100) + " % </strong>";
                     });
 
             d3.csv("SurvivalProbability.csv", function (error, data) {
-                if (error)
-                    throw error;
+                //  if (error)
+                //     throw error;
+
+
 
                 var domainByTrait = {},
                         traits = d3.keys(data[0]).filter(function (d) {
@@ -2643,9 +2500,10 @@
                         n = traits.length;
 
                 data = data.filter(function (row) {
-                    if (row['Ethnicity'] == ethnicity && row['Site'] == site && row['Gender'] == gender && row['Tcategory'] == tstage)
+                    if (row['Site'] == site && row['Tcategory'] == tstage && row['Ethnicity'] == ethnicity) {
                         return row;
-                })
+                    }
+                });
                 traits.forEach(function (trait) {
                     domainByTrait[trait] = d3.extent(data, function (d) {
                         return d[trait];
@@ -2700,11 +2558,11 @@
                         .attr("class", "cell")
                         .attr("transform", function (d) {
                             return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
-                        })
-                        .each(plot)
-                        .on('mouseover', tip.show)
-                        .on('mouseout', tip.hide);
+                        });
 
+                cell.call(brush);
+
+                cell.each(plot);
 
                 // Titles for the diagonal.
                 cell.filter(function (d) {
@@ -2717,8 +2575,6 @@
                             return d.x;
                         });
 
-                cell.call(brush);
-
                 function plot(p) {
                     var cell = d3.select(this);
 
@@ -2730,7 +2586,8 @@
                             .attr("x", padding / 2)
                             .attr("y", padding / 2)
                             .attr("width", size - padding)
-                            .attr("height", size - padding);
+                            .attr("height", size - padding)
+                            .style("pointer-events", "none");
 
                     cell.selectAll("circle")
                             .data(data)
@@ -2753,8 +2610,15 @@
                             .attr("r", 5)
                             .style("fill", function (d) {
                                 return color(d.Chemotherapy);
+                            })
+                            .on('mouseover', tip.show)
+                            .on('mouseout', function (d) {
+                                tip.hide();
+                                d3.select("#chart2").select("svg").select("#concurrent").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#induction").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#no-chemo").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#induction-chemoRT").style("stroke-width", "3px");
                             });
-
                 }
 
                 var brushCell;
@@ -2773,8 +2637,7 @@
                 function brushmove(p) {
                     var e = brush.extent();
                     svg.selectAll("circle").classed("hidden", function (d) {
-                        return e[0][0] > d[p.x] || d[p.x] > e[1][0]
-                                || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+                        return e[0][0] > d[p.x] || d[p.x] > e[1][0] || e[0][1] > d[p.y] || d[p.y] > e[1][1];
                     });
                 }
 
@@ -2785,14 +2648,20 @@
                 }
 
                 function cross(a, b) {
-                    var c = [], n = a.length, m = b.length, i, j;
+                    var c = [],
+                            n = a.length,
+                            m = b.length,
+                            i, j;
                     for (i = - 1; ++i < n; )
                         for (j = - 1; ++j < m; )
-                            c.push({x: a[i], i: i, y: b[j], j: j});
+                            c.push({
+                                x: a[i],
+                                i: i,
+                                y: b[j],
+                                j: j
+                            });
                     return c;
                 }
-
-                d3.select(self.frameElement).style("height", size * n + padding + 20 + "px");
 
                 var legendRectSize = 10;
                 var legendSpacing = 10;
@@ -2813,6 +2682,237 @@
                         .attr('height', legendRectSize)
                         .style('fill', color)
                         .style('stroke', color);
+                legend.append('text')
+                        .attr('x', legendRectSize + legendSpacing)
+                        .attr('y', legendSpacing)
+                        .text(function (d) {
+                            return d;
+                        });
+            });
+        }
+        function ScatterPlot2() {
+            var width = 419,
+                    size = 130,
+                    padding = 19.5,
+                    height = 313;
+            var x = d3.scale.linear().domain([0, 100])
+                    .range([padding / 2, size - padding / 2]);
+            var y = d3.scale.linear().domain([0, 1])
+                    .range([size - padding / 2, padding / 2]);
+            var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("bottom")
+                    .ticks(5);
+            var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left")
+                    .ticks(5);
+            var color_set_scatter = d3.scale.ordinal()
+                    .domain(['white', 'other', 'african-american', 'hispanic', 'asian'])
+                    .range(['#ffae19', '#4ca64c', '#4682B4', '#737373', '#ff4c4c']);
+            var tip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .offset([0, 100])
+                    .html(function (d) {
+                        console.log(d)
+                        var coordinates = d3.mouse(this);
+                        xValue = x.invert(coordinates[0]);
+                        yValue = y.invert(coordinates[1]);
+                        d3.select(this).attr("r", "8px");
+                        var tempName = d3.select(this).attr('class');
+                        if (tempName.indexOf('white') != -1)
+                            d3.select("#chart2").select("svg").select("#white").style("stroke-width", "5px");
+                        else if (tempName.indexOf("african") != -1)
+                            d3.select("#chart2").select("svg").select("#african").style("stroke-width", "5px");
+                        else if (tempName.indexOf("white") != -1)
+                            d3.select("#chart2").select("svg").select("#white").style("stroke-width", "5px");
+                        else if (tempName.indexOf("hispanic") != -1)
+                            d3.select("#chart2").select("svg").select("#hispanic").style("stroke-width", "5px");
+                        else if (tempName.indexOf("other") != -1)
+                            d3.select("#chart2").select("svg").select("#other").style("stroke-width", "5px");
+
+                        return "<strong> Age Of Patient " + d3.format(".2f")(xValue * 100) +
+                                " <br/> Probability of Survival : " + d3.format(".2f")(yValue * 100) + " % </strong>";
+                    });
+            d3.csv("SurvivalProbability.csv", function (error, data) {
+                if (error)
+                    throw error;
+
+
+                var domainByTrait = {},
+                        traits = d3.keys(data[0]).filter(function (d) {
+                    return (d == 'AgeAtTx' || d == 'Probability of Survival')
+                }),
+                        n = traits.length;
+                data = data.filter(function (row) {
+                    if (row['Site'] == site && row['Tcategory'] == tstage) {
+                        return row;
+                    }
+                });
+                traits.forEach(function (trait) {
+                    domainByTrait[trait] = d3.extent(data, function (d) {
+                        return d[trait];
+                    });
+                });
+                xAxis.tickSize(size * n);
+                yAxis.tickSize(-size * n);
+                var brush = d3.svg.brush()
+                        .x(x)
+                        .y(y)
+                        .on("brushstart", brushstart)
+                        .on("brush", brushmove)
+                        .on("brushend", brushend);
+                var svg = d3.select("#chart3").append("svg")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .append("g")
+                        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+                svg.call(tip);
+                svg.selectAll(".x.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(" + (n - i - 1) * size + ",0)";
+                        })
+                        .each(function (d) {
+                            x.domain(domainByTrait[d]);
+                            d3.select(this).call(xAxis);
+                        });
+                svg.selectAll(".y.axis")
+                        .data(traits)
+                        .enter().append("g")
+                        .attr("class", "y axis")
+                        .attr("transform", function (d, i) {
+                            return "translate(0," + i * size + ")";
+                        })
+                        .each(function (d) {
+                            y.domain(domainByTrait[d]);
+                            d3.select(this).call(yAxis);
+                        });
+                var cell = svg.selectAll(".cell")
+                        .data(cross(traits, traits))
+                        .enter().append("g")
+                        .attr("class", "cell")
+                        .attr("transform", function (d) {
+                            return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
+                        });
+                cell.call(brush);
+                cell.each(plot);
+                // Titles for the diagonal.
+                cell.filter(function (d) {
+                    return d.i === d.j;
+                }).append("text")
+                        .attr("x", padding)
+                        .attr("y", padding)
+                        .attr("dy", ".71em")
+                        .text(function (d) {
+                            return d.x;
+                        });
+                function plot(p) {
+                    var cell = d3.select(this);
+                    x.domain(domainByTrait[p.x]);
+                    y.domain(domainByTrait[p.y]);
+                    cell.append("rect")
+                            .attr("class", "frame")
+                            .attr("x", padding / 2)
+                            .attr("y", padding / 2)
+                            .attr("width", size - padding)
+                            .attr("height", size - padding)
+                            .style("pointer-events", "none");
+                    cell.selectAll("circle")
+                            .data(data)
+                            .enter().append("circle")
+                            .attr("class", function (d) {
+                                if (d['Ethnicity'] == 'african-american')
+                                    return "circle" + 'african';
+
+                                else
+                                    return "circle" + d['Ethnicity'];
+                            })
+                            .attr("cx", function (d) {
+                                return x(d[p.x]);
+                            })
+                            .attr("cy", function (d) {
+                                return y(d[p.y]);
+                            })
+                            .attr("r", 5)
+                            .style("fill", function (d) {
+                                return color_set_scatter(d.Ethnicity);
+                            })
+                            .on('mouseover', tip.show)
+                            .on('mouseout', function (d) {
+                                tip.hide();
+                                d3.select(this).attr("r", "5px");
+                                tip.hide();
+                                d3.select("#chart2").select("svg").select("#white").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#hispanic").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#african").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#asian").style("stroke-width", "3px");
+                                d3.select("#chart2").select("svg").select("#other").style("stroke-width", "3px");
+                            });
+                }
+
+                var brushCell;
+                // Clear the previously-active brush, if any.
+                function brushstart(p) {
+                    if (brushCell !== this) {
+                        d3.select(brushCell).call(brush.clear());
+                        x.domain(domainByTrait[p.x]);
+                        y.domain(domainByTrait[p.y]);
+                        brushCell = this;
+                    }
+                }
+
+                // Highlight the selected circles.
+                function brushmove(p) {
+                    var e = brush.extent();
+                    svg.selectAll("circle").classed("hidden", function (d) {
+                        return e[0][0] > d[p.x] || d[p.x] > e[1][0] || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+                    });
+                }
+
+                // If the brush is empty, select all circles.
+                function brushend() {
+                    if (brush.empty())
+                        svg.selectAll(".hidden").classed("hidden", false);
+                }
+
+                function cross(a, b) {
+                    var c = [],
+                            n = a.length,
+                            m = b.length,
+                            i, j;
+                    for (i = - 1; ++i < n; )
+                        for (j = - 1; ++j < m; )
+                            c.push({
+                                x: a[i],
+                                i: i,
+                                y: b[j],
+                                j: j
+                            });
+                    return c;
+                }
+
+                var legendRectSize = 10;
+                var legendSpacing = 10;
+                var legend = svg.append("g")
+                        .selectAll("g")
+                        .data(color_set_scatter.domain())
+                        .enter()
+                        .append('g')
+                        .attr('class', 'legend')
+                        .attr('transform', function (d, i) {
+                            var height = legendRectSize;
+                            var x = 2 * size;
+                            var y = (i * height) + 120;
+                            return 'translate(' + x + ',' + y + ')';
+                        });
+                legend.append('rect')
+                        .attr('width', legendRectSize)
+                        .attr('height', legendRectSize)
+                        .style('fill', color_set_scatter)
+                        .style('stroke', color_set_scatter);
                 legend.append('text')
                         .attr('x', legendRectSize + legendSpacing)
                         .attr('y', legendSpacing)

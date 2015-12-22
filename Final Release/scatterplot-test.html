@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  svg {
+    font: 10px sans-serif;
+    padding: 10px;
+  }
+  
+  .axis,
+  .frame {
+    shape-rendering: crispEdges;
+  }
+  
+  .axis line {
+    stroke: #ddd;
+  }
+  
+  .axis path {
+    display: none;
+  }
+  
+  .frame {
+    fill: none;
+    stroke: #aaa;
+  }
+  
+  circle {
+    fill-opacity: .7;
+  }
+  
+  circle.hidden {
+    fill: #ccc !important;
+  }
+  
+  .extent {
+    fill: #000;
+    fill-opacity: .125;
+    stroke: #fff;
+  }
+</style>
+
+<body>
+  <div id="chart3"> </div>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script>
+    var width = 419,
+      size = 130,
+      padding = 19.5,
+      height = 313;
+
+    var x = d3.scale.linear().domain([0, 100])
+      .range([padding / 2, size - padding / 2]);
+
+    var y = d3.scale.linear().domain([0, 1])
+      .range([size - padding / 2, padding / 2]);
+
+    var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+      .ticks(5);
+
+    var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .ticks(5);
+
+    var color = d3.scale.ordinal()
+      .domain(['no chemo', 'induction', 'induction+chemoRT', 'concurrent'])
+      .range(['#ffae19', '#4ca64c', '#4682B4', '#c51b8a']);
+
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([50, 70])
+      .html(function(d) {
+        console.log(d)
+        var coordinates = d3.mouse(this);
+        xValue = x.invert(coordinates[0]);
+        yValue = y.invert(coordinates[1]);
+
+        return "<strong> Age Of Patient " + d3.format(".2f")(xValue * 100) +
+          " <br/> Probability of Survival : " + d3.format(".2f")(yValue * 100) + " % </strong>";
+      });
+
+    //d3.csv("data.csv", function(error, data) {
+    //  if (error)
+    //     throw error;
+    
+      var data = [{"Ethnicity":"white","AgeAtTx":"65.93972603","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"0","Chemotherapy":"no chemo","Local_Therapy":"LP/RT alone","Probability of Survival":"0.366190068","KM OS":"0","OS (months)":"112.9","sex":"Female"},{"Ethnicity":"white","AgeAtTx":"69.42465753","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"0","Chemotherapy":"induction","Local_Therapy":"PLRT","Probability of Survival":"0.396018836","KM OS":"0","OS (months)":"24.1","sex":"Male"},{"Ethnicity":"white","AgeAtTx":"68.14246575","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N0","ecog":"3","Chemotherapy":"no chemo","Local_Therapy":"LP/RT alone","Probability of Survival":"0.439289384","KM OS":"0","OS (months)":"3.566666667","sex":"Female"},{"Ethnicity":"white","AgeAtTx":"40.30410959","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"1","Chemotherapy":"no chemo","Local_Therapy":"LP/RT alone","Probability of Survival":"0.512773973","KM OS":"1","OS (months)":"226.3","sex":"Male"},{"Ethnicity":"white","AgeAtTx":"47.96438356","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"0","Chemotherapy":"no chemo","Local_Therapy":"PLRT","Probability of Survival":"0.472208904","KM OS":"0","OS (months)":"9.6","sex":"Female"},{"Ethnicity":"white","AgeAtTx":"70.3369863","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"0","Chemotherapy":"no chemo","Local_Therapy":"LP/RT alone","Probability of Survival":"0.324965753","KM OS":"0","OS (months)":"25.26666667","sex":"Male"},{"Ethnicity":"white","AgeAtTx":"60.50136986","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"2","Chemotherapy":"no chemo","Local_Therapy":"LP/RT alone","Probability of Survival":"0.323424658","KM OS":"0","OS (months)":"9.5","sex":"Female"},{"Ethnicity":"white","AgeAtTx":"60.72328767","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"1","Chemotherapy":"no chemo","Local_Therapy":"LP/RT alone","Probability of Survival":"0.321344178","KM OS":"0","OS (months)":"15.03333333","sex":"Male"},{"Ethnicity":"white","AgeAtTx":"59.36986301","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N0","ecog":"1","Chemotherapy":"induction","Local_Therapy":"LP/chemoRT","Probability of Survival":"0.646532534","KM OS":"0","OS (months)":"4.5","sex":"Male"},{"Ethnicity":"other","AgeAtTx":"57.64931507","Site":"supraglottic","Tcategory":"T3","Nodal_Disease":"N+","ecog":"1","Chemotherapy":"concurrent","Local_Therapy":"LP/chemoRT","Probability of Survival":"0.662662671","KM OS":"1","OS (months)":"52.73333333","sex":"Male"}];
+
+      var domainByTrait = {},
+        traits = d3.keys(data[0]).filter(function(d) {
+          return (d == 'AgeAtTx' || d == 'Probability of Survival')
+        }),
+        n = traits.length;
+
+
+      traits.forEach(function(trait) {
+        domainByTrait[trait] = d3.extent(data, function(d) {
+          return d[trait];
+        });
+      });
+
+      xAxis.tickSize(size * n);
+      yAxis.tickSize(-size * n);
+
+      var brush = d3.svg.brush()
+        .x(x)
+        .y(y)
+        .on("brushstart", brushstart)
+        .on("brush", brushmove)
+        .on("brushend", brushend);
+
+      var svg = d3.select("#chart3").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+
+      svg.call(tip);
+
+      svg.selectAll(".x.axis")
+        .data(traits)
+        .enter().append("g")
+        .attr("class", "x axis")
+        .attr("transform", function(d, i) {
+          return "translate(" + (n - i - 1) * size + ",0)";
+        })
+        .each(function(d) {
+          x.domain(domainByTrait[d]);
+          d3.select(this).call(xAxis);
+        });
+
+      svg.selectAll(".y.axis")
+        .data(traits)
+        .enter().append("g")
+        .attr("class", "y axis")
+        .attr("transform", function(d, i) {
+          return "translate(0," + i * size + ")";
+        })
+        .each(function(d) {
+          y.domain(domainByTrait[d]);
+          d3.select(this).call(yAxis);
+        });
+
+      var cell = svg.selectAll(".cell")
+        .data(cross(traits, traits))
+        .enter().append("g")
+        .attr("class", "cell")
+        .attr("transform", function(d) {
+          return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
+        });
+        
+      cell.call(brush);
+      
+      cell.each(plot);
+
+      // Titles for the diagonal.
+      cell.filter(function(d) {
+          return d.i === d.j;
+        }).append("text")
+        .attr("x", padding)
+        .attr("y", padding)
+        .attr("dy", ".71em")
+        .text(function(d) {
+          return d.x;
+        });
+
+      function plot(p) {
+        var cell = d3.select(this);
+
+        x.domain(domainByTrait[p.x]);
+        y.domain(domainByTrait[p.y]);
+
+        cell.append("rect")
+          .attr("class", "frame")
+          .attr("x", padding / 2)
+          .attr("y", padding / 2)
+          .attr("width", size - padding)
+          .attr("height", size - padding)
+          .style("pointer-events", "none");
+
+        cell.selectAll("circle")
+          .data(data)
+          .enter().append("circle")
+          .attr("cx", function(d) {
+            return x(d[p.x]);
+          })
+          .attr("cy", function(d) {
+            return y(d[p.y]);
+          })
+          .attr("r", 5)
+          .style("fill", function(d) {
+            return color(d.Chemotherapy);
+          })
+          .on('mouseover', tip.show)
+          .on('mouseout', tip.hide);
+      }
+      
+      var brushCell;
+
+      // Clear the previously-active brush, if any.
+      function brushstart(p) {
+        if (brushCell !== this) {
+          d3.select(brushCell).call(brush.clear());
+          x.domain(domainByTrait[p.x]);
+          y.domain(domainByTrait[p.y]);
+          brushCell = this;
+        }
+      }
+
+      // Highlight the selected circles.
+      function brushmove(p) {
+        var e = brush.extent();
+        svg.selectAll("circle").classed("hidden", function(d) {
+          return e[0][0] > d[p.x] || d[p.x] > e[1][0] || e[0][1] > d[p.y] || d[p.y] > e[1][1];
+        });
+      }
+
+      // If the brush is empty, select all circles.
+      function brushend() {
+        if (brush.empty())
+          svg.selectAll(".hidden").classed("hidden", false);
+      }
+
+      function cross(a, b) {
+        var c = [],
+          n = a.length,
+          m = b.length,
+          i, j;
+        for (i = -1; ++i < n;)
+          for (j = -1; ++j < m;)
+            c.push({
+              x: a[i],
+              i: i,
+              y: b[j],
+              j: j
+            });
+        return c;
+      }
+
+      var legendRectSize = 10;
+      var legendSpacing = 10;
+      var legend = svg.append("g")
+        .selectAll("g")
+        .data(color.domain())
+        .enter()
+        .append('g')
+        .attr('class', 'legend')
+        .attr('transform', function(d, i) {
+          var height = legendRectSize;
+          var x = 2 * size;
+          var y = (i * height) + 120;
+          return 'translate(' + x + ',' + y + ')';
+        });
+      legend.append('rect')
+        .attr('width', legendRectSize)
+        .attr('height', legendRectSize)
+        .style('fill', color)
+        .style('stroke', color);
+      legend.append('text')
+        .attr('x', legendRectSize + legendSpacing)
+        .attr('y', legendSpacing)
+        .text(function(d) {
+          return d;
+        });
+    //});
+  </script>
