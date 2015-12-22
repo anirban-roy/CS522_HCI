@@ -2468,21 +2468,31 @@
 
             var tip = d3.tip()
                     .attr('class', 'd3-tip')
-                    .offset([50, 70])
+                    .offset([0, 100])
                     .html(function (d) {
                         console.log(d)
                         var coordinates = d3.mouse(this);
                         xValue = x.invert(coordinates[0]);
                         yValue = y.invert(coordinates[1]);
                         var tempName = d3.select(this).attr('class');
-                        if (tempName.indexOf('concurrent') != -1)
+
+                        d3.select(this).attr("r", function(d) { return 8; });
+                        if (tempName.indexOf('concurrent') != -1) {
+                            brushNLinkTreeMap('concurrent');
                             d3.select("#chart2").select("svg").select("#concurrent").style("stroke-width", "5px");
-                        else if (tempName.indexOf("induction-chemoRT") != -1)
+                        }
+                        else if (tempName.indexOf("induction-chemoRT") != -1) {
+                            brushNLinkTreeMap('induction-chemoRT');
                             d3.select("#chart2").select("svg").select("#induction-chemoRT").style("stroke-width", "5px");
-                        else if (tempName.indexOf("induction") != -1)
+                        }
+                        else if (tempName.indexOf("induction") != -1) {
+                            brushNLinkTreeMap('induction');
                             d3.select("#chart2").select("svg").select("#induction").style("stroke-width", "5px");
-                        else if (tempName.indexOf("no-chemo") != -1)
+                        }
+                        else if (tempName.indexOf("no-chemo") != -1) {
+                            brushNLinkTreeMap('no-chemo');
                             d3.select("#chart2").select("svg").select("#no-chemo").style("stroke-width", "5px");
+                        }
                         return "<strong> Age Of Patient " + d3.format(".2f")(xValue * 100) +
                                 " <br/> Probability of Survival : " + d3.format(".2f")(yValue * 100) + " % </strong>";
                     });
@@ -2614,6 +2624,13 @@
                             .on('mouseover', tip.show)
                             .on('mouseout', function (d) {
                                 tip.hide();
+                                var tempName = d3.select(this).attr('class');
+                                d3.select("#chart3").select("svg").selectAll("." + tempName).attr("r", function(d) { return 5; });
+                                var chart = $("#chart1").highcharts();
+                                for (var i = 0; i < current_therapies.length; i++) {
+                                    current_therapies[i].color = colors(current_therapies[i].name);
+                                }
+                                chart.series[0].update({data: current_therapies})
                                 d3.select("#chart2").select("svg").select("#concurrent").style("stroke-width", "3px");
                                 d3.select("#chart2").select("svg").select("#induction").style("stroke-width", "3px");
                                 d3.select("#chart2").select("svg").select("#no-chemo").style("stroke-width", "3px");
