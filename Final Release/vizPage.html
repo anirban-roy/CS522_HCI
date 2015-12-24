@@ -351,6 +351,8 @@
                 radio_sex = gender;
                 $.getJSON('demographics_ethnicity_survivalprobab.json', function (jsonData, error) {
                     console.log(error);
+					if(!error)
+					alert("Data File not found !");
                     // Instructions to Ashwin: "Please pass the demographic input values from users to plotTreeMap below as indicated
                     plotTreeMap(jsonData, radio_ethni, radio_site, radio_sex);
                     chart = new Highcharts.Chart(options);
@@ -434,8 +436,10 @@
                     .domain(['induction', 'concurrent', 'induction+chemoRT', 'no chemo'])
                     .range(['#ffae19', '#4ca64c', '#4682B4', '#737373']);
             // load default chart
-            d3.csv("SurvivalProbability.csv", function (data) {
+            d3.csv("SurvivalProbability.csv", function (error, data) {
                 console.log(data);
+				if(error)
+				alert("Data File not Found");
 
                 if (m_ethnicity != 'all-ethnicities') {
                     filteredData = data.filter(function (row) {
@@ -2490,7 +2494,7 @@
                             d3.select("#chart2").select("svg").select("#induction").style("stroke-width", "5px");
                         }
                         else if (tempName.indexOf("no-chemo") != -1) {
-                            brushNLinkTreeMap('no-chemo');
+                            brushNLinkTreeMap('no chemo');
                             d3.select("#chart2").select("svg").select("#no-chemo").style("stroke-width", "5px");
                         }
                         return "<strong> Age Of Patient " + d3.format(".2f")(xValue * 100) +
@@ -2498,8 +2502,8 @@
                     });
 
             d3.csv("SurvivalProbability.csv", function (error, data) {
-                //  if (error)
-                //     throw error;
+                if (error)
+                alert("Data File not Found/ Error reading data file");
 
 
 
@@ -2753,7 +2757,7 @@
                     });
             d3.csv("SurvivalProbability.csv", function (error, data) {
                 if (error)
-                    throw error;
+                alert("Data File not Found/ Error reading data file");
 
 
                 var domainByTrait = {},
